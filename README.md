@@ -12,3 +12,5 @@
 + Animated frequency bars and peak dots
 + Beat-reactive to bass, mid, and treble frequencies
 + Timeline showing current playback position and total track length  
+
+[Steam Workshop](https://steamcommunity.com/sharedfiles/filedetails/?id=3596377391)
