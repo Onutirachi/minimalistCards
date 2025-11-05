@@ -1,6 +1,6 @@
 {
 	"contentrating" : "Everyone",
-	"description" : "[h1]Minimalist Cards[/h1]\n\n[b]Clock[/b]\n[list]\n[*]12H or 24H format  \n[*]Optional seconds display  \n[/list]\n\n[b]Localized Date[/b]\n[list]\n[*]Automatically formats weekday and date based on your system language  \n[/list]\n\n[b]Track Info[/b]\n[list]\n[*]Dynamically updates song details and background color from the album cover  \n[*]Animated frequency bars and peak dots\n[*]Beat-reactive to bass, mid, and treble frequencies  \n[*]Timeline showing current playback position and total track length  \n[/list]",
+	"description" : "[h1]Minimalist Cards[/h1]\r\n\r\n[b]Clock[/b]\r\n[list]\r\n[*]12H or 24H format  \r\n[*]Optional seconds display  \r\n[/list]\r\n\r\n[b]Localized Date[/b]\r\n[list]\r\n[*]Automatically formats weekday and date based on your system language  \r\n[/list]\r\n\r\n[b]Track Info[/b]\r\n[list]\r\n[*]Dynamically updates song details and background color from the album cover  \r\n[*]Animated frequency bars and peak dots\r\n[*]Beat-reactive to bass, mid, and treble frequencies  \r\n[*]Timeline showing current playback position and total track length  \r\n[/list]\r\n\r\n[url=https://github.com/Onutirachi/minimalistCards/tree/main]GitHub[/url]",
 	"file" : "index.html",
 	"general" : 
 	{

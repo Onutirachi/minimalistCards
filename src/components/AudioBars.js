@@ -6,6 +6,7 @@ export default class AudioBarsWebGL {
         this.canvas = document.createElement("canvas");
         this.gl = null;
         this.program = null;
+        this.contextLost = false;
 
         // Estado das barras
         this.prevBars = new Float32Array(64);
@@ -31,14 +32,32 @@ export default class AudioBarsWebGL {
 
         this.maxBarHeight = 0;
         this.needsResize = true;
+        this.forceRedraw = false;
 
         this.init();
+        this.setupContextHandlers();
     }
 
     init() {
         this.setupWebGL();
         this.setupShaders();
         this.setupBuffers();
+    }
+
+    setupContextHandlers() {
+        // Handle WebGL context loss/restoration (common in Wallpaper Engine)
+        this.canvas.addEventListener("webglcontextlost", (event) => {
+            event.preventDefault();
+            this.contextLost = true;
+            console.log("WebGL context lost");
+        });
+
+        this.canvas.addEventListener("webglcontextrestored", () => {
+            this.contextLost = false;
+            console.log("WebGL context restored");
+            this.init(); // Reinitialize WebGL resources
+            this.forceRedraw = true;
+        });
     }
 
     setupWebGL() {
@@ -49,6 +68,7 @@ export default class AudioBarsWebGL {
             desynchronized: true,
             powerPreference: "high-performance",
             premultipliedAlpha: false,
+            preserveDrawingBuffer: false, // Important for performance
         };
 
         this.gl = this.canvas.getContext("webgl2", contextOptions) || this.canvas.getContext("webgl", contextOptions);
@@ -61,6 +81,10 @@ export default class AudioBarsWebGL {
         gl.enable(gl.BLEND);
         gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA);
         gl.clearColor(0, 0, 0, 0);
+
+        // Configuração extra para evitar artifacts
+        gl.disable(gl.DEPTH_TEST);
+        gl.disable(gl.STENCIL_TEST);
 
         this.canvas.style.backgroundColor = "transparent";
     }
@@ -118,7 +142,7 @@ export default class AudioBarsWebGL {
                     yOffset + aPosition.y * height
                 );
                 
-                // Convert to clip space
+                // Convert to clip space with proper Y flipping
                 vec2 clipSpace = (screenPos / uResolution) * 2.0 - 1.0;
                 clipSpace.y *= -1.0;
                 
@@ -131,7 +155,7 @@ export default class AudioBarsWebGL {
             }
         `;
 
-        // Fragment Shader otimizado com SDF para bordas arredondadas
+        // Fragment Shader otimizado
         const fsSource = `#version 300 es
             precision highp float;
             
@@ -153,7 +177,7 @@ export default class AudioBarsWebGL {
                 vec2 pixelPos = vLocalPos * vSize;
                 vec2 center = vSize * 0.5;
                 
-                // Calculate actual radius in pixels (0-50% of smallest dimension)
+                // Calculate actual radius in pixels
                 float maxRadius = min(vSize.x, vSize.y) * 0.5;
                 float radius = vRadius * 0.01 * maxRadius;
                 
@@ -250,6 +274,7 @@ export default class AudioBarsWebGL {
             this.gl.viewport(0, 0, width, height);
             this.updateMaxBarHeight();
             this.needsResize = false;
+            this.forceRedraw = true;
         }
     }
 
@@ -269,11 +294,25 @@ export default class AudioBarsWebGL {
     // ========== MÉTODOS PÚBLICOS ==========
 
     beat(audioArray) {
-        if (this.needsResize) {
+        if (this.contextLost) {
+            return; // Skip rendering if context is lost
+        }
+
+        if (this.needsResize || this.forceRedraw) {
             this.updateCanvasSize();
         }
 
         const gl = this.gl;
+
+        // Clear mais agressivo para evitar artifacts
+        gl.clear(gl.COLOR_BUFFER_BIT);
+
+        // Força um clear adicional se necessário
+        if (this.forceRedraw) {
+            gl.clear(gl.COLOR_BUFFER_BIT);
+            this.forceRedraw = false;
+        }
+
         const monoArray = AudioUtils.makeMono(audioArray);
         const channelsArray = AudioUtils.extractChannelQuantity(monoArray, this._quantity);
 
@@ -288,7 +327,6 @@ export default class AudioBarsWebGL {
         this.processAudioData(channelsArray);
 
         // Renderização
-        gl.clear(gl.COLOR_BUFFER_BIT);
         gl.useProgram(this.program);
 
         this.setUniforms();
@@ -305,7 +343,7 @@ export default class AudioBarsWebGL {
             this.prevBars[i] = this.prevBars[i] * 0.6 + channelsArray[i] * 0.4;
             this.prevBars[i] = Math.max(0, Math.min(1, this.prevBars[i]));
 
-            // Peak dots
+            // Peak dots - SEMPRE mantém pelo menos uma altura mínima
             if (this._showPeakDots) {
                 const current = this.prevBars[i];
 
@@ -315,8 +353,14 @@ export default class AudioBarsWebGL {
                 } else if (this.peakHoldTime[i] > 0) {
                     this.peakHoldTime[i]--;
                 } else {
-                    this.peakDots[i] = Math.max(current, this.peakDots[i] - this._peakDotsFallSpeed);
+                    this.peakDots[i] = Math.max(
+                        0.001, // Altura mínima para sempre ficar visível
+                        Math.max(current, this.peakDots[i] - this._peakDotsFallSpeed)
+                    );
                 }
+
+                // Garante que sempre tenha pelo menos a altura mínima
+                this.peakDots[i] = Math.max(0.001, this.peakDots[i]);
             }
         }
     }
@@ -341,7 +385,7 @@ export default class AudioBarsWebGL {
         const barsRgb = this.hexToRgb(this._barsColor);
         const barOpacity = this._opacity / 100;
 
-        this.drawInstanced(this.prevBars, barsRgb, barOpacity);
+        this.drawInstanced(this.prevBars, barsRgb, barOpacity, false);
     }
 
     renderPeakDots() {
@@ -351,10 +395,10 @@ export default class AudioBarsWebGL {
         const dotsRgb = this.hexToRgb(this._peakDotsColor);
         const dotOpacity = this._peakDotsOpacity / 100;
 
-        this.drawInstanced(this.peakDots, dotsRgb, dotOpacity);
+        this.drawInstanced(this.peakDots, dotsRgb, dotOpacity, true);
     }
 
-    drawInstanced(heights, color, opacity) {
+    drawInstanced(heights, color, opacity, isPeakDot = false) {
         const gl = this.gl;
         const count = heights.length;
 
@@ -367,10 +411,15 @@ export default class AudioBarsWebGL {
         let visibleCount = 0;
 
         for (let i = 0; i < count; i++) {
-            if (heights[i] < 0.001) continue;
+            // Para barras normais: skip se altura < 0.001
+            // Para peak dots: NUNCA skip (sempre desenha, mesmo com altura mínima)
+            if (!isPeakDot && heights[i] < 0.001) continue;
 
             barIndices[visibleCount] = i;
-            barHeights[visibleCount] = heights[i];
+
+            // Para peak dots, garante altura mínima visual
+            const displayHeight = isPeakDot ? Math.max(0.001, heights[i]) : heights[i];
+            barHeights[visibleCount] = displayHeight;
 
             colors[visibleCount * 3 + 0] = color[0];
             colors[visibleCount * 3 + 1] = color[1];
@@ -415,6 +464,7 @@ export default class AudioBarsWebGL {
     updateColors(event) {
         this._barsColor = event.textColor;
         this._peakDotsColor = event.textColor;
+        this.forceRedraw = true; // Force redraw on color change
     }
 
     // ========== SETTERS (ARROW FUNCTIONS) ==========
@@ -425,31 +475,38 @@ export default class AudioBarsWebGL {
         this.prevBars = new Float32Array(quantity);
         this.peakDots = new Float32Array(quantity);
         this.peakHoldTime = new Uint8Array(quantity);
+        this.forceRedraw = true;
     };
 
     gap = (value) => {
         this._gap = Math.max(0, Math.min(20, parseFloat(value) || 2));
+        this.forceRedraw = true;
     };
 
     borderRadius = (value) => {
         this._borderRadius = Math.max(0, Math.min(100, parseFloat(value) || 20));
+        this.forceRedraw = true;
     };
 
     opacity = (value) => {
         this._opacity = Math.max(0, Math.min(100, parseInt(value) || 100));
+        this.forceRedraw = true;
     };
 
     showPeakDots = (value) => {
         this._showPeakDots = value === "true" || value === true;
         this.updateMaxBarHeight();
+        this.forceRedraw = true;
     };
 
     peakDotsBorderRadius = (value) => {
         this._peakDotsBorderRadius = Math.max(0, Math.min(100, parseFloat(value) || 20));
+        this.forceRedraw = true;
     };
 
     peakDotsOpacity = (value) => {
         this._peakDotsOpacity = Math.max(0, Math.min(100, parseInt(value) || 100));
+        this.forceRedraw = true;
     };
 
     peakDotsHoldFrames = (value) => {
@@ -465,17 +522,25 @@ export default class AudioBarsWebGL {
     peakDotsSize = (value) => {
         this._peakDotsSize = Math.max(2, Math.min(12, parseFloat(value) || 3));
         this.updateMaxBarHeight();
+        this.forceRedraw = true;
     };
 
     peakDotsGap = (value) => {
         this._peakDotsGap = Math.max(0, Math.min(20, parseFloat(value) || 2));
         this.updateMaxBarHeight();
+        this.forceRedraw = true;
     };
 
     destroy() {
         if (!this.gl) return;
 
         const gl = this.gl;
+
+        // Remove event listeners
+        this.canvas.removeEventListener("webglcontextlost", () => {});
+        this.canvas.removeEventListener("webglcontextrestored", () => {});
+
+        // Clean up WebGL resources
         gl.deleteProgram(this.program);
         gl.deleteBuffer(this.vertexBuffer);
 
