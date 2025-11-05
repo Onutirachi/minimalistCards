@@ -1,0 +1,12 @@
+@import url("./variables.css");
+@import url("./animations.css");
+@import url("./fonts.css");
+
+@import url("./page.css");
+
+@import url("./components/cards.css");
+
+@import url("./components/background.css");
+@import url("./components/clockCard.css");
+@import url("./components/trackCard.css");
+@import url("./components/dateCard.css");

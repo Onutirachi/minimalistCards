@@ -1,0 +1,133 @@
+.track-card-container {
+    position: relative;
+    width: 600px;
+    height: 300px;
+    background-color: var(--track-card-default-background-color);
+    border-radius: var(--track-card-border-radius);
+    overflow: hidden;
+    box-shadow: var(--shadow-l);
+    transition: background-color 1s linear, max-height 1s ease, margin 1s ease;
+}
+
+.track-card-cover {
+    position: absolute;
+    height: 100%;
+    aspect-ratio: 1;
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    mask-image: linear-gradient(80deg, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0) 85%);
+    mask-repeat: no-repeat;
+    mask-size: 100% 100%;
+}
+
+.track-card-content {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: space-between;
+    box-sizing: border-box;
+    padding: 20px;
+}
+
+.track-card-track-info {
+    width: 100%;
+    height: 95px;
+    display: flex;
+    flex-direction: column;
+}
+
+.track-card-title,
+.track-card-artist {
+    width: 100%;
+
+    color: transparent;
+    white-space: nowrap;
+    text-align: right;
+    overflow: hidden;
+    transition: color 1s linear;
+}
+
+.track-card-title {
+    font-weight: var(--track-card-title-font-weight);
+    font-family: var(--track-card-title-font-family);
+    color: var(--track-card-default-text-color);
+    font-size: 2.2rem;
+    height: 40px;
+    line-height: 40px;
+    vertical-align: middle;
+}
+
+.track-card-artist {
+    font-weight: var(--track-card-artist-font-weight);
+    font-family: var(--track-card-artist-font-family);
+    color: var(--track-card-default-text-color);
+    font-size: 2.2rem;
+    height: 40px;
+    line-height: 40px;
+    vertical-align: middle;
+}
+
+.track-card-beats {
+    width: 150px;
+    height: 40px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    box-sizing: border-box;
+    margin-bottom: auto;
+}
+
+.track-card-beats * {
+    background-color: var(--track-card-default-text-color);
+    border-radius: 20%;
+    height: 100%;
+    aspect-ratio: 1;
+    will-change: scale;
+    transition: background-color 1s linear;
+}
+
+.track-card-audio-bars {
+    width: 100%;
+    height: 90px;
+    margin-top: auto;
+}
+
+.track-card-timeline {
+    width: 100%;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.track-card-timeline-current-time,
+.track-card-timeline-total-time {
+    width: 40px;
+    height: 100%;
+    font-family: "Unageo";
+    text-shadow: 0 0 5px rgba(255, 255, 255, 0.3), 0 0 10px rgba(255, 255, 255, 0.15);
+}
+
+.track-card-timeline-bar {
+    flex-grow: 1;
+    height: 5px;
+    background-color: #000;
+    border-radius: 2.5px;
+    overflow: hidden;
+}
+
+.track-card-timeline-bar-progress {
+    width: 100%;
+    height: 100%;
+    max-width: 0;
+    border-radius: 2.5px;
+    transition: max-width 0.5s linear;
+}

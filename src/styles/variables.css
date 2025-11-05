@@ -1,0 +1,27 @@
+:root {
+    --shadow-s: inset 0 1px 2px #ffffff30, /* top highlight */ 0 1px 2px #00000030, /* dark shadow */ 0 2px 4px #00000015; /* soft shadow */
+    --shadow-m: inset 0 1px 2px #ffffff50, /* top highlight */ 0 2px 4px #00000030, /* dark shadow */ 0 4px 8px #00000015; /* soft shadow */
+    --shadow-l: inset 0 1px 2px #ffffff70, /* top highlight */ 0 4px 6px #00000030, /* dark shadow */ 0 6px 10px #00000015; /* soft shadow */
+
+    --clock-card-font-family: "Unageo";
+    --clock-card-font-weight: 600;
+    --clock-card-border-radius: 10px;
+    --clock-card-default-background-color: #111;
+    --clock-card-default-text-color: #fff;
+
+    --track-card-title-font-family: "Unageo";
+    --track-card-title-font-weight: 600;
+    --track-card-artist-font-family: "Unageo";
+    --track-card-artist-font-weight: 300;
+    --track-card-border-radius: 10px;
+    --track-card-default-background-color: #111;
+    --track-card-default-text-color: #fff;
+
+    --date-card-weekday-font-family: "Unageo";
+    --date-card-weekday-font-weight: 600;
+    --date-card-full-date-font-family: "Unageo";
+    --date-card-full-date-font-weight: 300;
+    --date-card-border-radius: 10px;
+    --date-card-default-background-color: #111;
+    --date-card-default-text-color: #fff;
+}

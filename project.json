@@ -1,0 +1,577 @@
+{
+	"contentrating" : "Everyone",
+	"description" : "[h1]Minimalist Cards[/h1]\n\n[b]Clock[/b]\n[list]\n[*]12H or 24H format  \n[*]Optional seconds display  \n[/list]\n\n[b]Localized Date[/b]\n[list]\n[*]Automatically formats weekday and date based on your system language  \n[/list]\n\n[b]Track Info[/b]\n[list]\n[*]Dynamically updates song details and background color from the album cover  \n[*]Animated frequency bars and peak dots\n[*]Beat-reactive to bass, mid, and treble frequencies  \n[*]Timeline showing current playback position and total track length  \n[/list]",
+	"file" : "index.html",
+	"general" : 
+	{
+		"properties" : 
+		{
+			"audiobars" : 
+			{
+				"condition" : "",
+				"index" : 20,
+				"order" : 120,
+				"text" : "Audio Bars",
+				"type" : "group",
+				"value" : ""
+			},
+			"audiobarsborderradius" : 
+			{
+				"fraction" : true,
+				"index" : 23,
+				"max" : 100,
+				"min" : 0,
+				"order" : 123,
+				"precision" : 1,
+				"step" : 1,
+				"text" : "Audio Bars - Border Radius",
+				"type" : "slider",
+				"value" : 60
+			},
+			"audiobarsgap" : 
+			{
+				"fraction" : false,
+				"index" : 22,
+				"max" : 10,
+				"min" : 0,
+				"order" : 122,
+				"text" : "Audio Bars - Gap",
+				"type" : "slider",
+				"value" : 4
+			},
+			"audiobarsopacity" : 
+			{
+				"fraction" : false,
+				"index" : 24,
+				"max" : 100,
+				"min" : 10,
+				"order" : 124,
+				"text" : "Audio Bars - Opacity",
+				"type" : "slider",
+				"value" : 100
+			},
+			"audiobarspeakdotsborderradius" : 
+			{
+				"fraction" : true,
+				"index" : 26,
+				"max" : 100,
+				"min" : 0,
+				"order" : 126,
+				"precision" : 2,
+				"step" : 0.1,
+				"text" : "Audio Bars - Peak Dots Border Radius",
+				"type" : "slider",
+				"value" : 80
+			},
+			"audiobarspeakdotsgap" : 
+			{
+				"fraction" : false,
+				"index" : 29,
+				"max" : 10,
+				"min" : 0,
+				"order" : 129,
+				"text" : "Audio Bars - Peak Dots Gap",
+				"type" : "slider",
+				"value" : 4
+			},
+			"audiobarspeakdotsopacity" : 
+			{
+				"fraction" : false,
+				"index" : 27,
+				"max" : 100,
+				"min" : 10,
+				"order" : 127,
+				"text" : "Audio Bars - Peak Dots Opacity",
+				"type" : "slider",
+				"value" : 80
+			},
+			"audiobarspeakdotssize" : 
+			{
+				"fraction" : false,
+				"index" : 28,
+				"max" : 10,
+				"min" : 1,
+				"order" : 128,
+				"text" : "Audio Bars - Peak Dots Size",
+				"type" : "slider",
+				"value" : 5
+			},
+			"audiobarsquantity" : 
+			{
+				"fraction" : false,
+				"index" : 21,
+				"max" : 64,
+				"min" : 9,
+				"order" : 121,
+				"text" : "Audio Bars - Quantity",
+				"type" : "slider",
+				"value" : 40
+			},
+			"audiobarsshowpeakdots" : 
+			{
+				"index" : 25,
+				"order" : 125,
+				"text" : "Audio Bars - Show Peak Dots",
+				"type" : "bool",
+				"value" : true
+			},
+			"background" : 
+			{
+				"index" : 37,
+				"order" : 137,
+				"text" : "Background",
+				"type" : "group",
+				"value" : ""
+			},
+			"backgroundbeatsensitivity" : 
+			{
+				"fraction" : true,
+				"index" : 38,
+				"max" : 1,
+				"min" : 0,
+				"order" : 138,
+				"precision" : 2,
+				"step" : 0.1,
+				"text" : "Background - Beat Sensitivity",
+				"type" : "slider",
+				"value" : 0.2
+			},
+			"backgroundcustomimage" : 
+			{
+				"condition" : "",
+				"index" : 40,
+				"order" : 140,
+				"text" : "Background - Custom Image",
+				"type" : "file",
+				"value" : ""
+			},
+			"backgroundmovementspeed" : 
+			{
+				"fraction" : true,
+				"index" : 39,
+				"max" : 240,
+				"min" : 0,
+				"order" : 139,
+				"precision" : 2,
+				"step" : 0.1,
+				"text" : "Background - Movement Speed",
+				"type" : "slider",
+				"value" : 120
+			},
+			"cardshorizontalposition" : 
+			{
+				"fraction" : true,
+				"index" : 1,
+				"max" : 100,
+				"min" : 0,
+				"order" : 101,
+				"precision" : 2,
+				"step" : 0.1,
+				"text" : "Cards - Horizontal Position",
+				"type" : "slider",
+				"value" : 50
+			},
+			"cardssize" : 
+			{
+				"fraction" : true,
+				"index" : 0,
+				"max" : 5,
+				"min" : 0.1,
+				"order" : 100,
+				"precision" : 2,
+				"step" : 0.1,
+				"text" : "Cards - Size",
+				"type" : "slider",
+				"value" : 1
+			},
+			"cardsverticalposition" : 
+			{
+				"fraction" : true,
+				"index" : 2,
+				"max" : 100,
+				"min" : 0,
+				"order" : 102,
+				"precision" : 2,
+				"step" : 0.1,
+				"text" : "Cards - Vertical Position",
+				"type" : "slider",
+				"value" : 50
+			},
+			"clockcard" : 
+			{
+				"index" : 3,
+				"order" : 103,
+				"text" : "Clock Card",
+				"type" : "group",
+				"value" : ""
+			},
+			"clockcardborderradius" : 
+			{
+				"fraction" : true,
+				"index" : 7,
+				"max" : 40,
+				"min" : 0,
+				"order" : 107,
+				"precision" : 2,
+				"step" : 0.1,
+				"text" : "Clock Card - Border Radius",
+				"type" : "slider",
+				"value" : 10
+			},
+			"clockcardfontfamily" : 
+			{
+				"index" : 8,
+				"options" : 
+				[
+					{
+						"label" : "Unageo",
+						"value" : "Unageo"
+					},
+					{
+						"label" : "Circular Std",
+						"value" : "Circular Std"
+					},
+					{
+						"label" : "MiSans",
+						"value" : "MiSans"
+					},
+					{
+						"label" : "Rounded Elegance",
+						"value" : "Rounded Elegance"
+					},
+					{
+						"label" : "Super Joyful",
+						"value" : "Super Joyful"
+					},
+					{
+						"label" : "Tokyo",
+						"value" : "Tokyo"
+					}
+				],
+				"order" : 108,
+				"text" : "Clock Card - Font",
+				"type" : "combo",
+				"value" : "Unageo"
+			},
+			"clockcardfontweight" : 
+			{
+				"fraction" : false,
+				"index" : 9,
+				"max" : 900,
+				"min" : 100,
+				"order" : 109,
+				"text" : "Clock Card - Font Weight",
+				"type" : "slider",
+				"value" : 600
+			},
+			"clockcardformat12h" : 
+			{
+				"index" : 6,
+				"order" : 106,
+				"text" : "Clock Card - Format 12H",
+				"type" : "bool",
+				"value" : false
+			},
+			"clockcardshow" : 
+			{
+				"index" : 4,
+				"order" : 104,
+				"text" : "Clock Card - Show",
+				"type" : "bool",
+				"value" : true
+			},
+			"clockcardshowseconds" : 
+			{
+				"index" : 5,
+				"order" : 105,
+				"text" : "Clock Card - Show Seconds",
+				"type" : "bool",
+				"value" : true
+			},
+			"datecard" : 
+			{
+				"index" : 30,
+				"order" : 130,
+				"text" : "Date Card",
+				"type" : "group",
+				"value" : ""
+			},
+			"datecardborderradius" : 
+			{
+				"fraction" : true,
+				"index" : 32,
+				"max" : 40,
+				"min" : 0,
+				"order" : 132,
+				"precision" : 2,
+				"step" : 0.1,
+				"text" : "Date Card - Border Radius",
+				"type" : "slider",
+				"value" : 10
+			},
+			"datecardfulldatefontfamily" : 
+			{
+				"index" : 35,
+				"options" : 
+				[
+					{
+						"label" : "Unageo",
+						"value" : "Unageo"
+					},
+					{
+						"label" : "Circular Std",
+						"value" : "Circular Std"
+					},
+					{
+						"label" : "MiSans",
+						"value" : "MiSans"
+					},
+					{
+						"label" : "Rounded Elegance",
+						"value" : "Rounded Elegance"
+					},
+					{
+						"label" : "Super Joyful",
+						"value" : "Super Joyful"
+					},
+					{
+						"label" : "Tokyo",
+						"value" : "Tokyo"
+					}
+				],
+				"order" : 135,
+				"text" : "Date Card - Full Date Font Family",
+				"type" : "combo",
+				"value" : "Unageo"
+			},
+			"datecardfulldatefontweight" : 
+			{
+				"fraction" : false,
+				"index" : 36,
+				"max" : 900,
+				"min" : 100,
+				"order" : 136,
+				"text" : "Date Card - Full Date Font Weight",
+				"type" : "slider",
+				"value" : 300
+			},
+			"datecardshow" : 
+			{
+				"index" : 31,
+				"order" : 131,
+				"text" : "Date Card - Show",
+				"type" : "bool",
+				"value" : true
+			},
+			"datecardweekdayfontfamily" : 
+			{
+				"index" : 33,
+				"options" : 
+				[
+					{
+						"label" : "Unageo",
+						"value" : "Unageo"
+					},
+					{
+						"label" : "Circular Std",
+						"value" : "Circular Std"
+					},
+					{
+						"label" : "MiSans",
+						"value" : "MiSans"
+					},
+					{
+						"label" : "Rounded Elegance",
+						"value" : "Rounded Elegance"
+					},
+					{
+						"label" : "Super Joyful",
+						"value" : "Super Joyful"
+					},
+					{
+						"label" : "Tokyo",
+						"value" : "Tokyo"
+					}
+				],
+				"order" : 133,
+				"text" : "Date Card - Weekday Font Family",
+				"type" : "combo",
+				"value" : "Unageo"
+			},
+			"datecardweekdayfontweight" : 
+			{
+				"fraction" : false,
+				"index" : 34,
+				"max" : 900,
+				"min" : 100,
+				"order" : 134,
+				"text" : "Date Card - Weekday Font Weight",
+				"type" : "slider",
+				"value" : 600
+			},
+			"schemecolor" : 
+			{
+				"order" : 0,
+				"text" : "ui_browse_properties_scheme_color",
+				"type" : "color",
+				"value" : "0 0 0"
+			},
+			"trackcard" : 
+			{
+				"index" : 10,
+				"order" : 110,
+				"text" : "Track Card",
+				"type" : "group",
+				"value" : ""
+			},
+			"trackcardartitsfontfamily" : 
+			{
+				"index" : 15,
+				"options" : 
+				[
+					{
+						"label" : "Unageo",
+						"value" : "Unageo"
+					},
+					{
+						"label" : "Circular Std",
+						"value" : "Circular Std"
+					},
+					{
+						"label" : "MiSans",
+						"value" : "MiSans"
+					},
+					{
+						"label" : "Rounded Elegance",
+						"value" : "Rounded Elegance"
+					},
+					{
+						"label" : "Super Joyful",
+						"value" : "Super Joyful"
+					},
+					{
+						"label" : "Tokyo",
+						"value" : "Tokyo"
+					}
+				],
+				"order" : 115,
+				"text" : "Track Card - Artist Font Family",
+				"type" : "combo",
+				"value" : "Unageo"
+			},
+			"trackcardartitsfontweight" : 
+			{
+				"fraction" : false,
+				"index" : 16,
+				"max" : 900,
+				"min" : 100,
+				"order" : 116,
+				"text" : "Track Card - Artist Font Weight",
+				"type" : "slider",
+				"value" : 300
+			},
+			"trackcardborderradius" : 
+			{
+				"fraction" : true,
+				"index" : 12,
+				"max" : 40,
+				"min" : 0,
+				"order" : 112,
+				"precision" : 2,
+				"step" : 0.1,
+				"text" : "Track Card - Border Radius",
+				"type" : "slider",
+				"value" : 10
+			},
+			"trackcardshow" : 
+			{
+				"index" : 11,
+				"order" : 111,
+				"text" : "Track Card - Show",
+				"type" : "bool",
+				"value" : true
+			},
+			"trackcardshowbars" : 
+			{
+				"index" : 18,
+				"order" : 118,
+				"text" : "Track Card - Show Bars",
+				"type" : "bool",
+				"value" : true
+			},
+			"trackcardshowbeats" : 
+			{
+				"index" : 17,
+				"order" : 117,
+				"text" : "Track Card - Show Beats",
+				"type" : "bool",
+				"value" : true
+			},
+			"trackcardshowtimeline" : 
+			{
+				"index" : 19,
+				"order" : 119,
+				"text" : "Track Card - Show Timeline",
+				"type" : "bool",
+				"value" : true
+			},
+			"trackcardtitlefontfamily" : 
+			{
+				"index" : 13,
+				"options" : 
+				[
+					{
+						"label" : "Unageo",
+						"value" : "Unageo"
+					},
+					{
+						"label" : "Circular Std",
+						"value" : "Circular Std"
+					},
+					{
+						"label" : "MiSans",
+						"value" : "MiSans"
+					},
+					{
+						"label" : "Rounded Elegance",
+						"value" : "Rounded Elegance"
+					},
+					{
+						"label" : "Super Joyful",
+						"value" : "Super Joyful"
+					},
+					{
+						"label" : "Tokyo",
+						"value" : "Tokyo"
+					}
+				],
+				"order" : 113,
+				"text" : "Track Card - Title Font Family",
+				"type" : "combo",
+				"value" : "Unageo"
+			},
+			"trackcardtitlefontweight" : 
+			{
+				"fraction" : false,
+				"index" : 14,
+				"max" : 900,
+				"min" : 100,
+				"order" : 114,
+				"text" : "Track Card - Title Font Weight",
+				"type" : "slider",
+				"value" : 600
+			}
+		},
+		"supportsaudioprocessing" : true
+	},
+	"preview" : "preview.gif",
+	"ratingsex" : "none",
+	"ratingviolence" : "none",
+	"tags" : [ "Music" ],
+	"title" : "Minimalist Cards",
+	"type" : "Web",
+	"version" : 7,
+	"visibility" : "public",
+	"workshopid" : "3596377391",
+	"workshopurl" : "steam://url/CommunityFilePage/3596377391"
+}

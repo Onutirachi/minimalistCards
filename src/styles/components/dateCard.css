@@ -1,0 +1,32 @@
+.date-card-container {
+    position: relative;
+    width: 600px;
+    height: 100px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    align-items: center;
+
+    color: var(--date-card-default-text-color);
+    border-radius: var(--date-card-border-radius);
+    background-color: var(--date-card-default-background-color);
+
+    box-shadow: var(--shadow-l);
+    transition: background-color 1s linear, color 1s linear;
+
+    margin: 10px;
+}
+
+.date-card-weekday {
+    font-family: var(--date-card-weekday-font-family);
+    font-weight: var(--date-card-weekday-font-weight);
+    font-size: 2rem;
+}
+
+.date-card-full-date {
+    font-family: var(--date-card-full-date-font-family);
+    font-weight: var(--date-card-full-date-font-weight);
+    font-size: 2rem;
+}

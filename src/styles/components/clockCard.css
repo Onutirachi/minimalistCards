@@ -1,0 +1,22 @@
+.clock-card-container {
+    width: 600px;
+    height: 100px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background-color: transparent;
+
+    font-size: 4rem;
+    color: var(--clock-card-default-text-color);
+    font-family: var(--clock-card-font-family);
+    font-weight: var(--clock-card-font-weight);
+    border-radius: var(--clock-card-border-radius);
+    background-color: var(--clock-card-default-background-color);
+    box-shadow: var(--shadow-l);
+
+    transition: background-color 1s linear, color 1s linear;
+
+    margin: 10px;
+}
