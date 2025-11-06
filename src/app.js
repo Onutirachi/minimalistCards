@@ -15,6 +15,7 @@ class MinimalistCards {
         this.components = {};
 
         this.initializeComponents();
+        this.components.cards.show(true);
         this.setupEventListeners();
 
         this.propertiesMap = {
@@ -182,4 +183,8 @@ class MinimalistCards {
     }
 }
 
-new MinimalistCards();
+document.addEventListener("DOMContentLoaded", function () {
+    setTimeout(() => {
+        new MinimalistCards();
+    }, 1000);
+});

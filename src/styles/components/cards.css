@@ -10,5 +10,6 @@
     align-items: center;
     justify-content: center;
 
-    transition: gap 1s linear;
+    transition: opacity 1s linear;
+    opacity: 0;
 }

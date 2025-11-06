@@ -20,4 +20,13 @@ export default class Cards {
     size = (scale) => {
         this.container.style.transform = `translate(-50%, -50%) scale(${scale ?? 1})`;
     };
+
+    show = (boolean) => {
+        if (boolean == "true" || boolean == true) {
+            this.container.style.opacity = 1;
+        }
+        if (boolean == "false" || boolean == false) {
+            this.container.style.opacity = 0;
+        }
+    };
 }
