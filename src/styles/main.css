@@ -6,6 +6,7 @@
 
 @import url("./components/cards.css");
 
+@import url("./components/debug.css");
 @import url("./components/background.css");
 @import url("./components/clockCard.css");
 @import url("./components/trackCard.css");

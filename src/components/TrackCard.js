@@ -109,6 +109,14 @@ export default class TrackCard extends BaseCard {
         const medium = AudioUtils.getRangeMean(monoArray, 20, 40);
         const treble = AudioUtils.getRangeMean(monoArray, 40, 64);
 
+        // const bassEasing = Math.pow(Math.min(bass, 1), 0.5);
+        // const mediumEasing = Math.pow(Math.min(medium, 1), 0.7);
+        // const trebleEasing = Math.pow(Math.min(treble, 1), 0.9);
+
+        // this.beatBass.style.scale = Math.min(bassEasing + 0.5, 1);
+        // this.beatMedium.style.scale = Math.min(mediumEasing + 0.5, 1);
+        // this.beatTreble.style.scale = Math.min(trebleEasing + 0.5, 1);
+
         this.beatBass.style.scale = Math.min(0.5 + bass * 3, 1);
         this.beatMedium.style.scale = Math.min(0.5 + medium * 2, 1);
         this.beatTreble.style.scale = Math.min(0.5 + treble * 1.5, 1);

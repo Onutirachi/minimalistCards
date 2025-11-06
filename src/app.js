@@ -1,3 +1,4 @@
+import Debug from "./components/Debug.js";
 import Cards from "./components/Cards.js";
 import Background from "./components/Background.js";
 import AudioBars from "./components/AudioBars.js";
@@ -7,6 +8,10 @@ import DateCard from "./components/DateCard.js";
 
 class MinimalistCards {
     constructor() {
+        this.debug = new Debug();
+        this.showDebug = false;
+        this.debug.showDebug = this.showDebug;
+
         this.components = {};
 
         this.initializeComponents();
@@ -75,6 +80,9 @@ class MinimalistCards {
 
         const app = document.getElementById("app");
         app.appendChild(this.components.background.container);
+
+        if (this.showDebug) app.appendChild(this.debug.container);
+
         app.appendChild(this.components.cards.container);
 
         this.components.trackCard.audioBars.appendChild(this.components.audioBars.canvas);
@@ -95,14 +103,15 @@ class MinimalistCards {
     }
 
     handleWallpaperMediaProperties(event) {
-        console.log("Properties", event);
+        this.debug.properties(event);
+
         requestAnimationFrame(() => {
             this.components.trackCard.updateTrack(event);
         });
     }
 
     handleWallpaperMediaThumbnail(event) {
-        //console.log("Thumbnail", event);
+        this.debug.thumbnail(event);
         requestAnimationFrame(() => {
             this.components.background.updateThumbnail(event);
             this.components.trackCard.updateThumbnail(event);
@@ -115,7 +124,7 @@ class MinimalistCards {
     }
 
     handleWallpaperAudio(audioArray) {
-        //console.log("Audio", audioArray);
+        this.debug.audio(audioArray);
         requestAnimationFrame(() => {
             this.components.audioBars.beat(audioArray);
             this.components.trackCard.beat(audioArray);
@@ -124,23 +133,23 @@ class MinimalistCards {
     }
 
     handleWallpaperMediaTimeline(event) {
-        //console.log("Timeline", event);
+        this.debug.timeline(event);
         requestAnimationFrame(() => {
             this.components.trackCard.updateTimeline(event);
         });
     }
 
     handleWallpaperMediaPlayback(event) {
-        console.log("Playback", event.state);
+        this.debug.playback(event);
         requestAnimationFrame(() => {
             if (event.state == window.wallpaperMediaIntegration.PLAYBACK_PLAYING) {
                 this.components.trackCard.open(true);
-                this.components.trackCard.pauseTimeline(true);
+                this.components.trackCard.pauseTimeline(false);
             }
 
             if (event.state == window.wallpaperMediaIntegration.PLAYBACK_PAUSED) {
                 this.components.trackCard.open(true);
-                this.components.trackCard.pauseTimeline(false);
+                this.components.trackCard.pauseTimeline(true);
             }
 
             if (event.state == window.wallpaperMediaIntegration.PLAYBACK_STOPPED) {
@@ -151,7 +160,6 @@ class MinimalistCards {
     }
 
     handleApplyUserProperties(properties) {
-        //console.log("ApplyUserProperties", properties);
         for (const key in properties) {
             const value = properties[key].value;
 
@@ -159,6 +167,7 @@ class MinimalistCards {
             if (fn) fn(value);
 
             localStorage.setItem(key, value);
+            this.debug.userProperties({ key, value });
         }
     }
 
