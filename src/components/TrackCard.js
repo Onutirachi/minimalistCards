@@ -27,6 +27,9 @@ export default class TrackCard extends BaseCard {
         this.timelineCurrentTime = DomUtils.createElement("div", ["track-card-timeline-current-time"]);
         this.timelineTotalTime = DomUtils.createElement("div", ["track-card-timeline-total-time"]);
 
+        this.title.textContent = "If you're reading this,";
+        this.artist.textContent = "reopen your music app.";
+
         this.beats.appendChild(this.beatBass);
         this.beats.appendChild(this.beatMedium);
         this.beats.appendChild(this.beatTreble);
@@ -133,7 +136,6 @@ export default class TrackCard extends BaseCard {
     }
 
     updateTrack(event) {
-        if (!this.isOpened) this.open(true);
         this.change(this.title, {
             textContent: event.title,
             style: {

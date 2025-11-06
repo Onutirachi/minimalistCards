@@ -32,20 +32,26 @@ export default class AudioBarsWebGL {
 
         this.maxBarHeight = 0;
         this.needsResize = true;
-        this.forceRedraw = false;
+        this.forceRedraw = true;
 
         this.init();
         this.setupContextHandlers();
     }
 
     init() {
-        this.setupWebGL();
-        this.setupShaders();
-        this.setupBuffers();
+        try {
+            this.setupWebGL();
+            this.setupShaders();
+            this.setupBuffers();
+            this.contextLost = false;
+            this.forceRedraw = true;
+        } catch (error) {
+            console.error("WebGL initialization failed:", error);
+            this.contextLost = true;
+        }
     }
 
     setupContextHandlers() {
-        // Handle WebGL context loss/restoration (common in Wallpaper Engine)
         this.canvas.addEventListener("webglcontextlost", (event) => {
             event.preventDefault();
             this.contextLost = true;
@@ -53,22 +59,38 @@ export default class AudioBarsWebGL {
         });
 
         this.canvas.addEventListener("webglcontextrestored", () => {
-            this.contextLost = false;
             console.log("WebGL context restored");
-            this.init(); // Reinitialize WebGL resources
-            this.forceRedraw = true;
+            setTimeout(() => {
+                this.init();
+                this.forceRedraw = true;
+            }, 100);
         });
     }
 
     setupWebGL() {
-        // Tenta WebGL2 primeiro
+        // Limpa contexto anterior
+        if (this.gl) {
+            try {
+                const gl = this.gl;
+                if (this.program) gl.deleteProgram(this.program);
+                if (this.vertexBuffer) gl.deleteBuffer(this.vertexBuffer);
+                Object.values(this.instanceBuffers || {}).forEach((buffer) => {
+                    if (buffer) gl.deleteBuffer(buffer);
+                });
+            } catch (error) {
+                // Ignora erros de cleanup
+            }
+        }
+
+        // 🔥 MANTENDO a remoção do 'desynchronized' mas voltando outras configurações ao original
         const contextOptions = {
             alpha: true,
             antialias: true,
-            desynchronized: true,
+            // REMOVIDO: desynchronized - causa problemas no Wallpaper Engine
             powerPreference: "high-performance",
-            premultipliedAlpha: false,
-            preserveDrawingBuffer: false, // Important for performance
+            premultipliedAlpha: false, // 🔥 VOLTANDO para false (como no original)
+            preserveDrawingBuffer: false,
+            failIfMajorPerformanceCaveat: false,
         };
 
         this.gl = this.canvas.getContext("webgl2", contextOptions) || this.canvas.getContext("webgl", contextOptions);
@@ -78,21 +100,28 @@ export default class AudioBarsWebGL {
         }
 
         const gl = this.gl;
-        gl.enable(gl.BLEND);
-        gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA);
-        gl.clearColor(0, 0, 0, 0);
 
-        // Configuração extra para evitar artifacts
+        // 🔥 VOLTANDO as configurações de blending ao ORIGINAL
+        gl.clearColor(0, 0, 0, 0);
+        gl.enable(gl.BLEND);
+        gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA); // 🔥 VOLTANDO ao original
         gl.disable(gl.DEPTH_TEST);
         gl.disable(gl.STENCIL_TEST);
 
+        // Clear inicial
+        gl.clear(gl.COLOR_BUFFER_BIT);
+
         this.canvas.style.backgroundColor = "transparent";
+        this.canvas.style.width = "100%";
+        this.canvas.style.height = "100%";
+        this.canvas.style.display = "block";
     }
 
+    // 🔥 MANTENDO todos os shaders e funções de renderização EXATAMENTE como no código original
     setupShaders() {
         const gl = this.gl;
 
-        // Vertex Shader otimizado
+        // Vertex Shader (EXATAMENTE como no original)
         const vsSource = `#version 300 es
             precision highp float;
             
@@ -142,7 +171,6 @@ export default class AudioBarsWebGL {
                     yOffset + aPosition.y * height
                 );
                 
-                // Convert to clip space with proper Y flipping
                 vec2 clipSpace = (screenPos / uResolution) * 2.0 - 1.0;
                 clipSpace.y *= -1.0;
                 
@@ -155,7 +183,7 @@ export default class AudioBarsWebGL {
             }
         `;
 
-        // Fragment Shader otimizado
+        // Fragment Shader (EXATAMENTE como no original)
         const fsSource = `#version 300 es
             precision highp float;
             
@@ -173,18 +201,14 @@ export default class AudioBarsWebGL {
             }
             
             void main() {
-                // Convert to pixel coordinates
                 vec2 pixelPos = vLocalPos * vSize;
                 vec2 center = vSize * 0.5;
                 
-                // Calculate actual radius in pixels
                 float maxRadius = min(vSize.x, vSize.y) * 0.5;
                 float radius = vRadius * 0.01 * maxRadius;
                 
-                // SDF for rounded rectangle
                 float distance = roundedBoxSDF(pixelPos - center, center, radius);
                 
-                // Smooth anti-aliasing
                 float alpha = 1.0 - smoothstep(-1.0, 1.0, distance);
                 alpha *= vOpacity;
                 
@@ -246,7 +270,7 @@ export default class AudioBarsWebGL {
     setupBuffers() {
         const gl = this.gl;
 
-        // Buffer de vértices para um quadrado unitário
+        // Buffer de vértices
         const vertices = new Float32Array([0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 1.0, 1.0, 0.0, 1.0, 1.0]);
 
         this.vertexBuffer = gl.createBuffer();
@@ -268,10 +292,14 @@ export default class AudioBarsWebGL {
         const width = this.canvas.parentNode.offsetWidth;
         const height = this.canvas.parentNode.offsetHeight;
 
+        if (width === 0 || height === 0) return;
+
         if (this.canvas.width !== width || this.canvas.height !== height) {
             this.canvas.width = width;
             this.canvas.height = height;
-            this.gl.viewport(0, 0, width, height);
+            if (this.gl) {
+                this.gl.viewport(0, 0, width, height);
+            }
             this.updateMaxBarHeight();
             this.needsResize = false;
             this.forceRedraw = true;
@@ -279,7 +307,7 @@ export default class AudioBarsWebGL {
     }
 
     updateMaxBarHeight() {
-        this.maxBarHeight = this._showPeakDots ? Math.max(0, this.canvas.height - this._peakDotsSize - this._peakDotsGap) : this.canvas.height;
+        this.maxBarHeight = this._showPeakDots ? Math.max(10, this.canvas.height - this._peakDotsSize - this._peakDotsGap) : this.canvas.height;
     }
 
     hexToRgb(hex) {
@@ -291,59 +319,61 @@ export default class AudioBarsWebGL {
         return [((bigint >> 16) & 255) / 255, ((bigint >> 8) & 255) / 255, (bigint & 255) / 255];
     }
 
-    // ========== MÉTODOS PÚBLICOS ==========
-
     beat(audioArray) {
         if (this.contextLost) {
-            return; // Skip rendering if context is lost
+            return;
         }
 
-        if (this.needsResize || this.forceRedraw) {
+        if (!this.gl) {
+            return;
+        }
+
+        if (this.needsResize) {
             this.updateCanvasSize();
         }
 
         const gl = this.gl;
 
-        // Clear mais agressivo para evitar artifacts
-        gl.clear(gl.COLOR_BUFFER_BIT);
-
-        // Força um clear adicional se necessário
-        if (this.forceRedraw) {
+        try {
+            // Clear simples
             gl.clear(gl.COLOR_BUFFER_BIT);
-            this.forceRedraw = false;
-        }
 
-        const monoArray = AudioUtils.makeMono(audioArray);
-        const channelsArray = AudioUtils.extractChannelQuantity(monoArray, this._quantity);
+            const monoArray = AudioUtils.makeMono(audioArray);
+            const channelsArray = AudioUtils.extractChannelQuantity(monoArray, this._quantity);
 
-        // Atualiza arrays se necessário
-        if (this.prevBars.length !== this._quantity) {
-            this.prevBars = new Float32Array(this._quantity);
-            this.peakDots = new Float32Array(this._quantity);
-            this.peakHoldTime = new Uint8Array(this._quantity);
-        }
+            // Atualiza arrays se necessário
+            if (this.prevBars.length !== this._quantity) {
+                this.prevBars = new Float32Array(this._quantity);
+                this.peakDots = new Float32Array(this._quantity);
+                this.peakHoldTime = new Uint8Array(this._quantity);
+            }
 
-        // Processamento de áudio
-        this.processAudioData(channelsArray);
+            // Processamento de áudio (EXATAMENTE como no original)
+            this.processAudioData(channelsArray);
 
-        // Renderização
-        gl.useProgram(this.program);
+            // Renderização
+            gl.useProgram(this.program);
+            this.setUniforms();
+            this.renderBars();
 
-        this.setUniforms();
-        this.renderBars();
-
-        if (this._showPeakDots) {
-            this.renderPeakDots();
+            if (this._showPeakDots) {
+                this.renderPeakDots();
+            }
+        } catch (error) {
+            console.error("Rendering error:", error);
+            this.contextLost = true;
+            setTimeout(() => this.init(), 1000);
         }
     }
 
+    // 🔥 PROCESSAMENTO DE ÁUDIO EXATAMENTE COMO NO ORIGINAL
     processAudioData(channelsArray) {
         for (let i = 0; i < this._quantity; i++) {
-            // Suavização
+            // Suavização (EXATAMENTE como no original)
             this.prevBars[i] = this.prevBars[i] * 0.6 + channelsArray[i] * 0.4;
             this.prevBars[i] = Math.max(0, Math.min(1, this.prevBars[i]));
 
-            // Peak dots - SEMPRE mantém pelo menos uma altura mínima
+            // Peak dots - sempre mantém altura mínima (EXATAMENTE como no original)
             if (this._showPeakDots) {
                 const current = this.prevBars[i];
 
@@ -398,11 +428,11 @@ export default class AudioBarsWebGL {
         this.drawInstanced(this.peakDots, dotsRgb, dotOpacity, true);
     }
 
+    // 🔥 DRAW INSTANCED EXATAMENTE COMO NO ORIGINAL
     drawInstanced(heights, color, opacity, isPeakDot = false) {
         const gl = this.gl;
         const count = heights.length;
 
-        // Prepara dados de instância
         const barIndices = new Float32Array(count);
         const barHeights = new Float32Array(count);
         const colors = new Float32Array(count * 3);
@@ -416,8 +446,6 @@ export default class AudioBarsWebGL {
             if (!isPeakDot && heights[i] < 0.001) continue;
 
             barIndices[visibleCount] = i;
-
-            // Para peak dots, garante altura mínima visual
             const displayHeight = isPeakDot ? Math.max(0.001, heights[i]) : heights[i];
             barHeights[visibleCount] = displayHeight;
 
@@ -431,10 +459,7 @@ export default class AudioBarsWebGL {
 
         if (visibleCount === 0) return;
 
-        // Configura atributos
         this.setupAttributes(barIndices, barHeights, colors, opacities, visibleCount);
-
-        // Renderização instanciada
         gl.drawArraysInstanced(gl.TRIANGLES, 0, 6, visibleCount);
     }
 
@@ -464,10 +489,10 @@ export default class AudioBarsWebGL {
     updateColors(event) {
         this._barsColor = event.textColor;
         this._peakDotsColor = event.textColor;
-        this.forceRedraw = true; // Force redraw on color change
+        this.forceRedraw = true;
     }
 
-    // ========== SETTERS (ARROW FUNCTIONS) ==========
+    // ========== SETTERS ==========
 
     quantity = (value) => {
         const quantity = Math.max(8, Math.min(512, parseInt(value) || 64));
@@ -515,7 +540,6 @@ export default class AudioBarsWebGL {
 
     peakDotsFallSpeed = (value) => {
         const num = parseFloat(value) || 0.008;
-        // Converte 0-100 para 0.001-0.05
         this._peakDotsFallSpeed = num > 1 ? 0.001 + (Math.min(100, num) / 100) * 0.049 : Math.max(0.0001, Math.min(0.05, num));
     };
 
@@ -532,20 +556,14 @@ export default class AudioBarsWebGL {
     };
 
     destroy() {
-        if (!this.gl) return;
+        if (this.gl) {
+            const gl = this.gl;
+            if (this.program) gl.deleteProgram(this.program);
+            if (this.vertexBuffer) gl.deleteBuffer(this.vertexBuffer);
 
-        const gl = this.gl;
-
-        // Remove event listeners
-        this.canvas.removeEventListener("webglcontextlost", () => {});
-        this.canvas.removeEventListener("webglcontextrestored", () => {});
-
-        // Clean up WebGL resources
-        gl.deleteProgram(this.program);
-        gl.deleteBuffer(this.vertexBuffer);
-
-        Object.values(this.instanceBuffers).forEach((buffer) => {
-            gl.deleteBuffer(buffer);
-        });
+            Object.values(this.instanceBuffers || {}).forEach((buffer) => {
+                if (buffer) gl.deleteBuffer(buffer);
+            });
+        }
     }
 }

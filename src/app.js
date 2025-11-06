@@ -102,7 +102,7 @@ class MinimalistCards {
     }
 
     handleWallpaperMediaThumbnail(event) {
-        console.log("Thumbnail", event);
+        //console.log("Thumbnail", event);
         requestAnimationFrame(() => {
             this.components.background.updateThumbnail(event);
             this.components.trackCard.updateThumbnail(event);
@@ -124,35 +124,34 @@ class MinimalistCards {
     }
 
     handleWallpaperMediaTimeline(event) {
-        console.log("Timeline", event);
+        //console.log("Timeline", event);
         requestAnimationFrame(() => {
             this.components.trackCard.updateTimeline(event);
         });
     }
 
     handleWallpaperMediaPlayback(event) {
-        console.log("Playback", event);
+        console.log("Playback", event.state);
         requestAnimationFrame(() => {
-            switch (event.state) {
-                case 0:
-                    this.components.trackCard.open(false);
-                    break;
-                case 1:
-                    this.components.trackCard.open(true);
-                    this.components.trackCard.pauseTimeline(false);
-                    break;
-                case 2:
-                    this.components.trackCard.open(true);
-                    this.components.trackCard.pauseTimeline(true);
-                    break;
-                default:
-                    break;
+            if (event.state == window.wallpaperMediaIntegration.PLAYBACK_PLAYING) {
+                this.components.trackCard.open(true);
+                this.components.trackCard.pauseTimeline(true);
+            }
+
+            if (event.state == window.wallpaperMediaIntegration.PLAYBACK_PAUSED) {
+                this.components.trackCard.open(true);
+                this.components.trackCard.pauseTimeline(false);
+            }
+
+            if (event.state == window.wallpaperMediaIntegration.PLAYBACK_STOPPED) {
+                this.components.trackCard.open(false);
+                this.components.trackCard.pauseTimeline(true);
             }
         });
     }
 
     handleApplyUserProperties(properties) {
-        console.log("ApplyUserProperties", properties);
+        //console.log("ApplyUserProperties", properties);
         for (const key in properties) {
             const value = properties[key].value;
 
@@ -165,7 +164,7 @@ class MinimalistCards {
 
     restoreUserProperties() {
         for (const key in this.propertiesMap) {
-            console.log(key);
+            //console.log(key);
             const stored = localStorage.getItem(key);
             if (stored !== null) {
                 this.propertiesMap[key](stored);
