@@ -15,7 +15,7 @@
     position: relative;
 }
 
-.background-inner-image {
+.background-thumbnail {
     position: absolute;
     top: -9999px;
     bottom: -9999px;
@@ -43,10 +43,15 @@
     mix-blend-mode: multiply;
 }
 
-.background-custom-image {
+.background-thumbnail-container {
     position: absolute;
     top: 0;
     left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.background-custom-image {
     width: 100%;
     height: 100%;
     background-size: 100% 100%;

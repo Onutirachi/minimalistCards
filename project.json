@@ -145,6 +145,19 @@
 				"type" : "file",
 				"value" : ""
 			},
+			"backgroundcustomimageopacity" : 
+			{
+				"fraction" : true,
+				"index" : 41,
+				"max" : 1,
+				"min" : 0,
+				"order" : 141,
+				"precision" : 3,
+				"step" : 0.01,
+				"text" : "Background - Custom Image Opacity",
+				"type" : "slider",
+				"value" : 1
+			},
 			"backgroundmovementspeed" : 
 			{
 				"fraction" : true,
@@ -569,8 +582,8 @@
 	"ratingviolence" : "none",
 	"tags" : [ "Music" ],
 	"title" : "Minimalist Cards",
-	"type" : "Web",
-	"version" : 10,
+	"type" : "web",
+	"version" : 12,
 	"visibility" : "public",
 	"workshopid" : "3596377391",
 	"workshopurl" : "steam://url/CommunityFilePage/3596377391"

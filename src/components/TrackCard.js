@@ -129,13 +129,16 @@ export default class TrackCard extends BaseCard {
             this.container.style.maxHeight = this.height + "px";
             this.container.style.margin = "10px";
 
-            this.container.showTimeout = setTimeout(() => {
+            clearTimeout(this.container.animationTimeout);
+            this.container.animationTimeout = setTimeout(() => {
                 this.animate(this.container, this.animation, () => {});
             }, this.animation.duration);
         }
+
         if (boolean == "true" || boolean == false) {
             if (!this.isOpened) return;
             this.isOpened = false;
+            clearTimeout(this.container.animationTimeout);
             this.animate(this.container, { ...this.animation, direction: "reverse" }, () => {
                 this.container.style.maxHeight = "0px";
                 this.container.style.margin = "0px";

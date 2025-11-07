@@ -29,8 +29,8 @@ export default class DateCard extends BaseCard {
     }
 
     updateColors(event) {
-        this.container.style.color = event.textColor == "#000000" && event.primaryColor == "#000000" ? "#ffffff" : event.textColor;
-        this.container.style.background = event.primaryColor == "#000000" ? "#111" : event.primaryColor;
+        this.container.style.color = event.textColor;
+        this.container.style.background = event.primaryColor;
     }
 
     show = (boolean) => {

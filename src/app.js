@@ -62,6 +62,7 @@ class MinimalistCards {
             backgroundbeatsensitivity: this.components.background.beatSensitivity,
             backgroundmovementspeed: this.components.background.movementSpeed,
             backgroundcustomimage: this.components.background.customImage,
+            backgroundcustomimageopacity: this.components.background.customImageOpacity,
         };
 
         this.restoreUserProperties();
@@ -106,6 +107,11 @@ class MinimalistCards {
     handleWallpaperMediaProperties(event) {
         this.debug.properties(event);
 
+        event = {
+            ...event,
+            title: event.title == "" ? "Untitled" : event.title,
+        };
+
         requestAnimationFrame(() => {
             this.components.trackCard.updateTrack(event);
         });
@@ -113,6 +119,13 @@ class MinimalistCards {
 
     handleWallpaperMediaThumbnail(event) {
         this.debug.thumbnail(event);
+
+        event = {
+            ...event,
+            primaryColor: event.primaryColor === event.textColor ? "#111111" : event.primaryColor,
+            textColor: event.primaryColor === event.textColor ? "#ffffff" : event.textColor,
+        };
+
         requestAnimationFrame(() => {
             this.components.background.updateThumbnail(event);
             this.components.trackCard.updateThumbnail(event);

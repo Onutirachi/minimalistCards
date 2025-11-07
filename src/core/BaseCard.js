@@ -4,8 +4,9 @@ export default class BaseCard {
     constructor() {
         this.animation = ANIMATION_DEFAULTS;
     }
-    
-    change(element, changes, animation = {}) {
+
+    change(element, changes, animation = {}, removeAnimation = false) {
+        console.log(element.classList[0], removeAnimation);
         const animationObject = { ...this.animation, ...animation };
 
         const halfDuration = animationObject.duration / 2;
@@ -20,13 +21,18 @@ export default class BaseCard {
             duration: halfDuration,
         };
 
-        this.animate(element, reverseAnimation, () => {
-            this.apply(element, changes);
-            this.animate(element, normalAnimation);
-        });
+        this.animate(
+            element,
+            reverseAnimation,
+            () => {
+                this.apply(element, changes);
+                this.animate(element, normalAnimation);
+            },
+            removeAnimation
+        );
     }
 
-    animate(element, animation = {}, callback = () => {}) {
+    animate(element, animation = {}, callback = () => {}, removeAnimation = false) {
         const animationObject = { ...this.animation, direction: "normal", ...animation };
         const animationString = `${animationObject.name} ${animationObject.duration}ms ${animationObject.easing} ${animationObject.direction} forwards`;
 
@@ -37,6 +43,11 @@ export default class BaseCard {
 
         element.animationTimeout = setTimeout(() => {
             callback();
+            if (removeAnimation) {
+                setTimeout(() => {
+                    element.style.animation = "";
+                }, animationObject.duration);
+            }
         }, animationObject.duration);
     }
 
