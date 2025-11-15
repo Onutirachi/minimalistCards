@@ -51,7 +51,7 @@ export default class Background extends BaseCard {
         const monoArray = AudioUtils.makeMono(audioArray);
         const bass = AudioUtils.getRangeMean(monoArray, 0, 20);
         const beatScale = bass * this.beatSensitivityDelta + 1;
-        //this.thumbnail.style.scale = beatScale;
+        this.thumbnail.style.scale = beatScale;
         this.customImageElement.style.scale = beatScale;
     }
 

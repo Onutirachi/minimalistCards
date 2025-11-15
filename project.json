@@ -9,8 +9,8 @@
 			"audiobars" : 
 			{
 				"condition" : "",
-				"index" : 20,
-				"order" : 120,
+				"index" : 21,
+				"order" : 121,
 				"text" : "Audio Bars",
 				"type" : "group",
 				"value" : ""
@@ -18,10 +18,10 @@
 			"audiobarsborderradius" : 
 			{
 				"fraction" : true,
-				"index" : 23,
+				"index" : 24,
 				"max" : 100,
 				"min" : 0,
-				"order" : 123,
+				"order" : 124,
 				"precision" : 1,
 				"step" : 1,
 				"text" : "Audio Bars - Border Radius",
@@ -31,10 +31,10 @@
 			"audiobarsgap" : 
 			{
 				"fraction" : false,
-				"index" : 22,
+				"index" : 23,
 				"max" : 10,
 				"min" : 0,
-				"order" : 122,
+				"order" : 123,
 				"text" : "Audio Bars - Gap",
 				"type" : "slider",
 				"value" : 4
@@ -42,10 +42,10 @@
 			"audiobarsopacity" : 
 			{
 				"fraction" : false,
-				"index" : 24,
+				"index" : 25,
 				"max" : 100,
 				"min" : 10,
-				"order" : 124,
+				"order" : 125,
 				"text" : "Audio Bars - Opacity",
 				"type" : "slider",
 				"value" : 100
@@ -53,10 +53,10 @@
 			"audiobarspeakdotsborderradius" : 
 			{
 				"fraction" : true,
-				"index" : 26,
+				"index" : 27,
 				"max" : 100,
 				"min" : 0,
-				"order" : 126,
+				"order" : 127,
 				"precision" : 2,
 				"step" : 0.1,
 				"text" : "Audio Bars - Peak Dots Border Radius",
@@ -66,10 +66,10 @@
 			"audiobarspeakdotsgap" : 
 			{
 				"fraction" : false,
-				"index" : 29,
+				"index" : 30,
 				"max" : 10,
 				"min" : 0,
-				"order" : 129,
+				"order" : 130,
 				"text" : "Audio Bars - Peak Dots Gap",
 				"type" : "slider",
 				"value" : 4
@@ -77,10 +77,10 @@
 			"audiobarspeakdotsopacity" : 
 			{
 				"fraction" : false,
-				"index" : 27,
+				"index" : 28,
 				"max" : 100,
 				"min" : 10,
-				"order" : 127,
+				"order" : 128,
 				"text" : "Audio Bars - Peak Dots Opacity",
 				"type" : "slider",
 				"value" : 80
@@ -88,10 +88,10 @@
 			"audiobarspeakdotssize" : 
 			{
 				"fraction" : false,
-				"index" : 28,
+				"index" : 29,
 				"max" : 10,
 				"min" : 1,
-				"order" : 128,
+				"order" : 129,
 				"text" : "Audio Bars - Peak Dots Size",
 				"type" : "slider",
 				"value" : 5
@@ -99,26 +99,26 @@
 			"audiobarsquantity" : 
 			{
 				"fraction" : false,
-				"index" : 21,
+				"index" : 22,
 				"max" : 64,
 				"min" : 9,
-				"order" : 121,
+				"order" : 122,
 				"text" : "Audio Bars - Quantity",
 				"type" : "slider",
 				"value" : 40
 			},
 			"audiobarsshowpeakdots" : 
 			{
-				"index" : 25,
-				"order" : 125,
+				"index" : 26,
+				"order" : 126,
 				"text" : "Audio Bars - Show Peak Dots",
 				"type" : "bool",
 				"value" : true
 			},
 			"background" : 
 			{
-				"index" : 37,
-				"order" : 137,
+				"index" : 38,
+				"order" : 138,
 				"text" : "Background",
 				"type" : "group",
 				"value" : ""
@@ -126,10 +126,10 @@
 			"backgroundbeatsensitivity" : 
 			{
 				"fraction" : true,
-				"index" : 38,
+				"index" : 39,
 				"max" : 1,
 				"min" : 0,
-				"order" : 138,
+				"order" : 139,
 				"precision" : 2,
 				"step" : 0.1,
 				"text" : "Background - Beat Sensitivity",
@@ -139,8 +139,8 @@
 			"backgroundcustomimage" : 
 			{
 				"condition" : "",
-				"index" : 40,
-				"order" : 140,
+				"index" : 41,
+				"order" : 141,
 				"text" : "Background - Custom Image",
 				"type" : "file",
 				"value" : ""
@@ -148,10 +148,10 @@
 			"backgroundcustomimageopacity" : 
 			{
 				"fraction" : true,
-				"index" : 41,
+				"index" : 42,
 				"max" : 1,
 				"min" : 0,
-				"order" : 141,
+				"order" : 142,
 				"precision" : 3,
 				"step" : 0.01,
 				"text" : "Background - Custom Image Opacity",
@@ -161,10 +161,10 @@
 			"backgroundmovementspeed" : 
 			{
 				"fraction" : true,
-				"index" : 39,
+				"index" : 40,
 				"max" : 240,
 				"min" : 0,
-				"order" : 139,
+				"order" : 140,
 				"precision" : 2,
 				"step" : 0.1,
 				"text" : "Background - Movement Speed",
@@ -174,10 +174,10 @@
 			"cardshorizontalposition" : 
 			{
 				"fraction" : true,
-				"index" : 1,
+				"index" : 2,
 				"max" : 100,
 				"min" : 0,
-				"order" : 101,
+				"order" : 102,
 				"precision" : 2,
 				"step" : 0.1,
 				"text" : "Cards - Horizontal Position",
@@ -187,10 +187,10 @@
 			"cardssize" : 
 			{
 				"fraction" : true,
-				"index" : 0,
+				"index" : 1,
 				"max" : 5,
 				"min" : 0.1,
-				"order" : 100,
+				"order" : 101,
 				"precision" : 2,
 				"step" : 0.1,
 				"text" : "Cards - Size",
@@ -200,10 +200,10 @@
 			"cardsverticalposition" : 
 			{
 				"fraction" : true,
-				"index" : 2,
+				"index" : 3,
 				"max" : 100,
 				"min" : 0,
-				"order" : 102,
+				"order" : 103,
 				"precision" : 2,
 				"step" : 0.1,
 				"text" : "Cards - Vertical Position",
@@ -212,8 +212,8 @@
 			},
 			"clockcard" : 
 			{
-				"index" : 3,
-				"order" : 103,
+				"index" : 4,
+				"order" : 104,
 				"text" : "Clock Card",
 				"type" : "group",
 				"value" : ""
@@ -221,10 +221,10 @@
 			"clockcardborderradius" : 
 			{
 				"fraction" : true,
-				"index" : 7,
+				"index" : 8,
 				"max" : 40,
 				"min" : 0,
-				"order" : 107,
+				"order" : 108,
 				"precision" : 2,
 				"step" : 0.1,
 				"text" : "Clock Card - Border Radius",
@@ -233,7 +233,7 @@
 			},
 			"clockcardfontfamily" : 
 			{
-				"index" : 8,
+				"index" : 9,
 				"options" : 
 				[
 					{
@@ -261,7 +261,7 @@
 						"value" : "Tokyo"
 					}
 				],
-				"order" : 108,
+				"order" : 109,
 				"text" : "Clock Card - Font",
 				"type" : "combo",
 				"value" : "Unageo"
@@ -269,42 +269,42 @@
 			"clockcardfontweight" : 
 			{
 				"fraction" : false,
-				"index" : 9,
+				"index" : 10,
 				"max" : 900,
 				"min" : 100,
-				"order" : 109,
+				"order" : 110,
 				"text" : "Clock Card - Font Weight",
 				"type" : "slider",
 				"value" : 600
 			},
 			"clockcardformat12h" : 
 			{
-				"index" : 6,
-				"order" : 106,
+				"index" : 7,
+				"order" : 107,
 				"text" : "Clock Card - Format 12H",
 				"type" : "bool",
 				"value" : false
 			},
 			"clockcardshow" : 
 			{
-				"index" : 4,
-				"order" : 104,
+				"index" : 5,
+				"order" : 105,
 				"text" : "Clock Card - Show",
 				"type" : "bool",
 				"value" : true
 			},
 			"clockcardshowseconds" : 
 			{
-				"index" : 5,
-				"order" : 105,
+				"index" : 6,
+				"order" : 106,
 				"text" : "Clock Card - Show Seconds",
 				"type" : "bool",
 				"value" : true
 			},
 			"datecard" : 
 			{
-				"index" : 30,
-				"order" : 130,
+				"index" : 31,
+				"order" : 131,
 				"text" : "Date Card",
 				"type" : "group",
 				"value" : ""
@@ -312,10 +312,10 @@
 			"datecardborderradius" : 
 			{
 				"fraction" : true,
-				"index" : 32,
+				"index" : 33,
 				"max" : 40,
 				"min" : 0,
-				"order" : 132,
+				"order" : 133,
 				"precision" : 2,
 				"step" : 0.1,
 				"text" : "Date Card - Border Radius",
@@ -324,7 +324,7 @@
 			},
 			"datecardfulldatefontfamily" : 
 			{
-				"index" : 35,
+				"index" : 36,
 				"options" : 
 				[
 					{
@@ -352,7 +352,7 @@
 						"value" : "Tokyo"
 					}
 				],
-				"order" : 135,
+				"order" : 136,
 				"text" : "Date Card - Full Date Font Family",
 				"type" : "combo",
 				"value" : "Unageo"
@@ -360,25 +360,25 @@
 			"datecardfulldatefontweight" : 
 			{
 				"fraction" : false,
-				"index" : 36,
+				"index" : 37,
 				"max" : 900,
 				"min" : 100,
-				"order" : 136,
+				"order" : 137,
 				"text" : "Date Card - Full Date Font Weight",
 				"type" : "slider",
 				"value" : 300
 			},
 			"datecardshow" : 
 			{
-				"index" : 31,
-				"order" : 131,
+				"index" : 32,
+				"order" : 132,
 				"text" : "Date Card - Show",
 				"type" : "bool",
 				"value" : true
 			},
 			"datecardweekdayfontfamily" : 
 			{
-				"index" : 33,
+				"index" : 34,
 				"options" : 
 				[
 					{
@@ -406,7 +406,7 @@
 						"value" : "Tokyo"
 					}
 				],
-				"order" : 133,
+				"order" : 134,
 				"text" : "Date Card - Weekday Font Family",
 				"type" : "combo",
 				"value" : "Unageo"
@@ -414,13 +414,21 @@
 			"datecardweekdayfontweight" : 
 			{
 				"fraction" : false,
-				"index" : 34,
+				"index" : 35,
 				"max" : 900,
 				"min" : 100,
-				"order" : 134,
+				"order" : 135,
 				"text" : "Date Card - Weekday Font Weight",
 				"type" : "slider",
 				"value" : 600
+			},
+			"information" : 
+			{
+				"index" : 0,
+				"order" : 100,
+				"text" : "Please reset the wallpaper settings if anything looks strange/wrong or after an update. Some updates come with changes to user options and may cause problems.",
+				"type" : "text",
+				"value" : false
 			},
 			"schemecolor" : 
 			{
@@ -431,15 +439,15 @@
 			},
 			"trackcard" : 
 			{
-				"index" : 10,
-				"order" : 110,
+				"index" : 11,
+				"order" : 111,
 				"text" : "Track Card",
 				"type" : "group",
 				"value" : ""
 			},
 			"trackcardartitsfontfamily" : 
 			{
-				"index" : 15,
+				"index" : 16,
 				"options" : 
 				[
 					{
@@ -467,7 +475,7 @@
 						"value" : "Tokyo"
 					}
 				],
-				"order" : 115,
+				"order" : 116,
 				"text" : "Track Card - Artist Font Family",
 				"type" : "combo",
 				"value" : "Unageo"
@@ -475,10 +483,10 @@
 			"trackcardartitsfontweight" : 
 			{
 				"fraction" : false,
-				"index" : 16,
+				"index" : 17,
 				"max" : 900,
 				"min" : 100,
-				"order" : 116,
+				"order" : 117,
 				"text" : "Track Card - Artist Font Weight",
 				"type" : "slider",
 				"value" : 300
@@ -486,10 +494,10 @@
 			"trackcardborderradius" : 
 			{
 				"fraction" : true,
-				"index" : 12,
+				"index" : 13,
 				"max" : 40,
 				"min" : 0,
-				"order" : 112,
+				"order" : 113,
 				"precision" : 2,
 				"step" : 0.1,
 				"text" : "Track Card - Border Radius",
@@ -498,39 +506,39 @@
 			},
 			"trackcardshow" : 
 			{
-				"index" : 11,
-				"order" : 111,
+				"index" : 12,
+				"order" : 112,
 				"text" : "Track Card - Show",
 				"type" : "bool",
 				"value" : true
 			},
 			"trackcardshowbars" : 
 			{
-				"index" : 18,
-				"order" : 118,
+				"index" : 19,
+				"order" : 119,
 				"text" : "Track Card - Show Bars",
 				"type" : "bool",
 				"value" : true
 			},
 			"trackcardshowbeats" : 
 			{
-				"index" : 17,
-				"order" : 117,
+				"index" : 18,
+				"order" : 118,
 				"text" : "Track Card - Show Beats",
 				"type" : "bool",
 				"value" : true
 			},
 			"trackcardshowtimeline" : 
 			{
-				"index" : 19,
-				"order" : 119,
+				"index" : 20,
+				"order" : 120,
 				"text" : "Track Card - Show Timeline",
 				"type" : "bool",
 				"value" : true
 			},
 			"trackcardtitlefontfamily" : 
 			{
-				"index" : 13,
+				"index" : 14,
 				"options" : 
 				[
 					{
@@ -558,7 +566,7 @@
 						"value" : "Tokyo"
 					}
 				],
-				"order" : 113,
+				"order" : 114,
 				"text" : "Track Card - Title Font Family",
 				"type" : "combo",
 				"value" : "Unageo"
@@ -566,10 +574,10 @@
 			"trackcardtitlefontweight" : 
 			{
 				"fraction" : false,
-				"index" : 14,
+				"index" : 15,
 				"max" : 900,
 				"min" : 100,
-				"order" : 114,
+				"order" : 115,
 				"text" : "Track Card - Title Font Weight",
 				"type" : "slider",
 				"value" : 600
@@ -582,8 +590,8 @@
 	"ratingviolence" : "none",
 	"tags" : [ "Music" ],
 	"title" : "Minimalist Cards",
-	"type" : "web",
-	"version" : 12,
+	"type" : "Web",
+	"version" : 14,
 	"visibility" : "public",
 	"workshopid" : "3596377391",
 	"workshopurl" : "steam://url/CommunityFilePage/3596377391"
