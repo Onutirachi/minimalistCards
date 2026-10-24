@@ -1,0 +1,21 @@
+.date-card {
+    height: 100px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.date-card-weekday,
+.date-card-full-date {
+    font-size: 2rem;
+}
+
+.date-card-weekday {
+    font-weight: 600;
+}
+
+.date-card-full-date {
+    font-weight: 300;
+}

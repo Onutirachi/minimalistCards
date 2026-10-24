@@ -1,0 +1,139 @@
+/* Collapsed until media plays: TrackCard.open() expands it, then fades it in */
+.track-card {
+    position: relative;
+    height: 300px;
+    max-height: 0;
+    margin: 0;
+    overflow: hidden;
+    opacity: 0;
+    transition: background-color var(--color-transition), color var(--color-transition), max-height 1s ease, margin 1s ease;
+}
+
+.track-card.is-open {
+    max-height: 300px;
+    margin: var(--card-margin);
+}
+
+.track-card-cover {
+    position: absolute;
+    height: 100%;
+    aspect-ratio: 1;
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    mask-image: linear-gradient(80deg, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0) 85%);
+    mask-repeat: no-repeat;
+    mask-size: 100% 100%;
+}
+
+.track-card-content {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+    padding: 20px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: space-between;
+}
+
+.track-card-info {
+    width: 100%;
+    height: 95px;
+    display: flex;
+    flex-direction: column;
+}
+
+.track-card-title,
+.track-card-artist {
+    width: 100%;
+    height: 40px;
+    line-height: 40px;
+    font-size: 2.2rem;
+    white-space: nowrap;
+    text-align: right;
+    overflow: hidden;
+}
+
+.track-card-title {
+    font-weight: 600;
+}
+
+.track-card-artist {
+    font-weight: 300;
+}
+
+.marquee-item {
+    display: inline-block;
+}
+
+.track-card-beats {
+    width: 150px;
+    height: 40px;
+    margin-bottom: auto;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.track-card-beat {
+    height: 100%;
+    aspect-ratio: 1;
+    border-radius: 20%;
+    background-color: var(--card-text);
+    transition: background-color var(--color-transition);
+    will-change: scale;
+}
+
+.track-card-audio-bars {
+    width: 100%;
+    height: 90px;
+    margin-top: auto;
+}
+
+.audio-bars {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+.track-card-timeline {
+    width: 100%;
+    height: 20px;
+    margin-top: 10px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.track-card-time {
+    width: 40px;
+    height: 100%;
+    font-family: "Unageo", sans-serif;
+    text-shadow: 0 0 5px rgba(255, 255, 255, 0.3), 0 0 10px rgba(255, 255, 255, 0.15);
+}
+
+.track-card-progress {
+    flex-grow: 1;
+    height: 5px;
+    border-radius: 2.5px;
+    overflow: hidden;
+    background-color: var(--card-text-muted);
+    transition: background-color var(--color-transition);
+}
+
+/* Moved with a transform every frame by TrackCard.updateTimeline, so no CSS transition */
+.track-card-progress-fill {
+    width: 100%;
+    height: 100%;
+    border-radius: 2.5px;
+    background-color: var(--card-text);
+    transform: translateX(-100%);
+    transition: background-color var(--color-transition);
+    will-change: transform;
+}

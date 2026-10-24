@@ -1,0 +1,10 @@
+.clock-card {
+    height: 100px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    font-size: 4rem;
+    font-weight: 600;
+}
