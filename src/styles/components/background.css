@@ -18,13 +18,13 @@
     inset: 0;
 }
 
-/* Pre-blurred canvas, big enough to cover the screen at any rotation (keep in sync with BACKGROUND.sizeFactor) */
+/* Pre-blurred canvas; Background.updateSize sets its side to the screen diagonal so it covers any rotation */
 .background-thumbnail {
     position: absolute;
     top: 50%;
     left: 50%;
-    width: max(114.8vw, 114.8vh);
-    height: max(114.8vw, 114.8vh);
+    width: var(--background-size);
+    height: var(--background-size);
     translate: -50% -50%;
     will-change: scale;
 }

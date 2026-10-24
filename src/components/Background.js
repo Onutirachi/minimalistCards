@@ -35,7 +35,17 @@ export default class Background {
             iterations: Infinity,
         });
 
-        window.addEventListener("resize", () => this.redraw());
+        this.updateSize();
+        window.addEventListener("resize", () => {
+            this.updateSize();
+            this.redraw();
+        });
+    }
+
+    /** The rotating square must be as wide as the screen diagonal to cover it at any angle and aspect ratio. */
+    updateSize() {
+        this.size = Math.ceil(Math.hypot(window.innerWidth, window.innerHeight)) + BACKGROUND.sizeMargin;
+        this.container.style.setProperty("--background-size", `${this.size}px`);
     }
 
     async setThumbnail(url) {
@@ -85,8 +95,7 @@ export default class Background {
         if (!this.source) return;
 
         // Match the on-screen blur radius at the canvas resolution
-        const screenSize = Math.max(window.innerWidth, window.innerHeight) * BACKGROUND.sizeFactor;
-        const blur = (BACKGROUND.blur * BACKGROUND.canvasSize) / screenSize;
+        const blur = (BACKGROUND.blur * BACKGROUND.canvasSize) / this.size;
         drawBlurred(this.context, this.padded, this.source, blur);
     }
 }

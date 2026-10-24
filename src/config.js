@@ -33,7 +33,7 @@ export const TIMELINE = {
 export const BACKGROUND = {
     blur: 100, // px on screen
     canvasSize: 256,
-    sizeFactor: 1.148, // thumbnail side relative to max(vw, vh), keep in sync with background.css
+    sizeMargin: 2, // px added to the screen diagonal so antialiased edges never show
     tintAlpha: 0.8,
 };
 
