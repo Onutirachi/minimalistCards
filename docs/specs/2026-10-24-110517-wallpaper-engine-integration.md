@@ -1,5 +1,6 @@
-# 01 — Integração com o Wallpaper Engine
+# Integração com o Wallpaper Engine
 
+- **Criada em:** 2026-10-24 11:05:17
 - **Status:** Implemented
 - **Código:** `src/main.js`, `src/core/wallpaperBridge.js`, `src/core/settings.js`, `project.json`
 

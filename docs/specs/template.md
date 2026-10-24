@@ -1,5 +1,6 @@
-# NN — Título
+# Título
 
+- **Criada em:** AAAA-MM-DD HH:MM:SS
 - **Status:** Draft | Implemented | Superseded
 - **Código:** caminhos dos arquivos principais
 

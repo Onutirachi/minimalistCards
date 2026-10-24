@@ -1,5 +1,6 @@
-# 02 — Render loop e áudio
+# Render loop e áudio
 
+- **Criada em:** 2026-10-24 11:05:17
 - **Status:** Implemented
 - **Código:** `src/core/RenderLoop.js`, `src/core/App.js` (`frame`, `onAudio`), `src/audio/AudioAnalyzer.js`
 
@@ -11,7 +12,7 @@ O WE chama o listener de áudio cerca de 30 vezes por segundo com 128 valores (6
 - recalculava o mono 3 vezes (barras, fundo, beats);
 - alocava arrays novos.
 
-Com a página oculta, os rAFs se acumulavam (ver [spec 00](00-architecture.md)).
+Com a página oculta, os rAFs se acumulavam (ver [Arquitetura](2026-10-24-110516-architecture.md)).
 
 ## Requisitos
 
