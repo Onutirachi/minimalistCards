@@ -1,0 +1,10 @@
+{
+    "name": "minimalist-cards",
+    "private": true,
+    "description": "Wallpaper Engine web wallpaper: clock, date and now-playing cards.",
+    "type": "module",
+    "scripts": {
+        "test": "node --test",
+        "dev": "python -m http.server 8080"
+    }
+}
