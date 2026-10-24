@@ -12,7 +12,7 @@ O WE chama o listener de áudio cerca de 30 vezes por segundo com 128 valores (6
 - recalculava o mono 3 vezes (barras, fundo, beats);
 - alocava arrays novos.
 
-Com a página oculta, os rAFs se acumulavam (ver [Arquitetura](2026-10-24-110516-architecture.md)).
+Com a página oculta, os rAFs se acumulavam (ver [Arquitetura](20261024-110516-architecture.md)).
 
 ## Requisitos
 
