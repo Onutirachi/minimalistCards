@@ -1,0 +1,47 @@
+# 03 — Barras de áudio
+
+- **Status:** Implemented
+- **Código:** `src/components/AudioBars.js`
+
+## Contexto
+
+As barras são desenhadas em WebGL2: um quad instanciado, com cantos arredondados por SDF no fragment shader. A v1 tinha três problemas aqui:
+
+- **Embaçamento com scale.** O canvas era dimensionado pelo `offsetWidth`, que ignora o `transform: scale()` dos cards. Com scale 2, uma imagem de 560×90 era esticada para 1120×180.
+- **Fallback quebrado.** Havia um fallback para WebGL1, mas os shaders são `#version 300 es` e usam instancing, que só existe no WebGL2.
+- **Uploads desnecessários.** Cor e opacidade, que são constantes, eram enviadas como atributos por instância, com 4 `bufferData` por frame.
+
+## Requisitos
+
+- **REQ-BAR-1** — O drawing buffer DEVE ter o tamanho real na tela (scale dos cards × `devicePixelRatio`). Gap, tamanho e distância dos dots DEVEM ser escalados na mesma proporção, para o visual ficar idêntico e só ganhar nitidez.
+- **REQ-BAR-2** — QUANDO o scale dos cards, o tamanho da janela ou a visibilidade do card ou das barras mudar, o tamanho DEVE ser recalculado. Como rede de segurança, ele também é conferido a cada 60 áudios.
+- **REQ-BAR-3** — QUANDO o WebGL2 não existir, as barras DEVEM ser ocultadas, sem erro.
+- **REQ-BAR-4** — QUANDO o contexto WebGL for perdido, o sistema DEVE parar de desenhar. QUANDO for restaurado, DEVE recriar programa e buffers e voltar a desenhar.
+- **REQ-BAR-5** — O processamento DEVE ser o mesmo da v1:
+  - nível = nível × 0,6 + novo × 0,4, limitado a [0, 1];
+  - o peak dot segura o pico por 10 frames de áudio e depois cai 0,008 por frame;
+  - o peak dot nunca fica abaixo de 0,001, ou seja, sempre aparece.
+- **REQ-BAR-6** — O sistema NÃO DEVE alocar memória nem fazer `bufferData` por frame.
+- **REQ-BAR-7** — QUANDO as barras não estiverem visíveis (card fechado ou `showBars` desligado), o sistema NÃO DEVE processar nem desenhar.
+
+## Design
+
+- Os shaders recebem tamanhos em pixels de device. A cor e a opacidade viram uniforms.
+- Há duas camadas (barras e dots), cada uma com seu VAO e seu buffer de instâncias `[index, altura]`, atualizado com `bufferSubData` a partir de um `Float32Array` pré-alocado (64 × 2).
+- **`resize()`:**
+  - `ratio = (getBoundingClientRect().width / offsetWidth) × devicePixelRatio`;
+  - canvas = tamanho CSS × ratio;
+  - `pixelRatio` é guardado e multiplica gap, tamanho e distância dos dots no `draw()`.
+- O CSS continua com `width: 100%`. Só a resolução interna muda.
+- O `App` chama `invalidateSize()` em `setCardsScale`, `setTrackCardVisible`, `setShowBars`, no `resize` da janela e ao abrir o card.
+- A borda suavizada do SDF (`smoothstep(-1, 1)`) passa a ser medida em pixels de device. Com scale 1 é idêntica à v1, e com scale > 1 fica mais nítida.
+
+## Critérios de aceitação
+
+| Requisito | Verificação |
+|---|---|
+| REQ-BAR-1, 2 | Manual/smoke: com `cardssize = 2`, o canvas passa de 560×90 para 1120×180 e as barras ficam nítidas |
+| REQ-BAR-3, 4 | Revisão do construtor e dos listeners de contexto |
+| REQ-BAR-5 | Revisão de `updateLevels` contra a v1 (`main:src/components/AudioBars.js`) |
+| REQ-BAR-6 | Revisão de `draw`/`drawLayer` |
+| REQ-BAR-7 | Revisão de `App.frame` (`trackCard.barsVisible`) |

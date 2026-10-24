@@ -1,0 +1,72 @@
+# 05 — Cards
+
+- **Status:** Implemented
+- **Código:** `src/components/{Card,Cards,ClockCard,DateCard,TrackCard}.js`, `src/core/transitions.js`, `src/utils/{time,locale,marquee}.js`, `src/styles/`
+
+## Contexto
+
+São três cards empilhados (relógio, música e data) com as cores do álbum. O card de música abre quando há mídia tocando ou pausada e fecha quando ela para.
+
+Problemas na v1:
+
+- **Posição:** calculada em px uma única vez, sem acompanhar mudanças de resolução.
+- **Relógio:** um `setInterval(1000)` fora de fase com o segundo real.
+- **Data:** criava 4 `Intl.DateTimeFormat` por segundo.
+- **Card de música:** `open("true")` abria e fechava na mesma chamada.
+- **Transições:** cadeias de `setTimeout` em que trocas rápidas podiam aplicar dados antigos.
+- **Marquee:** medido 520 ms depois da troca e antes de a fonte carregar.
+- **Fontes:** `.woff` duplicados, a família "MiSans Normal" com nome inválido e o ExtraBold da Unageo declarado como `bold`.
+
+## Requisitos
+
+### Layout
+- **REQ-CARD-1** — A posição horizontal e vertical DEVE ser aplicada em `%` da tela e acompanhar mudanças de resolução.
+- **REQ-CARD-2** — O scale DEVE ser aplicado como `transform` no contêiner (ver REQ-BAR-1 para as barras).
+- **REQ-CARD-3** — Os cards DEVEM surgir com fade de 1 s, só depois de as fontes carregarem.
+- **REQ-CARD-4** — As cores DEVEM transicionar em 1 s. Fundo = `primaryColor`, texto = `textColor`, trilho da timeline = `textColor` com alpha 0x50.
+
+### Relógio
+- **REQ-CLK-1** — O relógio DEVE trocar de segundo junto com o relógio do sistema, com no máximo 1 frame de atraso.
+- **REQ-CLK-2** — Os formatos DEVEM ser os da v1: `HH:MM[:SS]`, e em 12h `hh:MM[:SS] AM/PM`, com zero à esquerda.
+
+### Data
+- **REQ-DATE-1** — Dia da semana e data DEVEM ser localizados, com a capitalização da v1 ("Sexta-Feira", "24 de Outubro de 2026").
+- **REQ-DATE-2** — QUANDO o idioma reportado for inglês, o fuso horário DEVE ser usado para inferir o locale (pt-BR, pt-PT, es-ES, fr-FR, de-DE, ja-JP). Sem correspondência, DEVE manter o idioma reportado.
+- **REQ-DATE-3** — A formatação DEVE ocorrer só na virada do dia, com crossfade.
+
+### Card de música
+- **REQ-TRK-1** — QUANDO o playback for `playing` ou `paused`, o card DEVE abrir: expande em 1 s e depois faz fade-in de 1 s. QUANDO for `stopped`, DEVE fechar: fade-out de 1 s e depois recolhe.
+- **REQ-TRK-2** — Aberturas e fechamentos sobrepostos DEVEM resultar no último estado pedido.
+- **REQ-TRK-3** — Título, artista e capa DEVEM trocar com crossfade (500 ms para sair e 500 ms para entrar). Em trocas rápidas, DEVE aparecer só a última faixa.
+- **REQ-TRK-4** — QUANDO um texto não couber, ele DEVE rolar em loop contínuo (duas cópias, 80 px de espaço, 50 px/s). A medição DEVE ser refeita quando fonte, peso ou visibilidade mudarem e quando as fontes terminarem de carregar.
+- **REQ-TRK-5** — Os três blocos de beat DEVEM escalar `min(0.5 + grave×3, 1)`, `min(0.5 + médio×2, 1)` e `min(0.5 + agudo×1.5, 1)`.
+- **REQ-TRK-6** — Antes de qualquer música, o card DEVE mostrar "If you're reading this, / reopen your music app.".
+
+### Fontes
+- **REQ-FONT-1** — Só `.woff2`, com uma `@font-face` por arquivo e pesos corretos. A Circular Std Book passa a ser o peso 400 da família "Circular Std", e a Unageo ExtraBold passa a ser 800.
+
+## Design
+
+- **`Cards`** define `left`/`top` em `%`, a variável `--cards-scale` e as variáveis de cor `--card-background`, `--card-text` e `--card-text-muted`, herdadas pelos três cards.
+- **`Card`** (base) cuida de visibilidade (atributo `hidden`), raio, fonte e peso por alvo (`fontTargets`).
+- **`ClockCard.tick()` / `DateCard.tick()`** são chamados pelo `App.frame` quando `floor(Date.now() / 1000)` muda. A data compara `toDateString()` e usa formatadores `Intl` em cache.
+- **`TrackCard.open/close`** usam um `openToken`: cada chamada incrementa o token, e as etapas assíncronas verificam se ainda são as mais recentes. A expansão é uma transição CSS de `max-height`/`margin` (classe `is-open`), e o fade é feito via WAAPI.
+- **`crossFade(el, apply)`** faz o fade-out partindo da opacidade atual, roda `apply` e faz o fade-in. Um token por elemento (WeakMap) descarta chamadas antigas.
+- **`setMarqueeText`** mede de forma síncrona (o layout já está atualizado) e anima com WAAPI.
+
+### Mudanças de comportamento intencionais
+- **Locale:** inglês fora dos fusos mapeados agora mantém o idioma reportado (en-GB continua en-GB). A v1 forçava en-US.
+- **Pesos de fonte (REQ-FONT-1):**
+  - peso 400 na Circular Std agora usa a Book; antes caía na Medium;
+  - peso 700 na Unageo agora usa a Bold de verdade; antes a ExtraBold sobrescrevia.
+
+## Critérios de aceitação
+
+| Requisito | Verificação |
+|---|---|
+| REQ-CLK-2 | `tests/time.test.js` › "formatClock supports 24h, 12h and hidden seconds" |
+| REQ-DATE-1, 2 | `tests/time.test.js` › "Portuguese dates are capitalized", "detectLocale …" |
+| REQ-TRK-1, 2 | Smoke em `dev/`: `stopped` deixa o card com `opacity 0` e sem `is-open`. As teclas `Space`/`S` alternam |
+| REQ-TRK-3 | Smoke: 3 `playTrack` seguidos mostram só a última faixa |
+| REQ-TRK-4 | Smoke: o título longo vira 2 `.marquee-item` |
+| REQ-CARD-1..4, REQ-TRK-5, 6, REQ-FONT-1 | Manual no WE e em `dev/` |

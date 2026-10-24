@@ -1,0 +1,49 @@
+# 06 — Timeline
+
+- **Status:** Implemented
+- **Código:** `src/media/TimelineClock.js`, `TrackCard.updateTimeline`
+
+## Contexto
+
+O WE envia a posição da música só de vez em quando, e com atraso e imprecisão que dependem do player. A v1 tinha três problemas:
+
+1. **Correção pela metade.** A cada evento fazia `atual += (real − atual) × 0,5`. Exemplo: mostrando 1:05.8, o evento diz 1:05.0, e a posição vira 1:05.4. O relógio parava ou recuava (1:05 → 1:04) e nunca ficava de fato certo.
+2. **Degraus de 1%.** `Math.floor(percent)` mais `transition: max-width 0.5s`. Numa música de 4 min, 1% são 2,4 s: a barra ficava parada e depois escorregava.
+3. **Loop recriado a cada evento.** O rAF era recriado, o que zerava o `lastTime`, e a `duration` ficava presa na closure antiga.
+
+## Requisitos
+
+- **REQ-TL-1** — A posição real estimada DEVE ser `âncora + tempo decorrido` (enquanto toca), sem acumular erro entre eventos.
+- **REQ-TL-2** — QUANDO a diferença entre o exibido e o real for de até 2 s, a exibição DEVE convergir ajustando a velocidade (0,5×–1,5×) e NÃO DEVE andar para trás.
+- **REQ-TL-3** — QUANDO a diferença passar de 2 s (seek) ou a duração mudar (nova faixa), a exibição DEVE saltar direto para o valor real.
+- **REQ-TL-4** — QUANDO pausado, a exibição DEVE congelar. QUANDO retomar, DEVE continuar do ponto pausado.
+- **REQ-TL-5** — QUANDO o wallpaper voltar depois de muito tempo oculto, a exibição DEVE ir direto para a posição real (o `dt` é limitado a 0,25 s e a diferença maior que 2 s faz o salto).
+- **REQ-TL-6** — A posição DEVE ficar sempre entre 0 e a duração. Com duração 0, o progresso DEVE ser 0.
+- **REQ-TL-7** — A barra DEVE se mover continuamente, a cada frame, via `transform` e sem transição CSS. O texto DEVE ser atualizado só quando o segundo inteiro mudar.
+
+## Design
+
+```
+sync(pos, dur, now)   → âncora = (pos, now); salta se a faixa mudou ou |erro| > 2 s
+setPlaying(p, now)    → re-ancora na posição real atual e troca o estado
+update(now, dt)       → real = âncora + (tocando ? now − anchorTime : 0)
+                         |erro| > 2 s       → posição = real
+                         tocando             → posição += min(dt, 0.25) × clamp(1 + erro × 0.5, 0.5, 1.5)
+                         pausado e erro > 0  → posição = real
+```
+
+Exemplo do erro de 0,4 s: com 0,4 s de atraso, a velocidade fica em 1,2×. Em cerca de 3 s o erro some sem nenhum salto visível. Com 0,4 s de adiantamento, a velocidade fica em 0,8×, então o relógio desacelera mas nunca recua.
+
+O `TrackCard` escreve `translateX((progresso − 1) × 100%)` no preenchimento da barra. Ele tem o tamanho total do trilho, então a ponta arredondada fica intacta, sem a distorção que um `scaleX` causaria.
+
+## Critérios de aceitação
+
+| Requisito | Verificação (`tests/timelineClock.test.js`) |
+|---|---|
+| REQ-TL-1 | "advances in real time while playing" |
+| REQ-TL-2 | "a small correction never moves the display backwards and converges" |
+| REQ-TL-3 | "a seek snaps immediately", "a new track (different duration) snaps…" |
+| REQ-TL-4 | "pausing freezes the position and resuming continues from it" |
+| REQ-TL-5 | "a long gap (hidden wallpaper) catches up instead of drifting" |
+| REQ-TL-6 | "stays within [0, duration] and handles unknown durations" |
+| REQ-TL-7 | Smoke em `dev/`: 345 frames em 3 s, 0 recuos |

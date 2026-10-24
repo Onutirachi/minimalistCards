@@ -1,0 +1,89 @@
+# 00 — Arquitetura
+
+- **Status:** Implemented
+- **Código:** `src/main.js`, `src/core/`
+
+## Contexto
+
+O Minimalist Cards é um wallpaper web do Wallpaper Engine (WE). Ele mostra três cards (relógio, música tocando e data) sobre um fundo feito a partir da capa do álbum. O WE entrega dados por callbacks: áudio cerca de 30 vezes por segundo, mídia e propriedades quando mudam.
+
+A v1 tinha três problemas estruturais, e esta reescrita existe para resolvê-los:
+
+1. **Trabalho enfileirado por evento.** Cada evento agendava um `requestAnimationFrame`. Com o wallpaper oculto, por exemplo durante um jogo em tela cheia, esses callbacks se acumulavam: 30/s × 3600 s = 108 mil por hora. Ao voltar, todos rodavam de uma vez. É a principal suspeita dos crashes do WE.
+2. **Boot com espera fixa.** O código esperava `setTimeout(1000)` e mantinha um cache em `localStorage` para contornar uma condição de corrida no registro dos listeners.
+3. **Fundo caro na GPU.** Um `backdrop-filter: blur(100px)` em tela cheia era recalculado a cada frame.
+
+## Requisitos
+
+- **REQ-ARC-1** — O sistema NÃO DEVE agendar trabalho (rAF, timers) por evento recebido do WE.
+- **REQ-ARC-2** — Os listeners do WE DEVEM apenas registrar o estado mais recente ou aplicar mudanças baratas e pontuais no DOM.
+- **REQ-ARC-3** — Todo trabalho recorrente DEVE rodar num único loop de `requestAnimationFrame`.
+- **REQ-ARC-4** — QUANDO o wallpaper ficar oculto ou pausado, o sistema NÃO DEVE acumular trabalho pendente.
+- **REQ-ARC-5** — O visual e as opções do usuário DEVEM ser os mesmos da v1, exceto pelas correções documentadas nas specs.
+
+## Design
+
+```
+Wallpaper Engine ──callbacks──▶ wallpaperBridge ──normaliza──▶ App.on*()
+                                                                │
+                      ┌─────────────────────────────────────────┤
+                      │ eventos raros: aplica direto            │ áudio: guarda só o último array
+                      ▼                                         ▼
+               componentes (DOM)  ◀──── RenderLoop.frame() ──── estado (audio, audioVersion)
+```
+
+- **`main.js`** cria o `App` e conecta o WE de forma síncrona. Módulos ES rodam depois do parse do documento, então não há espera.
+- **`core/wallpaperBridge.js`** registra os listeners, normaliza os eventos (título vazio, cores iguais, estado de playback) e chama os handlers do `App`.
+- **`core/App.js`** é dono dos componentes e do loop. Os handlers `on*` são baratos. O `frame()` faz o trabalho por frame:
+  - relógio e data, uma vez por segundo de parede;
+  - timeline, a cada frame;
+  - fundo, beats e barras de áudio, só quando chega um áudio novo.
+- **`core/RenderLoop.js`** é o único rAF. Para sozinho quando a página está oculta e é pausado via `setPaused` do WE.
+- **`core/settings.js`** é o schema declarativo das propriedades do usuário (ver [spec 01](01-wallpaper-engine-integration.md)).
+- **`core/transitions.js`** faz crossfades com a Web Animations API e um token por elemento, de forma que só a última mudança é aplicada.
+- **`components/`** contém um módulo por parte visual. Os cards herdam de `Card`.
+- **`utils/`** reúne funções puras (parse, cor, tempo, locale, marquee), testadas em `tests/`.
+
+### Estrutura
+
+```
+index.html            entrada usada pelo WE
+project.json          manifesto e propriedades do WE (inclui o workshopid)
+src/main.js           boot
+src/config.js         constantes internas de ajuste
+src/core/             App, loop, bridge, settings, transições
+src/audio/            análise de áudio
+src/media/            relógio da timeline
+src/components/       UI
+src/utils/            funções puras
+src/styles/           CSS
+dev/                  mock do WE para rodar no navegador
+tests/                node --test
+docs/specs/           estas specs
+```
+
+## Problemas da v1 resolvidos
+
+| Problema na v1 | Onde foi resolvido |
+|---|---|
+| Um rAF por evento, acumulando com o wallpaper oculto | REQ-ARC-1..4, [spec 02](02-render-loop-and-audio.md) |
+| `setTimeout(1000)` no boot e cache em `localStorage` | [spec 01](01-wallpaper-engine-integration.md) |
+| `propertiesMap` usado antes de existir | [spec 01](01-wallpaper-engine-integration.md) |
+| Blur de 100px em tela cheia a cada frame | [spec 04](04-background.md) |
+| `movementSpeed` alterava o elemento errado | [spec 04](04-background.md) |
+| Barras embaçadas com scale | [spec 03](03-audio-bars.md) |
+| Fallback para WebGL1 com shaders WebGL2 | [spec 03](03-audio-bars.md) |
+| Timeline voltando para trás e andando em degraus de 1% | [spec 06](06-timeline.md) |
+| `open("true")` abria e fechava na mesma chamada | [spec 05](05-cards.md) |
+| Posição dos cards em px fixos | [spec 05](05-cards.md) |
+| Relógio fora de sincronia com o segundo | [spec 05](05-cards.md) |
+| Fontes duplicadas (`.woff` + `.woff2`) e pesos errados | [spec 05](05-cards.md) |
+
+## Critérios de aceitação
+
+| Requisito | Verificação |
+|---|---|
+| REQ-ARC-1, 2 | Revisão: `App.on*` só atribui estado ou chama setters |
+| REQ-ARC-3 | Revisão: `requestAnimationFrame` só aparece em `RenderLoop` e em `Cards.show` (uma vez) |
+| REQ-ARC-4 | Manual: em `dev/`, pressione `P` (setPaused) ou troque de aba por 1 min. O retorno é instantâneo, sem pico de CPU |
+| REQ-ARC-5 | Manual: comparar com a `main` no WE |
