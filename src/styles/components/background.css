@@ -1,0 +1,47 @@
+.background {
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    overflow: hidden;
+    background-color: #000;
+}
+
+.background-image {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.background-rotator,
+.background-custom {
+    position: absolute;
+    inset: 0;
+}
+
+/* Pre-blurred canvas, big enough to cover the screen at any rotation (keep in sync with BACKGROUND.sizeFactor) */
+.background-thumbnail {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: max(114.8vw, 114.8vh);
+    height: max(114.8vw, 114.8vh);
+    translate: -50% -50%;
+    will-change: scale;
+}
+
+.background-tint {
+    position: absolute;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.8);
+    mix-blend-mode: multiply;
+    transition: background-color var(--color-transition);
+}
+
+.background-custom-image {
+    width: 100%;
+    height: 100%;
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    background-position: center;
+    will-change: scale;
+}
