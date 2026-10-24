@@ -1,0 +1,15 @@
+:root {
+    --shadow-l: inset 0 1px 2px #ffffff70, /* top highlight */ 0 4px 6px #00000030, /* dark shadow */ 0 6px 10px #00000015; /* soft shadow */
+
+    --card-width: 600px;
+    --card-margin: 10px;
+    --card-radius: 10px;
+    --card-font: "Unageo", sans-serif;
+
+    /* Replaced by the album colors (Cards.setColors) */
+    --card-background: #111;
+    --card-text: #fff;
+    --card-text-muted: rgba(255, 255, 255, 0.31);
+
+    --color-transition: 1s linear;
+}

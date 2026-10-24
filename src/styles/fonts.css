@@ -1,0 +1,297 @@
+/* Only woff2: every Chromium version Wallpaper Engine ships supports it. */
+
+@font-face {
+    font-family: "Circular Std";
+    src: url("../fonts/Circular Std/CircularSpotifyText-Light.woff2") format("woff2");
+    font-weight: 300;
+    font-style: normal;
+    font-display: block;
+}
+
+@font-face {
+    font-family: "Circular Std";
+    src: url("../fonts/Circular Std/CircularSpotifyText-LightItalic.woff2") format("woff2");
+    font-weight: 300;
+    font-style: italic;
+    font-display: block;
+}
+
+@font-face {
+    font-family: "Circular Std";
+    src: url("../fonts/Circular Std/CircularStd-Book.woff2") format("woff2");
+    font-weight: 400;
+    font-style: normal;
+    font-display: block;
+}
+
+@font-face {
+    font-family: "Circular Std";
+    src: url("../fonts/Circular Std/CircularStd-BookItalic.woff2") format("woff2");
+    font-weight: 400;
+    font-style: italic;
+    font-display: block;
+}
+
+@font-face {
+    font-family: "Circular Std";
+    src: url("../fonts/Circular Std/CircularStd-Medium.woff2") format("woff2");
+    font-weight: 500;
+    font-style: normal;
+    font-display: block;
+}
+
+@font-face {
+    font-family: "Circular Std";
+    src: url("../fonts/Circular Std/CircularStd-MediumItalic.woff2") format("woff2");
+    font-weight: 500;
+    font-style: italic;
+    font-display: block;
+}
+
+@font-face {
+    font-family: "Circular Std";
+    src: url("../fonts/Circular Std/CircularStd-Bold.woff2") format("woff2");
+    font-weight: 700;
+    font-style: normal;
+    font-display: block;
+}
+
+@font-face {
+    font-family: "Circular Std";
+    src: url("../fonts/Circular Std/CircularStd-BoldItalic.woff2") format("woff2");
+    font-weight: 700;
+    font-style: italic;
+    font-display: block;
+}
+
+@font-face {
+    font-family: "Circular Std";
+    src: url("../fonts/Circular Std/CircularStd-Black.woff2") format("woff2");
+    font-weight: 900;
+    font-style: normal;
+    font-display: block;
+}
+
+@font-face {
+    font-family: "Circular Std";
+    src: url("../fonts/Circular Std/CircularStd-BlackItalic.woff2") format("woff2");
+    font-weight: 900;
+    font-style: italic;
+    font-display: block;
+}
+
+@font-face {
+    font-family: "MiSans";
+    src: url("../fonts/MiSans/MiSans-Thin.woff2") format("woff2");
+    font-weight: 100;
+    font-style: normal;
+    font-display: block;
+}
+
+@font-face {
+    font-family: "MiSans";
+    src: url("../fonts/MiSans/MiSans-ExtraLight.woff2") format("woff2");
+    font-weight: 200;
+    font-style: normal;
+    font-display: block;
+}
+
+@font-face {
+    font-family: "MiSans";
+    src: url("../fonts/MiSans/MiSans-Light.woff2") format("woff2");
+    font-weight: 300;
+    font-style: normal;
+    font-display: block;
+}
+
+@font-face {
+    font-family: "MiSans";
+    src: url("../fonts/MiSans/MiSans-Normal.woff2") format("woff2");
+    font-weight: 350;
+    font-style: normal;
+    font-display: block;
+}
+
+@font-face {
+    font-family: "MiSans";
+    src: url("../fonts/MiSans/MiSans-Regular.woff2") format("woff2");
+    font-weight: 400;
+    font-style: normal;
+    font-display: block;
+}
+
+@font-face {
+    font-family: "MiSans";
+    src: url("../fonts/MiSans/MiSans-Medium.woff2") format("woff2");
+    font-weight: 500;
+    font-style: normal;
+    font-display: block;
+}
+
+@font-face {
+    font-family: "MiSans";
+    src: url("../fonts/MiSans/MiSans-Demibold.woff2") format("woff2");
+    font-weight: 550;
+    font-style: normal;
+    font-display: block;
+}
+
+@font-face {
+    font-family: "MiSans";
+    src: url("../fonts/MiSans/MiSans-Semibold.woff2") format("woff2");
+    font-weight: 600;
+    font-style: normal;
+    font-display: block;
+}
+
+@font-face {
+    font-family: "MiSans";
+    src: url("../fonts/MiSans/MiSans-Bold.woff2") format("woff2");
+    font-weight: 700;
+    font-style: normal;
+    font-display: block;
+}
+
+@font-face {
+    font-family: "MiSans";
+    src: url("../fonts/MiSans/MiSans-Heavy.woff2") format("woff2");
+    font-weight: 900;
+    font-style: normal;
+    font-display: block;
+}
+
+@font-face {
+    font-family: "Unageo";
+    src: url("../fonts/Unageo/Unageo-Light.woff2") format("woff2");
+    font-weight: 300;
+    font-style: normal;
+    font-display: block;
+}
+
+@font-face {
+    font-family: "Unageo";
+    src: url("../fonts/Unageo/Unageo-Light-Italic.woff2") format("woff2");
+    font-weight: 300;
+    font-style: italic;
+    font-display: block;
+}
+
+@font-face {
+    font-family: "Unageo";
+    src: url("../fonts/Unageo/Unageo-Regular.woff2") format("woff2");
+    font-weight: 400;
+    font-style: normal;
+    font-display: block;
+}
+
+@font-face {
+    font-family: "Unageo";
+    src: url("../fonts/Unageo/Unageo-Regular-Italic.woff2") format("woff2");
+    font-weight: 400;
+    font-style: italic;
+    font-display: block;
+}
+
+@font-face {
+    font-family: "Unageo";
+    src: url("../fonts/Unageo/Unageo-Medium.woff2") format("woff2");
+    font-weight: 500;
+    font-style: normal;
+    font-display: block;
+}
+
+@font-face {
+    font-family: "Unageo";
+    src: url("../fonts/Unageo/Unageo-Medium-Italic.woff2") format("woff2");
+    font-weight: 500;
+    font-style: italic;
+    font-display: block;
+}
+
+@font-face {
+    font-family: "Unageo";
+    src: url("../fonts/Unageo/Unageo-SemiBold.woff2") format("woff2");
+    font-weight: 600;
+    font-style: normal;
+    font-display: block;
+}
+
+@font-face {
+    font-family: "Unageo";
+    src: url("../fonts/Unageo/Unageo-SemiBold-Italic.woff2") format("woff2");
+    font-weight: 600;
+    font-style: italic;
+    font-display: block;
+}
+
+@font-face {
+    font-family: "Unageo";
+    src: url("../fonts/Unageo/Unageo-Bold.woff2") format("woff2");
+    font-weight: 700;
+    font-style: normal;
+    font-display: block;
+}
+
+@font-face {
+    font-family: "Unageo";
+    src: url("../fonts/Unageo/Unageo-Bold-Italic.woff2") format("woff2");
+    font-weight: 700;
+    font-style: italic;
+    font-display: block;
+}
+
+@font-face {
+    font-family: "Unageo";
+    src: url("../fonts/Unageo/Unageo-ExtraBold.woff2") format("woff2");
+    font-weight: 800;
+    font-style: normal;
+    font-display: block;
+}
+
+@font-face {
+    font-family: "Unageo";
+    src: url("../fonts/Unageo/Unageo-ExtraBold-Italic.woff2") format("woff2");
+    font-weight: 800;
+    font-style: italic;
+    font-display: block;
+}
+
+@font-face {
+    font-family: "Unageo";
+    src: url("../fonts/Unageo/Unageo-Black.woff2") format("woff2");
+    font-weight: 900;
+    font-style: normal;
+    font-display: block;
+}
+
+@font-face {
+    font-family: "Unageo";
+    src: url("../fonts/Unageo/Unageo-Black-Italic.woff2") format("woff2");
+    font-weight: 900;
+    font-style: italic;
+    font-display: block;
+}
+
+@font-face {
+    font-family: "Rounded Elegance";
+    src: url("../fonts/Rounded Elegance/Rounded-Elegance-Regular.woff2") format("woff2");
+    font-weight: 400;
+    font-style: normal;
+    font-display: block;
+}
+
+@font-face {
+    font-family: "Super Joyful";
+    src: url("../fonts/Super Joyful/Super Joyful.woff2") format("woff2");
+    font-weight: 400;
+    font-style: normal;
+    font-display: block;
+}
+
+@font-face {
+    font-family: "Tokyo";
+    src: url("../fonts/Tokyo/Tokyo.woff2") format("woff2");
+    font-weight: 400;
+    font-style: normal;
+    font-display: block;
+}
