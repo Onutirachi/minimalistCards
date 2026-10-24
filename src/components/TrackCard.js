@@ -297,4 +297,14 @@ export default class TrackCard extends BaseCard {
         if (boolean == "true" || boolean == true) this.timeline.style.display = "flex";
         if (boolean == "false" || boolean == false) this.timeline.style.display = "none";
     };
+
+    destroy() {
+        if (this.container.animationTimeout) {
+            clearTimeout(this.container.animationTimeout);
+        }
+        if (this.timelineAnimationFrame) {
+            cancelAnimationFrame(this.timelineAnimationFrame);
+        }
+        this.container.remove();
+    }
 }

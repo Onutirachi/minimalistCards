@@ -70,7 +70,14 @@ export default class Debug {
         this.thumbnailTextColor = DomUtils.createElement("div", ["debug-thumbnail-color"]);
         this.thumbnailHighContrastColor = DomUtils.createElement("div", ["debug-thumbnail-color"]);
 
-        this.thumbnailContent.append(this.thumbnailThumbnail, this.thumbnailPrimaryColor, this.thumbnailSecondaryColor, this.thumbnailTertiaryColor, this.thumbnailTextColor, this.thumbnailHighContrastColor);
+        this.thumbnailContent.append(
+            this.thumbnailThumbnail,
+            this.thumbnailPrimaryColor,
+            this.thumbnailSecondaryColor,
+            this.thumbnailTertiaryColor,
+            this.thumbnailTextColor,
+            this.thumbnailHighContrastColor,
+        );
     }
 
     initTimelineElements() {}
@@ -156,5 +163,9 @@ export default class Debug {
 
     debug(callback) {
         if (this.showDebug) callback();
+    }
+
+    destroy() {
+        this.container.remove();
     }
 }

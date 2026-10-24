@@ -69,6 +69,13 @@ class MinimalistCards {
     }
 
     initializeComponents() {
+        if (this.components.cards) this.components.cards.destroy();
+        if (this.components.background) this.components.background.destroy();
+        if (this.components.audioBars) this.components.audioBars.destroy();
+        if (this.components.clockCard) this.components.clockCard.destroy();
+        if (this.components.trackCard) this.components.trackCard.destroy();
+        if (this.components.dateCard) this.components.dateCard.destroy();
+
         this.components.cards = new Cards();
         this.components.background = new Background();
         this.components.audioBars = new AudioBars();

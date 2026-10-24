@@ -29,4 +29,8 @@ export default class Cards {
             this.container.style.opacity = 0;
         }
     };
+
+    destroy() {
+        this.container.remove();
+    }
 }

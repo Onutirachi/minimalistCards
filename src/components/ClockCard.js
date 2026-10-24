@@ -50,4 +50,9 @@ export default class ClockCard extends BaseCard {
         if (boolean == "true" || boolean == true) this.format12hBool = true;
         if (boolean == "false" || boolean == false) this.format12hBool = false;
     };
+
+    destroy() {
+        clearInterval(this.container.clockInterval);
+        this.container.remove();
+    }
 }

@@ -78,4 +78,8 @@ export default class Background extends BaseCard {
         this.customImageContainer.style.opacity = opacity;
         //this.filter.style.opacity = opacity;
     };
+
+    destroy() {
+        this.container.remove();
+    }
 }

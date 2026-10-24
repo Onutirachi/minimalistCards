@@ -57,4 +57,9 @@ export default class DateCard extends BaseCard {
     fullDateFontWeight = (fontWeight) => {
         this.fullDate.style.fontWeight = fontWeight;
     };
+
+    destroy() {
+        clearInterval(this.container.clockInterval);
+        this.container.remove();
+    }
 }
