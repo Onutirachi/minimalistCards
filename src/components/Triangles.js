@@ -53,7 +53,7 @@ const TRIANGLE = new Float32Array([0.5, 0, 0, 1, 1, 1]);
 export default class Triangles {
     constructor(parent) {
         this.canvas = el("canvas", "triangles", parent);
-        this.options = { rows: 6, sensitivity: 0.25, beatThreshold: 1.3, rangeStart: 0, rangeEnd: 10, fadeInDuration: 0.1, fadeOutDuration: 1.5, glowStrength: 0.2, variation: 0.2 };
+        this.options = { rows: 6, sensitivity: 0.25, beatThreshold: 1.3, rangeStart: 0, rangeEnd: 9, fadeInDuration: 0.1, fadeOutDuration: 1.5, glowStrength: 0.2, variation: 0.2 };
         this.visible = true;
         this.opacity = 0.5;
 
@@ -219,10 +219,10 @@ export default class Triangles {
         this.dirty = true;
     }
 
-    /** Mean of the user's channel range; the end is exclusive and always past the start. */
+    /** Mean of the user's channel range, both ends included; an end before the start means the start channel only. */
     level(analyzer) {
         const { rangeStart, rangeEnd } = this.options;
-        return analyzer.mean(rangeStart, Math.max(rangeStart + 1, rangeEnd));
+        return analyzer.mean(rangeStart, Math.max(rangeStart, rangeEnd) + 1);
     }
 
     /**

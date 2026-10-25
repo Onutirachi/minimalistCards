@@ -792,13 +792,13 @@
 				"condition" : "trianglesshow.value == true",
 				"fraction" : false,
 				"index" : 55,
-				"max" : 64,
-				"min" : 1,
+				"max" : 63,
+				"min" : 0,
 				"order" : 155,
 				"step" : 1,
 				"text" : "Triangles - Range End",
 				"type" : "slider",
-				"value" : 10
+				"value" : 9
 			},
 			"trianglesrangestart" : 
 			{
