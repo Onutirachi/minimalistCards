@@ -19,6 +19,7 @@ Uma spec descreve o comportamento **atual**. Se o comportamento mudar, a spec mu
 | [Integração com o Wallpaper Engine](specs/20261024-110517-wallpaper-engine-integration.md) | Boot, eventos, propriedades do usuário |
 | [Render loop e áudio](specs/20261024-110517-render-loop-and-audio.md) | Loop único, análise de áudio |
 | [Barras de áudio](specs/20261024-110518-audio-bars.md) | WebGL2, nitidez com scale, peak dots |
-| [Fundo](specs/20261024-110519-background.md) | Capa borrada, rotação, beat, imagem custom |
+| [Fundo](specs/20261024-110519-background.md) | Camadas, cor base, capa borrada, rotação, beat, imagem custom |
 | [Cards](specs/20261024-110520-cards.md) | Layout, relógio, data, card de música |
 | [Timeline](specs/20261024-110521-timeline.md) | Interpolação da posição da música |
+| [Triângulos](specs/20261025-172350-triangles.md) | Grade de triângulos reativa ao grave, fonte de cor |
