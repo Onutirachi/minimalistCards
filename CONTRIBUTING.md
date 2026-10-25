@@ -27,7 +27,7 @@ O projeto usa [Conventional Commits](https://www.conventionalcommits.org/):
 | `style` | Formatação, sem mudança de lógica |
 | `chore` | Build, assets, configuração, `project.json` |
 
-**Escopos:** `core`, `audio`, `bars`, `background`, `cards`, `clock`, `date`, `track`, `timeline`, `debug`, `dev`, `fonts`.
+**Escopos:** `core`, `audio`, `bars`, `background`, `triangles`, `cards`, `clock`, `date`, `track`, `timeline`, `settings`, `debug`, `dev`, `fonts`.
 
 **Exemplos:**
 
@@ -45,7 +45,9 @@ O `!` (ou o rodapé `BREAKING CHANGE:`) marca mudanças que exigem que o usuári
 - **Propriedade nova:**
   - adicione-a no editor do WE, o que atualiza o `project.json`;
   - adicione a entrada correspondente em `src/core/settings.js`;
-  - rode `npm test`, que confere chaves, defaults e limites.
+  - coloque-a na seção certa do painel, com rótulo e dica, em `tools/settingsPanel.mjs`;
+  - rode `npm run panel` e depois `npm test`, que confere chaves, defaults, limites e se o painel está em sincronia.
+- **Painel de configurações:** rótulos, ordem, condições, descrições e dicas vêm de `tools/settingsPanel.mjs`, não do editor do WE. Depois de mudar um default, um rótulo ou a ordem, rode `npm run panel`. Uma edição feita direto no editor do WE é sobrescrita na próxima vez que o comando rodar, e o `npm test` avisa quando o `project.json` sai de sincronia.
 
 ## Publicar no Workshop
 

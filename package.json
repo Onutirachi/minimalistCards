@@ -5,6 +5,7 @@
     "type": "module",
     "scripts": {
         "test": "node --test",
+        "panel": "node tools/settingsPanel.mjs",
         "dev": "python -m http.server 8080"
     }
 }
