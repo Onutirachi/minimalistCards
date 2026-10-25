@@ -1,8 +1,10 @@
 import { toBool, toNumber, toText } from "../utils/parse.js";
+import { parseColor } from "../utils/color.js";
 
 const bool = (fallback) => ({ fallback, parse: (value) => toBool(value, fallback) });
 const number = (fallback, min, max) => ({ fallback, min, max, parse: (value) => toNumber(value, { min, max, fallback }) });
 const text = (fallback) => ({ fallback, parse: (value) => toText(value, fallback) });
+const color = (fallback) => ({ fallback, parse: (value) => (parseColor(value) ? value : fallback) });
 
 /**
  * Every user property from project.json: default, parser and how it is applied to the UI.
@@ -48,10 +50,28 @@ export const SETTINGS = {
     datecardfulldatefontfamily: { ...text("Unageo"), apply: (ui, v) => ui.dateCard.setFont("fullDate", v) },
     datecardfulldatefontweight: { ...number(300, 100, 900), apply: (ui, v) => ui.dateCard.setFontWeight("fullDate", v) },
 
+    backgroundcolorsource: { ...text("custom"), apply: (ui, v) => ui.setColorSource("background", v) },
+    backgroundcolor: { ...color("0 0 0"), apply: (ui, v) => ui.setCustomColor("background", v) },
+    backgroundalbumshow: { ...bool(true), apply: (ui, v) => ui.background.setAlbumVisible(v) },
+    backgroundalbumopacity: { ...number(1, 0, 1), apply: (ui, v) => ui.background.setAlbumOpacity(v) },
     backgroundbeatsensitivity: { ...number(0.2, 0, 1), apply: (ui, v) => ui.background.setBeatSensitivity(v) },
     backgroundmovementspeed: { ...number(120, 0, 240), apply: (ui, v) => ui.background.setMovementSpeed(v) },
     backgroundcustomimage: { ...text(""), apply: (ui, v) => ui.background.setCustomImage(v) },
     backgroundcustomimageopacity: { ...number(1, 0, 1), apply: (ui, v) => ui.background.setCustomImageOpacity(v) },
+
+    trianglesshow: { ...bool(true), apply: (ui, v) => ui.triangles.setVisible(v) },
+    trianglesopacity: { ...number(0.5, 0, 1), apply: (ui, v) => ui.triangles.setOpacity(v) },
+    trianglesrows: { ...number(6, 2, 20), apply: (ui, v) => ui.triangles.configure({ rows: Math.round(v) }) },
+    trianglescolorsource: { ...text("primary"), apply: (ui, v) => ui.setColorSource("triangles", v) },
+    trianglescolor: { ...color("0.2 0.4 1"), apply: (ui, v) => ui.setCustomColor("triangles", v) },
+    trianglesbeatsensitivity: { ...number(0.25, 0, 1), apply: (ui, v) => ui.triangles.configure({ sensitivity: v }) },
+    trianglesrangestart: { ...number(0, 0, 63), apply: (ui, v) => ui.triangles.configure({ rangeStart: Math.round(v) }) },
+    trianglesrangeend: { ...number(10, 1, 64), apply: (ui, v) => ui.triangles.configure({ rangeEnd: Math.round(v) }) },
+    trianglesbeatthreshold: { ...number(1.3, 1, 3), apply: (ui, v) => ui.triangles.configure({ beatThreshold: v }) },
+    trianglesfadeinduration: { ...number(0.1, 0, 1), apply: (ui, v) => ui.triangles.configure({ fadeInDuration: v }) },
+    trianglesfadeoutduration: { ...number(1.5, 0.1, 5), apply: (ui, v) => ui.triangles.configure({ fadeOutDuration: v }) },
+    trianglesglowstrength: { ...number(0.2, 0, 2), apply: (ui, v) => ui.triangles.configure({ glowStrength: v }) },
+    trianglesvariation: { ...number(0.2, 0, 1), apply: (ui, v) => ui.triangles.configure({ variation: v }) },
 };
 
 /** Applies the properties Wallpaper Engine sent (all on load, then only the changed ones). Unknown keys are ignored. */

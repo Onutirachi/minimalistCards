@@ -7,12 +7,13 @@ import { normalizeThumbnail, normalizeTrack, toPlaybackState } from "../src/core
 const project = JSON.parse(readFileSync(new URL("../project.json", import.meta.url), "utf8").replace(/^﻿/, ""));
 const properties = project.general.properties;
 
-// Properties that only exist for the Wallpaper Engine UI
-const UI_ONLY = new Set(["schemecolor", "information"]);
+// Properties that only exist for the Wallpaper Engine UI; "group" and "text" properties are labels
+const UI_ONLY = new Set(["schemecolor"]);
+const LABEL_TYPES = new Set(["group", "text"]);
 
 test("every project.json property is handled", () => {
     const missing = Object.entries(properties)
-        .filter(([key, property]) => property.type !== "group" && !UI_ONLY.has(key))
+        .filter(([key, property]) => !LABEL_TYPES.has(property.type) && !UI_ONLY.has(key))
         .map(([key]) => key)
         .filter((key) => !(key in SETTINGS));
     assert.deepEqual(missing, []);

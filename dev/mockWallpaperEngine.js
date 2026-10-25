@@ -11,9 +11,10 @@
     const emit = (name, data) => listeners[name]?.(data);
 
     const tracks = [
-        { title: "Minimal Dreams", artist: "The Placeholders", duration: 185, colors: ["#1d3557", "#f1faee"] },
-        { title: "A Title Long Enough To Need The Scrolling Marquee", artist: "Somebody feat. Somebody Else", duration: 242, colors: ["#6a040f", "#ffba08"] },
-        { title: "", artist: "Same Colors Fallback", duration: 97, colors: ["#444444", "#444444"] },
+        // [primary, text, secondary, tertiary, high contrast]
+        { title: "Minimal Dreams", artist: "The Placeholders", duration: 185, colors: ["#1d3557", "#f1faee", "#457b9d", "#a8dadc", "#e63946"] },
+        { title: "A Title Long Enough To Need The Scrolling Marquee", artist: "Somebody feat. Somebody Else", duration: 242, colors: ["#6a040f", "#ffba08", "#d00000", "#e85d04", "#03071e"] },
+        { title: "", artist: "Same Colors Fallback", duration: 97, colors: ["#444444", "#444444", "#444444", "#444444", "#444444"] },
     ];
 
     let index = 0;
@@ -48,9 +49,9 @@
         index = next % tracks.length;
         position = 0;
         const track = tracks[index];
-        const [primary, text] = track.colors;
+        const [primary, text, secondary, tertiary, highContrast] = track.colors;
         emit("MediaProperties", { title: track.title, artist: track.artist });
-        emit("MediaThumbnail", { thumbnail: cover(track.colors), primaryColor: primary, secondaryColor: text, tertiaryColor: primary, textColor: text, highContrastColor: text });
+        emit("MediaThumbnail", { thumbnail: cover(track.colors), primaryColor: primary, secondaryColor: secondary, tertiaryColor: tertiary, textColor: text, highContrastColor: highContrast });
         emit("MediaPlayback", { state });
         sendTimeline();
     }

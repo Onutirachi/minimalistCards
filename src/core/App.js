@@ -6,8 +6,10 @@ import ClockCard from "../components/ClockCard.js";
 import TrackCard from "../components/TrackCard.js";
 import DateCard from "../components/DateCard.js";
 import AudioBars from "../components/AudioBars.js";
+import Triangles from "../components/Triangles.js";
 import Debug from "../components/Debug.js";
-import { DEBUG } from "../config.js";
+import { DEBUG, TRIANGLES } from "../config.js";
+import { isAlbumColor, pickColor, withMinLightness } from "../utils/color.js";
 import { applyDefaults, applySettings } from "./settings.js";
 
 /**
@@ -22,6 +24,7 @@ export default class App {
         this.trackCard = new TrackCard(this.cards.container);
         this.dateCard = new DateCard(this.cards.container);
         this.audioBars = new AudioBars(this.trackCard.audioBarsSlot);
+        this.triangles = new Triangles(this.background.trianglesSlot);
         this.debug = DEBUG ? new Debug(root) : null;
 
         this.analyzer = new AudioAnalyzer();
@@ -29,6 +32,10 @@ export default class App {
         this.audioVersion = 0;
         this.renderedAudioVersion = 0;
         this.lastSecond = -1;
+
+        // Each colored background layer uses its custom color or one of the current cover's colors
+        this.albumColors = null;
+        this.colors = { background: { source: "custom", custom: "" }, triangles: { source: "custom", custom: "" } };
 
         this.loop = new RenderLoop();
         this.loop.add(this.frame);
@@ -56,7 +63,8 @@ export default class App {
         this.trackCard.updateTimeline(now, dt);
 
         // Audio-driven work runs once per audio frame, never more than once per display frame
-        if (this.audio && this.audioVersion !== this.renderedAudioVersion) {
+        const newAudio = this.audio && this.audioVersion !== this.renderedAudioVersion;
+        if (newAudio) {
             this.renderedAudioVersion = this.audioVersion;
             this.analyzer.update(this.audio);
             this.background.setBeat(this.analyzer.bass);
@@ -64,6 +72,9 @@ export default class App {
             if (this.trackCard.barsVisible) this.audioBars.render(this.analyzer);
             this.debug?.audio(this.analyzer);
         }
+
+        // Also runs between audio frames, for color transitions and redraws after setting changes
+        if (this.triangles.active) this.triangles.frame(dt, newAudio ? this.analyzer : null);
     };
 
     // Settings that affect the audio bars' on-screen size
@@ -81,6 +92,27 @@ export default class App {
     setShowBars(show) {
         this.trackCard.setShowBars(show);
         this.audioBars.invalidateSize();
+    }
+
+    // Background colors
+
+    setColorSource(layer, source) {
+        this.colors[layer].source = source;
+        this.updateColors();
+    }
+
+    setCustomColor(layer, color) {
+        this.colors[layer].custom = color;
+        this.updateColors();
+    }
+
+    updateColors() {
+        const { background, triangles } = this.colors;
+        this.background.setBaseColor(pickColor(background.source, background.custom, this.albumColors));
+
+        // Album colors are often too dark to visibly light up; a custom color is used as chosen
+        const trianglesColor = pickColor(triangles.source, triangles.custom, this.albumColors);
+        this.triangles.setColor(isAlbumColor(triangles.source) ? withMinLightness(trianglesColor, TRIANGLES.minAlbumLightness) : trianglesColor);
     }
 
     // Wallpaper Engine handlers
@@ -116,6 +148,8 @@ export default class App {
         this.trackCard.setCover(thumbnail.thumbnail);
         this.cards.setColors(thumbnail);
         this.audioBars.setColor(thumbnail.textColor);
+        this.albumColors = thumbnail;
+        this.updateColors();
         this.debug?.thumbnail(thumbnail);
     };
 

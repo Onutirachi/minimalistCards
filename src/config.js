@@ -37,6 +37,17 @@ export const BACKGROUND = {
     tintAlpha: 0.8,
 };
 
+export const TRIANGLES = {
+    restLevel: 0.35, // brightness of an unlit triangle, relative to the base color
+    glow: 0.45, // how far a lit triangle moves from the base color towards white
+    beatShare: 0.2, // share of the triangles lit per beat at sensitivity 1
+    minLevel: 0.05, // a beat must be at least this loud, besides the user's threshold over the recent average
+    levelAverageRate: 0.05, // weight of the newest sample in the recent average
+    beatCooldown: 6, // audio frames between beats
+    colorSpeed: 3, // color transition rate per second (exponential)
+    minAlbumLightness: 0.45, // album colors are often too dark to light up
+};
+
 export const MARQUEE = {
     gap: 80, // px between the two copies
     speed: 50, // px per second

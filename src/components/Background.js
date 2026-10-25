@@ -1,10 +1,13 @@
 import { BACKGROUND } from "../config.js";
 import { el } from "../utils/dom.js";
-import { withAlpha } from "../utils/color.js";
+import { toCssColor, withAlpha } from "../utils/color.js";
 import { crossFade } from "../core/transitions.js";
 
 /**
- * Rotating, beat-scaled album cover behind the cards.
+ * Background layers, bottom to top: base color, rotating album cover, triangles (a slot filled by App), custom image.
+ * The cover, the triangles and the custom image are optional and have their own opacity.
+ *
+ * Rotating, beat-scaled album cover:
  * The blur is baked into a small canvas once per cover, so each frame only transforms a ready texture
  * (the old full-screen backdrop-filter re-blurred the whole screen every frame).
  */
@@ -12,10 +15,12 @@ export default class Background {
     constructor(parent) {
         this.container = el("div", "background", parent);
 
-        const image = el("div", "background-image", this.container);
-        this.rotator = el("div", "background-rotator", image);
+        this.album = el("div", "background-image", this.container);
+        this.rotator = el("div", "background-rotator", this.album);
         this.thumbnail = el("canvas", "background-thumbnail", this.rotator);
-        this.tint = el("div", "background-tint", image);
+        this.tint = el("div", "background-tint", this.album);
+
+        this.trianglesSlot = el("div", "background-triangles", this.container);
 
         this.customLayer = el("div", "background-custom", this.container);
         this.customImage = el("div", "background-custom-image", this.customLayer);
@@ -28,6 +33,10 @@ export default class Background {
         this.loadToken = 0;
         this.customPath = null;
         this.beatSensitivity = 0.2;
+        this.albumVisible = true;
+        this.albumOpacity = 1;
+        this.albumActive = true;
+        this.blurPending = false;
 
         // One full turn per second at playbackRate 1; the rate sets the speed without restarting the rotation
         this.rotation = this.rotator.animate([{ transform: "rotate(0deg)" }, { transform: "rotate(360deg)" }], {
@@ -59,13 +68,41 @@ export default class Background {
         });
     }
 
+    setBaseColor(color) {
+        this.container.style.backgroundColor = toCssColor(color);
+    }
+
+    setAlbumVisible(visible) {
+        this.albumVisible = visible;
+        this.updateAlbum();
+    }
+
+    setAlbumOpacity(opacity) {
+        this.albumOpacity = opacity;
+        this.updateAlbum();
+    }
+
+    /** A hidden cover costs nothing: no rotation, no beat scaling, and its blur waits until it is shown again. */
+    updateAlbum() {
+        this.albumActive = this.albumVisible && this.albumOpacity > 0;
+        this.album.hidden = !this.albumActive;
+        this.album.style.opacity = this.albumOpacity;
+
+        if (!this.albumActive) {
+            this.rotation.pause();
+            return;
+        }
+        this.rotation.play();
+        if (this.blurPending) this.redraw();
+    }
+
     setTint(primaryColor) {
         this.tint.style.backgroundColor = withAlpha(primaryColor, BACKGROUND.tintAlpha);
     }
 
     setBeat(bass) {
         const scale = 1 + bass * this.beatSensitivity;
-        this.thumbnail.style.scale = scale;
+        if (this.albumActive) this.thumbnail.style.scale = scale;
         this.customImage.style.scale = scale;
     }
 
@@ -93,6 +130,11 @@ export default class Background {
 
     redraw() {
         if (!this.source) return;
+        if (!this.albumActive) {
+            this.blurPending = true;
+            return;
+        }
+        this.blurPending = false;
 
         // Match the on-screen blur radius at the canvas resolution
         const blur = (BACKGROUND.blur * BACKGROUND.canvasSize) / this.size;
