@@ -23,3 +23,4 @@ Uma spec descreve o comportamento **atual**. Se o comportamento mudar, a spec mu
 | [Cards](specs/20261024-110520-cards.md) | Layout, relógio, data, card de música |
 | [Timeline](specs/20261024-110521-timeline.md) | Interpolação da posição da música |
 | [Triângulos](specs/20261025-172350-triangles.md) | Grade de triângulos reativa ao grave, fonte de cor |
+| [Painel de configurações](specs/20261025-191730-settings-panel.md) | Seções, rótulos e dicas no painel do WE |
