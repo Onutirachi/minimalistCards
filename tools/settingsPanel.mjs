@@ -61,6 +61,7 @@ const COLOR_NAMES = { "0 0 0": "black", "1 1 1": "white", "0.2 0.4 1": "blue" };
 
 const PANEL = [
     label("labelintro", "<h2>Minimalist Cards</h2><small>Clock, date and music cards over a background that moves with your music.</small><br>&nbsp;"),
+    label("labeltip", "<small>🎨 The background is made of layers: color, Album Spin, Triangles and image. Use their opacity sliders to blend them together, or set one to 0 to remove that effect.</small><br>&nbsp;"),
     label("information", "<small>💡 If something looks wrong after an update, press <b>Reset</b> in the wallpaper settings.</small><br>&nbsp;"),
 
     group("cards", "📐 Layout"),

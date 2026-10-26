@@ -9,8 +9,8 @@
 			"albumspin" : 
 			{
 				"condition" : "",
-				"index" : 98,
-				"order" : 198,
+				"index" : 99,
+				"order" : 199,
 				"text" : "💿 Album Spin",
 				"type" : "group",
 				"value" : ""
@@ -19,10 +19,10 @@
 			{
 				"condition" : "albumspinshow.value == true",
 				"fraction" : true,
-				"index" : 106,
+				"index" : 107,
 				"max" : 1,
 				"min" : 0,
-				"order" : 206,
+				"order" : 207,
 				"precision" : 2,
 				"step" : 0.1,
 				"text" : "Beat pulse",
@@ -33,10 +33,10 @@
 			{
 				"condition" : "albumspinshow.value == true",
 				"fraction" : true,
-				"index" : 102,
+				"index" : 103,
 				"max" : 1,
 				"min" : 0,
-				"order" : 202,
+				"order" : 203,
 				"precision" : 2,
 				"step" : 0.01,
 				"text" : "Opacity",
@@ -47,10 +47,10 @@
 			{
 				"condition" : "albumspinshow.value == true",
 				"fraction" : true,
-				"index" : 104,
+				"index" : 105,
 				"max" : 240,
 				"min" : 0,
-				"order" : 204,
+				"order" : 205,
 				"precision" : 2,
 				"step" : 0.1,
 				"text" : "Rotation speed",
@@ -60,8 +60,8 @@
 			"albumspinshow" : 
 			{
 				"condition" : "",
-				"index" : 100,
-				"order" : 200,
+				"index" : 101,
+				"order" : 201,
 				"text" : "Show Album Spin",
 				"type" : "bool",
 				"value" : true
@@ -69,8 +69,8 @@
 			"audiobars" : 
 			{
 				"condition" : "trackcardshow.value == true && trackcardshowbars.value == true",
-				"index" : 44,
-				"order" : 144,
+				"index" : 45,
+				"order" : 145,
 				"text" : "📊 Audio Bars",
 				"type" : "group",
 				"value" : ""
@@ -79,10 +79,10 @@
 			{
 				"condition" : "trackcardshow.value == true && trackcardshowbars.value == true",
 				"fraction" : true,
-				"index" : 50,
+				"index" : 51,
 				"max" : 100,
 				"min" : 0,
-				"order" : 150,
+				"order" : 151,
 				"precision" : 1,
 				"step" : 1,
 				"text" : "Bar roundness",
@@ -93,10 +93,10 @@
 			{
 				"condition" : "trackcardshow.value == true && trackcardshowbars.value == true",
 				"fraction" : false,
-				"index" : 48,
+				"index" : 49,
 				"max" : 10,
 				"min" : 0,
-				"order" : 148,
+				"order" : 149,
 				"text" : "Space between bars",
 				"type" : "slider",
 				"value" : 4
@@ -105,10 +105,10 @@
 			{
 				"condition" : "trackcardshow.value == true && trackcardshowbars.value == true",
 				"fraction" : false,
-				"index" : 52,
+				"index" : 53,
 				"max" : 100,
 				"min" : 10,
-				"order" : 152,
+				"order" : 153,
 				"text" : "Bar opacity",
 				"type" : "slider",
 				"value" : 100
@@ -117,10 +117,10 @@
 			{
 				"condition" : "trackcardshow.value == true && trackcardshowbars.value == true && audiobarsshowpeakdots.value == true",
 				"fraction" : true,
-				"index" : 60,
+				"index" : 61,
 				"max" : 100,
 				"min" : 0,
-				"order" : 160,
+				"order" : 161,
 				"precision" : 2,
 				"step" : 0.1,
 				"text" : "Dot roundness",
@@ -131,10 +131,10 @@
 			{
 				"condition" : "trackcardshow.value == true && trackcardshowbars.value == true && audiobarsshowpeakdots.value == true",
 				"fraction" : false,
-				"index" : 58,
+				"index" : 59,
 				"max" : 10,
 				"min" : 0,
-				"order" : 158,
+				"order" : 159,
 				"text" : "Space between dot and bar",
 				"type" : "slider",
 				"value" : 4
@@ -143,10 +143,10 @@
 			{
 				"condition" : "trackcardshow.value == true && trackcardshowbars.value == true && audiobarsshowpeakdots.value == true",
 				"fraction" : false,
-				"index" : 62,
+				"index" : 63,
 				"max" : 100,
 				"min" : 10,
-				"order" : 162,
+				"order" : 163,
 				"text" : "Dot opacity",
 				"type" : "slider",
 				"value" : 80
@@ -155,10 +155,10 @@
 			{
 				"condition" : "trackcardshow.value == true && trackcardshowbars.value == true && audiobarsshowpeakdots.value == true",
 				"fraction" : false,
-				"index" : 56,
+				"index" : 57,
 				"max" : 10,
 				"min" : 1,
-				"order" : 156,
+				"order" : 157,
 				"text" : "Dot size",
 				"type" : "slider",
 				"value" : 5
@@ -167,10 +167,10 @@
 			{
 				"condition" : "trackcardshow.value == true && trackcardshowbars.value == true",
 				"fraction" : false,
-				"index" : 46,
+				"index" : 47,
 				"max" : 64,
 				"min" : 9,
-				"order" : 146,
+				"order" : 147,
 				"text" : "Number of bars",
 				"type" : "slider",
 				"value" : 40
@@ -178,8 +178,8 @@
 			"audiobarsshowpeakdots" : 
 			{
 				"condition" : "trackcardshow.value == true && trackcardshowbars.value == true",
-				"index" : 54,
-				"order" : 154,
+				"index" : 55,
+				"order" : 155,
 				"text" : "Show peak dots",
 				"type" : "bool",
 				"value" : true
@@ -187,8 +187,8 @@
 			"background" : 
 			{
 				"condition" : "",
-				"index" : 78,
-				"order" : 178,
+				"index" : 79,
+				"order" : 179,
 				"text" : "🖼️ Background",
 				"type" : "group",
 				"value" : ""
@@ -196,8 +196,8 @@
 			"backgroundcolor" : 
 			{
 				"condition" : "backgroundcolorsource.value == 'custom'",
-				"index" : 82,
-				"order" : 182,
+				"index" : 83,
+				"order" : 183,
 				"text" : "Pick a color",
 				"type" : "color",
 				"value" : "0 0 0"
@@ -205,7 +205,7 @@
 			"backgroundcolorsource" : 
 			{
 				"condition" : "",
-				"index" : 80,
+				"index" : 81,
 				"options" : 
 				[
 					{
@@ -233,7 +233,7 @@
 						"value" : "highcontrast"
 					}
 				],
-				"order" : 180,
+				"order" : 181,
 				"text" : "Background color",
 				"type" : "combo",
 				"value" : "primary"
@@ -241,8 +241,8 @@
 			"backgroundimage" : 
 			{
 				"condition" : "backgroundimagesource.value == 'custom'",
-				"index" : 86,
-				"order" : 186,
+				"index" : 87,
+				"order" : 187,
 				"text" : "Your image",
 				"type" : "file",
 				"value" : ""
@@ -251,10 +251,10 @@
 			{
 				"condition" : "backgroundimagesource.value == 'custom' || backgroundimagesource.value == 'album'",
 				"fraction" : true,
-				"index" : 96,
+				"index" : 97,
 				"max" : 1,
 				"min" : 0,
-				"order" : 196,
+				"order" : 197,
 				"precision" : 2,
 				"step" : 0.1,
 				"text" : "Image beat pulse",
@@ -264,7 +264,7 @@
 			"backgroundimagecoverposition" : 
 			{
 				"condition" : "backgroundimagesource.value == 'album'",
-				"index" : 90,
+				"index" : 91,
 				"options" : 
 				[
 					{
@@ -280,7 +280,7 @@
 						"value" : "center"
 					}
 				],
-				"order" : 190,
+				"order" : 191,
 				"text" : "Cover position",
 				"type" : "combo",
 				"value" : "left"
@@ -288,7 +288,7 @@
 			"backgroundimagefit" : 
 			{
 				"condition" : "backgroundimagesource.value == 'custom'",
-				"index" : 88,
+				"index" : 89,
 				"options" : 
 				[
 					{
@@ -312,7 +312,7 @@
 						"value" : "tile"
 					}
 				],
-				"order" : 188,
+				"order" : 189,
 				"text" : "Image fit",
 				"type" : "combo",
 				"value" : "stretch"
@@ -320,8 +320,8 @@
 			"backgroundimagekeepcover" : 
 			{
 				"condition" : "backgroundimagesource.value == 'album'",
-				"index" : 92,
-				"order" : 192,
+				"index" : 93,
+				"order" : 193,
 				"text" : "Keep last cover",
 				"type" : "bool",
 				"value" : false
@@ -330,10 +330,10 @@
 			{
 				"condition" : "backgroundimagesource.value == 'custom' || backgroundimagesource.value == 'album'",
 				"fraction" : true,
-				"index" : 94,
+				"index" : 95,
 				"max" : 1,
 				"min" : 0,
-				"order" : 194,
+				"order" : 195,
 				"precision" : 3,
 				"step" : 0.01,
 				"text" : "Image opacity",
@@ -343,7 +343,7 @@
 			"backgroundimagesource" : 
 			{
 				"condition" : "",
-				"index" : 84,
+				"index" : 85,
 				"options" : 
 				[
 					{
@@ -359,7 +359,7 @@
 						"value" : "album"
 					}
 				],
-				"order" : 184,
+				"order" : 185,
 				"text" : "Image",
 				"type" : "combo",
 				"value" : "album"
@@ -367,8 +367,8 @@
 			"cards" : 
 			{
 				"condition" : "",
-				"index" : 2,
-				"order" : 102,
+				"index" : 3,
+				"order" : 103,
 				"text" : "📐 Layout",
 				"type" : "group",
 				"value" : ""
@@ -377,10 +377,10 @@
 			{
 				"condition" : "",
 				"fraction" : true,
-				"index" : 6,
+				"index" : 7,
 				"max" : 100,
 				"min" : 0,
-				"order" : 106,
+				"order" : 107,
 				"precision" : 2,
 				"step" : 0.1,
 				"text" : "Horizontal position",
@@ -391,10 +391,10 @@
 			{
 				"condition" : "",
 				"fraction" : true,
-				"index" : 4,
+				"index" : 5,
 				"max" : 5,
 				"min" : 0.1,
-				"order" : 104,
+				"order" : 105,
 				"precision" : 2,
 				"step" : 0.1,
 				"text" : "Size",
@@ -405,10 +405,10 @@
 			{
 				"condition" : "",
 				"fraction" : true,
-				"index" : 8,
+				"index" : 9,
 				"max" : 100,
 				"min" : 0,
-				"order" : 108,
+				"order" : 109,
 				"precision" : 2,
 				"step" : 0.1,
 				"text" : "Vertical position",
@@ -418,8 +418,8 @@
 			"clockcard" : 
 			{
 				"condition" : "",
-				"index" : 10,
-				"order" : 110,
+				"index" : 11,
+				"order" : 111,
 				"text" : "🕒 Clock",
 				"type" : "group",
 				"value" : ""
@@ -428,10 +428,10 @@
 			{
 				"condition" : "clockcardshow.value == true",
 				"fraction" : true,
-				"index" : 22,
+				"index" : 23,
 				"max" : 40,
 				"min" : 0,
-				"order" : 122,
+				"order" : 123,
 				"precision" : 2,
 				"step" : 0.1,
 				"text" : "Corner roundness",
@@ -441,7 +441,7 @@
 			"clockcardfontfamily" : 
 			{
 				"condition" : "clockcardshow.value == true",
-				"index" : 18,
+				"index" : 19,
 				"options" : 
 				[
 					{
@@ -469,7 +469,7 @@
 						"value" : "Tokyo"
 					}
 				],
-				"order" : 118,
+				"order" : 119,
 				"text" : "Font",
 				"type" : "combo",
 				"value" : "Unageo"
@@ -478,10 +478,10 @@
 			{
 				"condition" : "clockcardshow.value == true",
 				"fraction" : false,
-				"index" : 20,
+				"index" : 21,
 				"max" : 900,
 				"min" : 100,
-				"order" : 120,
+				"order" : 121,
 				"text" : "Font weight",
 				"type" : "slider",
 				"value" : 600
@@ -489,8 +489,8 @@
 			"clockcardformat12h" : 
 			{
 				"condition" : "clockcardshow.value == true",
-				"index" : 16,
-				"order" : 116,
+				"index" : 17,
+				"order" : 117,
 				"text" : "12-hour format",
 				"type" : "bool",
 				"value" : false
@@ -498,8 +498,8 @@
 			"clockcardshow" : 
 			{
 				"condition" : "",
-				"index" : 12,
-				"order" : 112,
+				"index" : 13,
+				"order" : 113,
 				"text" : "Show clock",
 				"type" : "bool",
 				"value" : true
@@ -507,8 +507,8 @@
 			"clockcardshowseconds" : 
 			{
 				"condition" : "clockcardshow.value == true",
-				"index" : 14,
-				"order" : 114,
+				"index" : 15,
+				"order" : 115,
 				"text" : "Show seconds",
 				"type" : "bool",
 				"value" : true
@@ -516,8 +516,8 @@
 			"datecard" : 
 			{
 				"condition" : "",
-				"index" : 64,
-				"order" : 164,
+				"index" : 65,
+				"order" : 165,
 				"text" : "📅 Date",
 				"type" : "group",
 				"value" : ""
@@ -526,10 +526,10 @@
 			{
 				"condition" : "datecardshow.value == true",
 				"fraction" : true,
-				"index" : 76,
+				"index" : 77,
 				"max" : 40,
 				"min" : 0,
-				"order" : 176,
+				"order" : 177,
 				"precision" : 2,
 				"step" : 0.1,
 				"text" : "Corner roundness",
@@ -539,7 +539,7 @@
 			"datecardfulldatefontfamily" : 
 			{
 				"condition" : "datecardshow.value == true",
-				"index" : 72,
+				"index" : 73,
 				"options" : 
 				[
 					{
@@ -567,7 +567,7 @@
 						"value" : "Tokyo"
 					}
 				],
-				"order" : 172,
+				"order" : 173,
 				"text" : "Date font",
 				"type" : "combo",
 				"value" : "Unageo"
@@ -576,10 +576,10 @@
 			{
 				"condition" : "datecardshow.value == true",
 				"fraction" : false,
-				"index" : 74,
+				"index" : 75,
 				"max" : 900,
 				"min" : 100,
-				"order" : 174,
+				"order" : 175,
 				"text" : "Date font weight",
 				"type" : "slider",
 				"value" : 300
@@ -587,8 +587,8 @@
 			"datecardshow" : 
 			{
 				"condition" : "",
-				"index" : 66,
-				"order" : 166,
+				"index" : 67,
+				"order" : 167,
 				"text" : "Show date",
 				"type" : "bool",
 				"value" : true
@@ -596,7 +596,7 @@
 			"datecardweekdayfontfamily" : 
 			{
 				"condition" : "datecardshow.value == true",
-				"index" : 68,
+				"index" : 69,
 				"options" : 
 				[
 					{
@@ -624,7 +624,7 @@
 						"value" : "Tokyo"
 					}
 				],
-				"order" : 168,
+				"order" : 169,
 				"text" : "Weekday font",
 				"type" : "combo",
 				"value" : "Unageo"
@@ -633,10 +633,10 @@
 			{
 				"condition" : "datecardshow.value == true",
 				"fraction" : false,
-				"index" : 70,
+				"index" : 71,
 				"max" : 900,
 				"min" : 100,
-				"order" : 170,
+				"order" : 171,
 				"text" : "Weekday font weight",
 				"type" : "slider",
 				"value" : 600
@@ -644,8 +644,8 @@
 			"hintalbumspinbeatsensitivity" : 
 			{
 				"condition" : "albumspinshow.value == true",
-				"index" : 107,
-				"order" : 207,
+				"index" : 108,
+				"order" : 208,
 				"text" : "<small>How much the cover grows with the bass. 0 = off.<br>Default value = 0.2</small>",
 				"type" : "text",
 				"value" : false
@@ -653,8 +653,8 @@
 			"hintalbumspinopacity" : 
 			{
 				"condition" : "albumspinshow.value == true",
-				"index" : 103,
-				"order" : 203,
+				"index" : 104,
+				"order" : 204,
 				"text" : "<small>Lower = more of the background color shows through.<br>Default value = 1</small><hr width=\"260\">",
 				"type" : "text",
 				"value" : false
@@ -662,8 +662,8 @@
 			"hintalbumspinrotationspeed" : 
 			{
 				"condition" : "albumspinshow.value == true",
-				"index" : 105,
-				"order" : 205,
+				"index" : 106,
+				"order" : 206,
 				"text" : "<small>0 = stopped, higher = faster.<br>Default value = 120</small><hr width=\"260\">",
 				"type" : "text",
 				"value" : false
@@ -671,8 +671,8 @@
 			"hintalbumspinshow" : 
 			{
 				"condition" : "",
-				"index" : 101,
-				"order" : 201,
+				"index" : 102,
+				"order" : 202,
 				"text" : "<small>Turn off to hide the spinning cover.<br>Default value = On</small><hr width=\"260\">",
 				"type" : "text",
 				"value" : false
@@ -680,8 +680,8 @@
 			"hintaudiobarsborderradius" : 
 			{
 				"condition" : "trackcardshow.value == true && trackcardshowbars.value == true",
-				"index" : 51,
-				"order" : 151,
+				"index" : 52,
+				"order" : 152,
 				"text" : "<small>0 = square corners, higher = rounder.<br>Default value = 60</small><hr width=\"260\">",
 				"type" : "text",
 				"value" : false
@@ -689,8 +689,8 @@
 			"hintaudiobarsgap" : 
 			{
 				"condition" : "trackcardshow.value == true && trackcardshowbars.value == true",
-				"index" : 49,
-				"order" : 149,
+				"index" : 50,
+				"order" : 150,
 				"text" : "<small>0 = bars touch each other.<br>Default value = 4</small><hr width=\"260\">",
 				"type" : "text",
 				"value" : false
@@ -698,8 +698,8 @@
 			"hintaudiobarsopacity" : 
 			{
 				"condition" : "trackcardshow.value == true && trackcardshowbars.value == true",
-				"index" : 53,
-				"order" : 153,
+				"index" : 54,
+				"order" : 154,
 				"text" : "<small>Lower = more see-through.<br>Default value = 100</small><hr width=\"260\">",
 				"type" : "text",
 				"value" : false
@@ -707,8 +707,8 @@
 			"hintaudiobarspeakdotsborderradius" : 
 			{
 				"condition" : "trackcardshow.value == true && trackcardshowbars.value == true && audiobarsshowpeakdots.value == true",
-				"index" : 61,
-				"order" : 161,
+				"index" : 62,
+				"order" : 162,
 				"text" : "<small>0 = square corners, higher = rounder.<br>Default value = 80</small><hr width=\"260\">",
 				"type" : "text",
 				"value" : false
@@ -716,8 +716,8 @@
 			"hintaudiobarspeakdotsgap" : 
 			{
 				"condition" : "trackcardshow.value == true && trackcardshowbars.value == true && audiobarsshowpeakdots.value == true",
-				"index" : 59,
-				"order" : 159,
+				"index" : 60,
+				"order" : 160,
 				"text" : "<small>Distance between the dot and the top of its bar.<br>Default value = 4</small><hr width=\"260\">",
 				"type" : "text",
 				"value" : false
@@ -725,8 +725,8 @@
 			"hintaudiobarspeakdotsopacity" : 
 			{
 				"condition" : "trackcardshow.value == true && trackcardshowbars.value == true && audiobarsshowpeakdots.value == true",
-				"index" : 63,
-				"order" : 163,
+				"index" : 64,
+				"order" : 164,
 				"text" : "<small>Lower = more see-through.<br>Default value = 80</small>",
 				"type" : "text",
 				"value" : false
@@ -734,8 +734,8 @@
 			"hintaudiobarspeakdotssize" : 
 			{
 				"condition" : "trackcardshow.value == true && trackcardshowbars.value == true && audiobarsshowpeakdots.value == true",
-				"index" : 57,
-				"order" : 157,
+				"index" : 58,
+				"order" : 158,
 				"text" : "<small>Height of each dot.<br>Default value = 5</small><hr width=\"260\">",
 				"type" : "text",
 				"value" : false
@@ -743,8 +743,8 @@
 			"hintaudiobarsquantity" : 
 			{
 				"condition" : "trackcardshow.value == true && trackcardshowbars.value == true",
-				"index" : 47,
-				"order" : 147,
+				"index" : 48,
+				"order" : 148,
 				"text" : "<small>More bars = thinner bars.<br>Default value = 40</small><hr width=\"260\">",
 				"type" : "text",
 				"value" : false
@@ -752,8 +752,8 @@
 			"hintaudiobarsshowpeakdots" : 
 			{
 				"condition" : "trackcardshow.value == true && trackcardshowbars.value == true",
-				"index" : 55,
-				"order" : 155,
+				"index" : 56,
+				"order" : 156,
 				"text" : "<small>Small dots that mark the highest point of each bar and fall slowly.<br>Default value = On</small><hr width=\"260\">",
 				"type" : "text",
 				"value" : false
@@ -761,8 +761,8 @@
 			"hintbackgroundcolor" : 
 			{
 				"condition" : "backgroundcolorsource.value == 'custom'",
-				"index" : 83,
-				"order" : 183,
+				"index" : 84,
+				"order" : 184,
 				"text" : "<small>Used when the background color is “My color”.<br>Default value = black</small><hr width=\"260\">",
 				"type" : "text",
 				"value" : false
@@ -770,8 +770,8 @@
 			"hintbackgroundcolorsource" : 
 			{
 				"condition" : "",
-				"index" : 81,
-				"order" : 181,
+				"index" : 82,
+				"order" : 182,
 				"text" : "<small>Solid color at the very bottom. Your own color, or a color taken from the album cover.<br>Default value = Album: main color</small><hr width=\"260\">",
 				"type" : "text",
 				"value" : false
@@ -779,8 +779,8 @@
 			"hintbackgroundimage" : 
 			{
 				"condition" : "backgroundimagesource.value == 'custom'",
-				"index" : 87,
-				"order" : 187,
+				"index" : 88,
+				"order" : 188,
 				"text" : "<small>The image file to show.<br>Default value = none</small><hr width=\"260\">",
 				"type" : "text",
 				"value" : false
@@ -788,8 +788,8 @@
 			"hintbackgroundimagebeatsensitivity" : 
 			{
 				"condition" : "backgroundimagesource.value == 'custom' || backgroundimagesource.value == 'album'",
-				"index" : 97,
-				"order" : 197,
+				"index" : 98,
+				"order" : 198,
 				"text" : "<small>How much the image grows with the bass. 0 = off.<br>Default value = 0</small>",
 				"type" : "text",
 				"value" : false
@@ -797,8 +797,8 @@
 			"hintbackgroundimagecoverposition" : 
 			{
 				"condition" : "backgroundimagesource.value == 'album'",
-				"index" : 91,
-				"order" : 191,
+				"index" : 92,
+				"order" : 192,
 				"text" : "<small>Left and Right fade out towards the center, like the cover in the music card. Center fades a little on both sides.<br>Default value = Left</small><hr width=\"260\">",
 				"type" : "text",
 				"value" : false
@@ -806,8 +806,8 @@
 			"hintbackgroundimagefit" : 
 			{
 				"condition" : "backgroundimagesource.value == 'custom'",
-				"index" : 89,
-				"order" : 189,
+				"index" : 90,
+				"order" : 190,
 				"text" : "<small>Stretch = fills the screen, may distort. Fill = fills without distorting, cuts the edges. Fit = shows the whole image. Center = original size. Tile = repeats the image.<br>Default value = Stretch</small><hr width=\"260\">",
 				"type" : "text",
 				"value" : false
@@ -815,8 +815,8 @@
 			"hintbackgroundimagekeepcover" : 
 			{
 				"condition" : "backgroundimagesource.value == 'album'",
-				"index" : 93,
-				"order" : 193,
+				"index" : 94,
+				"order" : 194,
 				"text" : "<small>Keeps showing the last cover when no music is playing. Off = the cover fades out.<br>Default value = Off</small><hr width=\"260\">",
 				"type" : "text",
 				"value" : false
@@ -824,8 +824,8 @@
 			"hintbackgroundimageopacity" : 
 			{
 				"condition" : "backgroundimagesource.value == 'custom' || backgroundimagesource.value == 'album'",
-				"index" : 95,
-				"order" : 195,
+				"index" : 96,
+				"order" : 196,
 				"text" : "<small>Lower = more of the layers below show through.<br>Default value = 0.15</small><hr width=\"260\">",
 				"type" : "text",
 				"value" : false
@@ -833,8 +833,8 @@
 			"hintbackgroundimagesource" : 
 			{
 				"condition" : "",
-				"index" : 85,
-				"order" : 185,
+				"index" : 86,
+				"order" : 186,
 				"text" : "<small>Top layer: an image of your own, or the cover of the song playing.<br>Default value = Album cover</small><hr width=\"260\">",
 				"type" : "text",
 				"value" : false
@@ -842,8 +842,8 @@
 			"hintcardshorizontalposition" : 
 			{
 				"condition" : "",
-				"index" : 7,
-				"order" : 107,
+				"index" : 8,
+				"order" : 108,
 				"text" : "<small>0 = left edge, 50 = center, 100 = right edge.<br>Default value = 50</small><hr width=\"260\">",
 				"type" : "text",
 				"value" : false
@@ -851,8 +851,8 @@
 			"hintcardssize" : 
 			{
 				"condition" : "",
-				"index" : 5,
-				"order" : 105,
+				"index" : 6,
+				"order" : 106,
 				"text" : "<small>1 = normal, 2 = double.<br>Default value = 1</small><hr width=\"260\">",
 				"type" : "text",
 				"value" : false
@@ -860,8 +860,8 @@
 			"hintcardsverticalposition" : 
 			{
 				"condition" : "",
-				"index" : 9,
-				"order" : 109,
+				"index" : 10,
+				"order" : 110,
 				"text" : "<small>0 = top, 50 = center, 100 = bottom.<br>Default value = 50</small>",
 				"type" : "text",
 				"value" : false
@@ -869,8 +869,8 @@
 			"hintclockcardborderradius" : 
 			{
 				"condition" : "clockcardshow.value == true",
-				"index" : 23,
-				"order" : 123,
+				"index" : 24,
+				"order" : 124,
 				"text" : "<small>0 = square corners, higher = rounder.<br>Default value = 10</small>",
 				"type" : "text",
 				"value" : false
@@ -878,8 +878,8 @@
 			"hintclockcardfontfamily" : 
 			{
 				"condition" : "clockcardshow.value == true",
-				"index" : 19,
-				"order" : 119,
+				"index" : 20,
+				"order" : 120,
 				"text" : "<small>Font of the time.<br>Default value = Unageo</small><hr width=\"260\">",
 				"type" : "text",
 				"value" : false
@@ -887,8 +887,8 @@
 			"hintclockcardfontweight" : 
 			{
 				"condition" : "clockcardshow.value == true",
-				"index" : 21,
-				"order" : 121,
+				"index" : 22,
+				"order" : 122,
 				"text" : "<small>100 = thin, 900 = bold.<br>Default value = 600</small><hr width=\"260\">",
 				"type" : "text",
 				"value" : false
@@ -896,8 +896,8 @@
 			"hintclockcardformat12h" : 
 			{
 				"condition" : "clockcardshow.value == true",
-				"index" : 17,
-				"order" : 117,
+				"index" : 18,
+				"order" : 118,
 				"text" : "<small>Shows AM / PM instead of 0–23 h.<br>Default value = Off</small><hr width=\"260\">",
 				"type" : "text",
 				"value" : false
@@ -905,8 +905,8 @@
 			"hintclockcardshow" : 
 			{
 				"condition" : "",
-				"index" : 13,
-				"order" : 113,
+				"index" : 14,
+				"order" : 114,
 				"text" : "<small>Turn off to hide the clock card.<br>Default value = On</small><hr width=\"260\">",
 				"type" : "text",
 				"value" : false
@@ -914,8 +914,8 @@
 			"hintclockcardshowseconds" : 
 			{
 				"condition" : "clockcardshow.value == true",
-				"index" : 15,
-				"order" : 115,
+				"index" : 16,
+				"order" : 116,
 				"text" : "<small>Adds the seconds to the time.<br>Default value = On</small><hr width=\"260\">",
 				"type" : "text",
 				"value" : false
@@ -923,8 +923,8 @@
 			"hintdatecardborderradius" : 
 			{
 				"condition" : "datecardshow.value == true",
-				"index" : 77,
-				"order" : 177,
+				"index" : 78,
+				"order" : 178,
 				"text" : "<small>0 = square corners, higher = rounder.<br>Default value = 10</small>",
 				"type" : "text",
 				"value" : false
@@ -932,8 +932,8 @@
 			"hintdatecardfulldatefontfamily" : 
 			{
 				"condition" : "datecardshow.value == true",
-				"index" : 73,
-				"order" : 173,
+				"index" : 74,
+				"order" : 174,
 				"text" : "<small>Font of the day, month and year.<br>Default value = Unageo</small><hr width=\"260\">",
 				"type" : "text",
 				"value" : false
@@ -941,8 +941,8 @@
 			"hintdatecardfulldatefontweight" : 
 			{
 				"condition" : "datecardshow.value == true",
-				"index" : 75,
-				"order" : 175,
+				"index" : 76,
+				"order" : 176,
 				"text" : "<small>100 = thin, 900 = bold.<br>Default value = 300</small><hr width=\"260\">",
 				"type" : "text",
 				"value" : false
@@ -950,8 +950,8 @@
 			"hintdatecardshow" : 
 			{
 				"condition" : "",
-				"index" : 67,
-				"order" : 167,
+				"index" : 68,
+				"order" : 168,
 				"text" : "<small>Turn off to hide the date card.<br>Default value = On</small><hr width=\"260\">",
 				"type" : "text",
 				"value" : false
@@ -959,8 +959,8 @@
 			"hintdatecardweekdayfontfamily" : 
 			{
 				"condition" : "datecardshow.value == true",
-				"index" : 69,
-				"order" : 169,
+				"index" : 70,
+				"order" : 170,
 				"text" : "<small>Font of the day of the week.<br>Default value = Unageo</small><hr width=\"260\">",
 				"type" : "text",
 				"value" : false
@@ -968,8 +968,8 @@
 			"hintdatecardweekdayfontweight" : 
 			{
 				"condition" : "datecardshow.value == true",
-				"index" : 71,
-				"order" : 171,
+				"index" : 72,
+				"order" : 172,
 				"text" : "<small>100 = thin, 900 = bold.<br>Default value = 600</small><hr width=\"260\">",
 				"type" : "text",
 				"value" : false
@@ -977,8 +977,8 @@
 			"hinttrackcardartitsfontfamily" : 
 			{
 				"condition" : "trackcardshow.value == true",
-				"index" : 39,
-				"order" : 139,
+				"index" : 40,
+				"order" : 140,
 				"text" : "<small>Font of the artist name.<br>Default value = Unageo</small><hr width=\"260\">",
 				"type" : "text",
 				"value" : false
@@ -986,8 +986,8 @@
 			"hinttrackcardartitsfontweight" : 
 			{
 				"condition" : "trackcardshow.value == true",
-				"index" : 41,
-				"order" : 141,
+				"index" : 42,
+				"order" : 142,
 				"text" : "<small>100 = thin, 900 = bold.<br>Default value = 300</small><hr width=\"260\">",
 				"type" : "text",
 				"value" : false
@@ -995,8 +995,8 @@
 			"hinttrackcardborderradius" : 
 			{
 				"condition" : "trackcardshow.value == true",
-				"index" : 43,
-				"order" : 143,
+				"index" : 44,
+				"order" : 144,
 				"text" : "<small>0 = square corners, higher = rounder.<br>Default value = 10</small>",
 				"type" : "text",
 				"value" : false
@@ -1004,8 +1004,8 @@
 			"hinttrackcardshow" : 
 			{
 				"condition" : "",
-				"index" : 27,
-				"order" : 127,
+				"index" : 28,
+				"order" : 128,
 				"text" : "<small>Turn off to hide the music card.<br>Default value = On</small><hr width=\"260\">",
 				"type" : "text",
 				"value" : false
@@ -1013,8 +1013,8 @@
 			"hinttrackcardshowbars" : 
 			{
 				"condition" : "trackcardshow.value == true",
-				"index" : 31,
-				"order" : 131,
+				"index" : 32,
+				"order" : 132,
 				"text" : "<small>Bars that dance with the music.<br>Default value = On</small><hr width=\"260\">",
 				"type" : "text",
 				"value" : false
@@ -1022,8 +1022,8 @@
 			"hinttrackcardshowbeats" : 
 			{
 				"condition" : "trackcardshow.value == true",
-				"index" : 33,
-				"order" : 133,
+				"index" : 34,
+				"order" : 134,
 				"text" : "<small>Three blocks that pulse with the bass, mids and treble.<br>Default value = On</small><hr width=\"260\">",
 				"type" : "text",
 				"value" : false
@@ -1031,8 +1031,8 @@
 			"hinttrackcardshowtimeline" : 
 			{
 				"condition" : "trackcardshow.value == true",
-				"index" : 29,
-				"order" : 129,
+				"index" : 30,
+				"order" : 130,
 				"text" : "<small>Elapsed and total time of the song.<br>Default value = On</small><hr width=\"260\">",
 				"type" : "text",
 				"value" : false
@@ -1040,8 +1040,8 @@
 			"hinttrackcardtitlefontfamily" : 
 			{
 				"condition" : "trackcardshow.value == true",
-				"index" : 35,
-				"order" : 135,
+				"index" : 36,
+				"order" : 136,
 				"text" : "<small>Font of the song name.<br>Default value = Unageo</small><hr width=\"260\">",
 				"type" : "text",
 				"value" : false
@@ -1049,8 +1049,8 @@
 			"hinttrackcardtitlefontweight" : 
 			{
 				"condition" : "trackcardshow.value == true",
-				"index" : 37,
-				"order" : 137,
+				"index" : 38,
+				"order" : 138,
 				"text" : "<small>100 = thin, 900 = bold.<br>Default value = 600</small><hr width=\"260\">",
 				"type" : "text",
 				"value" : false
@@ -1058,8 +1058,8 @@
 			"hinttrianglesbeatsensitivity" : 
 			{
 				"condition" : "trianglesshow.value == true",
-				"index" : 121,
-				"order" : 221,
+				"index" : 122,
+				"order" : 222,
 				"text" : "<small>How many light up on each beat.<br>Default value = 0.35</small><hr width=\"260\">",
 				"type" : "text",
 				"value" : false
@@ -1067,8 +1067,8 @@
 			"hinttrianglesbeatthreshold" : 
 			{
 				"condition" : "trianglesshow.value == true",
-				"index" : 135,
-				"order" : 235,
+				"index" : 136,
+				"order" : 236,
 				"text" : "<small>Higher = only strong beats light triangles.<br>Default value = 1.3</small>",
 				"type" : "text",
 				"value" : false
@@ -1076,8 +1076,8 @@
 			"hinttrianglescolor" : 
 			{
 				"condition" : "trianglesshow.value == true && trianglescolorsource.value == 'custom'",
-				"index" : 119,
-				"order" : 219,
+				"index" : 120,
+				"order" : 220,
 				"text" : "<small>Used when the color is “My color”.<br>Default value = blue</small><hr width=\"260\">",
 				"type" : "text",
 				"value" : false
@@ -1085,8 +1085,8 @@
 			"hinttrianglescolorsource" : 
 			{
 				"condition" : "trianglesshow.value == true",
-				"index" : 117,
-				"order" : 217,
+				"index" : 118,
+				"order" : 218,
 				"text" : "<small>Your own color, or a color taken from the album cover.<br>Default value = Album: main color</small><hr width=\"260\">",
 				"type" : "text",
 				"value" : false
@@ -1094,8 +1094,8 @@
 			"hinttrianglesfadeinduration" : 
 			{
 				"condition" : "trianglesshow.value == true",
-				"index" : 125,
-				"order" : 225,
+				"index" : 126,
+				"order" : 226,
 				"text" : "<small>How long they take to light up.<br>Default value = 0.1</small><hr width=\"260\">",
 				"type" : "text",
 				"value" : false
@@ -1103,8 +1103,8 @@
 			"hinttrianglesfadeoutduration" : 
 			{
 				"condition" : "trianglesshow.value == true",
-				"index" : 127,
-				"order" : 227,
+				"index" : 128,
+				"order" : 228,
 				"text" : "<small>How long they take to go dark.<br>Default value = 1.5</small><hr width=\"260\">",
 				"type" : "text",
 				"value" : false
@@ -1112,8 +1112,8 @@
 			"hinttrianglesglowstrength" : 
 			{
 				"condition" : "trianglesshow.value == true",
-				"index" : 123,
-				"order" : 223,
+				"index" : 124,
+				"order" : 224,
 				"text" : "<small>How bright they get. Above 1 they turn white.<br>Default value = 0.2</small><hr width=\"260\">",
 				"type" : "text",
 				"value" : false
@@ -1121,8 +1121,8 @@
 			"hinttrianglesopacity" : 
 			{
 				"condition" : "trianglesshow.value == true",
-				"index" : 113,
-				"order" : 213,
+				"index" : 114,
+				"order" : 214,
 				"text" : "<small>Lower = more of the layers below show through.<br>Default value = 0.33</small><hr width=\"260\">",
 				"type" : "text",
 				"value" : false
@@ -1130,8 +1130,8 @@
 			"hinttrianglesrangeend" : 
 			{
 				"condition" : "trianglesshow.value == true",
-				"index" : 133,
-				"order" : 233,
+				"index" : 134,
+				"order" : 234,
 				"text" : "<small>64 channels (0–63)<br>63 = highest treble<br>Default value = 9</small><hr width=\"260\">",
 				"type" : "text",
 				"value" : false
@@ -1139,8 +1139,8 @@
 			"hinttrianglesrangestart" : 
 			{
 				"condition" : "trianglesshow.value == true",
-				"index" : 131,
-				"order" : 231,
+				"index" : 132,
+				"order" : 232,
 				"text" : "<small>64 channels (0–63)<br>0 = deepest bass<br>Default value = 0</small><hr width=\"260\">",
 				"type" : "text",
 				"value" : false
@@ -1148,8 +1148,8 @@
 			"hinttrianglesrows" : 
 			{
 				"condition" : "trianglesshow.value == true",
-				"index" : 115,
-				"order" : 215,
+				"index" : 116,
+				"order" : 216,
 				"text" : "<small>More rows = smaller triangles.<br>Default value = 6</small><hr width=\"260\">",
 				"type" : "text",
 				"value" : false
@@ -1157,8 +1157,8 @@
 			"hinttrianglesshow" : 
 			{
 				"condition" : "",
-				"index" : 111,
-				"order" : 211,
+				"index" : 112,
+				"order" : 212,
 				"text" : "<small>Turn off to hide the triangles.<br>Default value = On</small><hr width=\"260\">",
 				"type" : "text",
 				"value" : false
@@ -1166,8 +1166,8 @@
 			"hinttrianglesvariation" : 
 			{
 				"condition" : "trianglesshow.value == true",
-				"index" : 129,
-				"order" : 229,
+				"index" : 130,
+				"order" : 230,
 				"text" : "<small>Shade difference between triangles. 0 = all the same.<br>Default value = 0.2</small><hr width=\"260\">",
 				"type" : "text",
 				"value" : false
@@ -1175,8 +1175,8 @@
 			"information" : 
 			{
 				"condition" : "",
-				"index" : 1,
-				"order" : 101,
+				"index" : 2,
+				"order" : 102,
 				"text" : "<small>💡 If something looks wrong after an update, press <b>Reset</b> in the wallpaper settings.</small><br>&nbsp;",
 				"type" : "text",
 				"value" : false
@@ -1184,8 +1184,8 @@
 			"labelalbumspin" : 
 			{
 				"condition" : "",
-				"index" : 99,
-				"order" : 199,
+				"index" : 100,
+				"order" : 200,
 				"text" : "<small>The cover of the song playing, blurred and slowly spinning behind the cards. Its color follows each song.</small>",
 				"type" : "text",
 				"value" : false
@@ -1193,8 +1193,8 @@
 			"labelaudiobars" : 
 			{
 				"condition" : "trackcardshow.value == true && trackcardshowbars.value == true",
-				"index" : 45,
-				"order" : 145,
+				"index" : 46,
+				"order" : 146,
 				"text" : "<small>The bars inside the now playing card.</small>",
 				"type" : "text",
 				"value" : false
@@ -1202,8 +1202,8 @@
 			"labelbackground" : 
 			{
 				"condition" : "",
-				"index" : 79,
-				"order" : 179,
+				"index" : 80,
+				"order" : 180,
 				"text" : "<small>The background is made of layers, from bottom to top: <b>color → Album Spin → Triangles → image</b>. This section has the bottom and the top layers; Album Spin and Triangles have their own sections. Use the opacity sliders to mix them.</small>",
 				"type" : "text",
 				"value" : false
@@ -1211,8 +1211,8 @@
 			"labelcards" : 
 			{
 				"condition" : "",
-				"index" : 3,
-				"order" : 103,
+				"index" : 4,
+				"order" : 104,
 				"text" : "<small>Size and position of all the cards together.</small>",
 				"type" : "text",
 				"value" : false
@@ -1220,8 +1220,8 @@
 			"labelclock" : 
 			{
 				"condition" : "",
-				"index" : 11,
-				"order" : 111,
+				"index" : 12,
+				"order" : 112,
 				"text" : "<small>The card with the current time.</small>",
 				"type" : "text",
 				"value" : false
@@ -1229,8 +1229,8 @@
 			"labeldate" : 
 			{
 				"condition" : "",
-				"index" : 65,
-				"order" : 165,
+				"index" : 66,
+				"order" : 166,
 				"text" : "<small>The card with the weekday and the date, in your system language.</small>",
 				"type" : "text",
 				"value" : false
@@ -1244,11 +1244,20 @@
 				"type" : "text",
 				"value" : false
 			},
+			"labeltip" : 
+			{
+				"condition" : "",
+				"index" : 1,
+				"order" : 101,
+				"text" : "<small>🎨 The background is made of layers: color, Album Spin, Triangles and image. Use their opacity sliders to blend them together, or set one to 0 to remove that effect.</small><br>&nbsp;",
+				"type" : "text",
+				"value" : false
+			},
 			"labeltrack" : 
 			{
 				"condition" : "",
-				"index" : 25,
-				"order" : 125,
+				"index" : 26,
+				"order" : 126,
 				"text" : "<small>The song playing on your PC, with cover, title and artist. Hides itself when nothing is playing.</small>",
 				"type" : "text",
 				"value" : false
@@ -1256,8 +1265,8 @@
 			"labeltriangles" : 
 			{
 				"condition" : "",
-				"index" : 109,
-				"order" : 209,
+				"index" : 110,
+				"order" : 210,
 				"text" : "<small>A grid of triangles in one color. On each beat of the music, a few random triangles light up and fade away.</small>",
 				"type" : "text",
 				"value" : false
@@ -1272,8 +1281,8 @@
 			"trackcard" : 
 			{
 				"condition" : "",
-				"index" : 24,
-				"order" : 124,
+				"index" : 25,
+				"order" : 125,
 				"text" : "🎵 Now Playing",
 				"type" : "group",
 				"value" : ""
@@ -1281,7 +1290,7 @@
 			"trackcardartitsfontfamily" : 
 			{
 				"condition" : "trackcardshow.value == true",
-				"index" : 38,
+				"index" : 39,
 				"options" : 
 				[
 					{
@@ -1309,7 +1318,7 @@
 						"value" : "Tokyo"
 					}
 				],
-				"order" : 138,
+				"order" : 139,
 				"text" : "Artist font",
 				"type" : "combo",
 				"value" : "Unageo"
@@ -1318,10 +1327,10 @@
 			{
 				"condition" : "trackcardshow.value == true",
 				"fraction" : false,
-				"index" : 40,
+				"index" : 41,
 				"max" : 900,
 				"min" : 100,
-				"order" : 140,
+				"order" : 141,
 				"text" : "Artist font weight",
 				"type" : "slider",
 				"value" : 300
@@ -1330,10 +1339,10 @@
 			{
 				"condition" : "trackcardshow.value == true",
 				"fraction" : true,
-				"index" : 42,
+				"index" : 43,
 				"max" : 40,
 				"min" : 0,
-				"order" : 142,
+				"order" : 143,
 				"precision" : 2,
 				"step" : 0.1,
 				"text" : "Corner roundness",
@@ -1343,8 +1352,8 @@
 			"trackcardshow" : 
 			{
 				"condition" : "",
-				"index" : 26,
-				"order" : 126,
+				"index" : 27,
+				"order" : 127,
 				"text" : "Show now playing",
 				"type" : "bool",
 				"value" : true
@@ -1352,8 +1361,8 @@
 			"trackcardshowbars" : 
 			{
 				"condition" : "trackcardshow.value == true",
-				"index" : 30,
-				"order" : 130,
+				"index" : 31,
+				"order" : 131,
 				"text" : "Show audio bars",
 				"type" : "bool",
 				"value" : true
@@ -1361,8 +1370,8 @@
 			"trackcardshowbeats" : 
 			{
 				"condition" : "trackcardshow.value == true",
-				"index" : 32,
-				"order" : 132,
+				"index" : 33,
+				"order" : 133,
 				"text" : "Show beat blocks",
 				"type" : "bool",
 				"value" : true
@@ -1370,8 +1379,8 @@
 			"trackcardshowtimeline" : 
 			{
 				"condition" : "trackcardshow.value == true",
-				"index" : 28,
-				"order" : 128,
+				"index" : 29,
+				"order" : 129,
 				"text" : "Show progress bar",
 				"type" : "bool",
 				"value" : true
@@ -1379,7 +1388,7 @@
 			"trackcardtitlefontfamily" : 
 			{
 				"condition" : "trackcardshow.value == true",
-				"index" : 34,
+				"index" : 35,
 				"options" : 
 				[
 					{
@@ -1407,7 +1416,7 @@
 						"value" : "Tokyo"
 					}
 				],
-				"order" : 134,
+				"order" : 135,
 				"text" : "Song title font",
 				"type" : "combo",
 				"value" : "Unageo"
@@ -1416,10 +1425,10 @@
 			{
 				"condition" : "trackcardshow.value == true",
 				"fraction" : false,
-				"index" : 36,
+				"index" : 37,
 				"max" : 900,
 				"min" : 100,
-				"order" : 136,
+				"order" : 137,
 				"text" : "Song title font weight",
 				"type" : "slider",
 				"value" : 600
@@ -1427,8 +1436,8 @@
 			"triangles" : 
 			{
 				"condition" : "",
-				"index" : 108,
-				"order" : 208,
+				"index" : 109,
+				"order" : 209,
 				"text" : "🔺 Triangles",
 				"type" : "group",
 				"value" : ""
@@ -1437,10 +1446,10 @@
 			{
 				"condition" : "trianglesshow.value == true",
 				"fraction" : true,
-				"index" : 120,
+				"index" : 121,
 				"max" : 1,
 				"min" : 0,
-				"order" : 220,
+				"order" : 221,
 				"precision" : 2,
 				"step" : 0.01,
 				"text" : "Triangles per beat",
@@ -1451,10 +1460,10 @@
 			{
 				"condition" : "trianglesshow.value == true",
 				"fraction" : true,
-				"index" : 134,
+				"index" : 135,
 				"max" : 3,
 				"min" : 1,
-				"order" : 234,
+				"order" : 235,
 				"precision" : 2,
 				"step" : 0.05,
 				"text" : "Beat threshold",
@@ -1464,8 +1473,8 @@
 			"trianglescolor" : 
 			{
 				"condition" : "trianglesshow.value == true && trianglescolorsource.value == 'custom'",
-				"index" : 118,
-				"order" : 218,
+				"index" : 119,
+				"order" : 219,
 				"text" : "Pick a color",
 				"type" : "color",
 				"value" : "0.2 0.4 1"
@@ -1473,7 +1482,7 @@
 			"trianglescolorsource" : 
 			{
 				"condition" : "trianglesshow.value == true",
-				"index" : 116,
+				"index" : 117,
 				"options" : 
 				[
 					{
@@ -1501,7 +1510,7 @@
 						"value" : "highcontrast"
 					}
 				],
-				"order" : 216,
+				"order" : 217,
 				"text" : "Color",
 				"type" : "combo",
 				"value" : "primary"
@@ -1510,10 +1519,10 @@
 			{
 				"condition" : "trianglesshow.value == true",
 				"fraction" : true,
-				"index" : 124,
+				"index" : 125,
 				"max" : 1,
 				"min" : 0,
-				"order" : 224,
+				"order" : 225,
 				"precision" : 2,
 				"step" : 0.05,
 				"text" : "Fade in (seconds)",
@@ -1524,10 +1533,10 @@
 			{
 				"condition" : "trianglesshow.value == true",
 				"fraction" : true,
-				"index" : 126,
+				"index" : 127,
 				"max" : 5,
 				"min" : 0.1,
-				"order" : 226,
+				"order" : 227,
 				"precision" : 1,
 				"step" : 0.1,
 				"text" : "Fade out (seconds)",
@@ -1538,10 +1547,10 @@
 			{
 				"condition" : "trianglesshow.value == true",
 				"fraction" : true,
-				"index" : 122,
+				"index" : 123,
 				"max" : 2,
 				"min" : 0,
-				"order" : 222,
+				"order" : 223,
 				"precision" : 2,
 				"step" : 0.05,
 				"text" : "Glow strength",
@@ -1552,10 +1561,10 @@
 			{
 				"condition" : "trianglesshow.value == true",
 				"fraction" : true,
-				"index" : 112,
+				"index" : 113,
 				"max" : 1,
 				"min" : 0,
-				"order" : 212,
+				"order" : 213,
 				"precision" : 2,
 				"step" : 0.01,
 				"text" : "Opacity",
@@ -1566,10 +1575,10 @@
 			{
 				"condition" : "trianglesshow.value == true",
 				"fraction" : false,
-				"index" : 132,
+				"index" : 133,
 				"max" : 63,
 				"min" : 0,
-				"order" : 232,
+				"order" : 233,
 				"step" : 1,
 				"text" : "Reaction range end",
 				"type" : "slider",
@@ -1579,10 +1588,10 @@
 			{
 				"condition" : "trianglesshow.value == true",
 				"fraction" : false,
-				"index" : 130,
+				"index" : 131,
 				"max" : 63,
 				"min" : 0,
-				"order" : 230,
+				"order" : 231,
 				"step" : 1,
 				"text" : "Reaction range start",
 				"type" : "slider",
@@ -1592,10 +1601,10 @@
 			{
 				"condition" : "trianglesshow.value == true",
 				"fraction" : false,
-				"index" : 114,
+				"index" : 115,
 				"max" : 20,
 				"min" : 2,
-				"order" : 214,
+				"order" : 215,
 				"step" : 1,
 				"text" : "Rows",
 				"type" : "slider",
@@ -1604,8 +1613,8 @@
 			"trianglesshow" : 
 			{
 				"condition" : "",
-				"index" : 110,
-				"order" : 210,
+				"index" : 111,
+				"order" : 211,
 				"text" : "Show triangles",
 				"type" : "bool",
 				"value" : true
@@ -1614,10 +1623,10 @@
 			{
 				"condition" : "trianglesshow.value == true",
 				"fraction" : true,
-				"index" : 128,
+				"index" : 129,
 				"max" : 1,
 				"min" : 0,
-				"order" : 228,
+				"order" : 229,
 				"precision" : 2,
 				"step" : 0.01,
 				"text" : "Texture",
