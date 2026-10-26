@@ -146,6 +146,10 @@ const PANEL = [
     opt("trianglesrangestart", "Reaction range start", "64 channels (0–63)<br>0 = deepest bass", TRI),
     opt("trianglesrangeend", "Reaction range end", "64 channels (0–63)<br>63 = highest treble", TRI),
     opt("trianglesbeatthreshold", "Beat threshold", "Higher = only strong beats light triangles.", TRI),
+
+    group("troubleshooting", "🛠️ Troubleshooting"),
+    label("labeltroubleshooting", "<small>Tools to find out what is wrong when something does not show up.</small>"),
+    opt("debugshow", "Show debug info", "Shows what Wallpaper Engine sends to the wallpaper: song, cover, playback and a log of events. Take a screenshot of it when reporting a problem."),
 ].flat();
 
 // Properties Wallpaper Engine manages itself

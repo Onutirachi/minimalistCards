@@ -77,6 +77,8 @@ export const SETTINGS = {
     trianglesfadeoutduration: { ...number(1.5, 0.1, 5), apply: (ui, v) => ui.triangles.configure({ fadeOutDuration: v }) },
     trianglesglowstrength: { ...number(0.2, 0, 2), apply: (ui, v) => ui.triangles.configure({ glowStrength: v }) },
     trianglesvariation: { ...number(0.2, 0, 1), apply: (ui, v) => ui.triangles.configure({ variation: v }) },
+
+    debugshow: { ...bool(false), apply: (ui, v) => ui.setDebugVisible(v) },
 };
 
 /** Applies the properties Wallpaper Engine sent (all on load, then only the changed ones). Unknown keys are ignored. */

@@ -68,18 +68,21 @@ export default class Background {
         this.container.style.setProperty("--background-size", `${this.size}px`);
     }
 
+    /** Resolves to "loaded", "failed" or "stale" (a newer cover arrived meanwhile), for diagnostics. */
     async setThumbnail(url) {
         this.coverUrl = url;
         this.updateImage();
 
         const token = ++this.loadToken;
         const image = await loadImage(url).catch(() => null);
-        if (!image || token !== this.loadToken) return;
+        if (token !== this.loadToken) return "stale";
+        if (!image) return "failed";
 
         crossFade(this.thumbnail, () => {
             this.source = image;
             this.redraw();
         });
+        return "loaded";
     }
 
     setBaseColor(color) {
@@ -206,10 +209,22 @@ export default class Background {
     }
 }
 
-function loadImage(url) {
+async function loadImage(url) {
     const image = new Image();
     image.src = url;
-    return image.decode().then(() => image);
+    try {
+        await image.decode();
+    } catch {
+        // decode() can reject while the page is hidden even for a valid image; fall back to the load event
+        if (!image.complete) {
+            await new Promise((resolve, reject) => {
+                image.onload = resolve;
+                image.onerror = reject;
+            });
+        }
+        if (!image.naturalWidth) throw new Error("The cover could not be loaded");
+    }
+    return image;
 }
 
 /**

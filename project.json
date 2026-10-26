@@ -641,6 +641,15 @@
 				"type" : "slider",
 				"value" : 600
 			},
+			"debugshow" : 
+			{
+				"condition" : "",
+				"index" : 139,
+				"order" : 239,
+				"text" : "Show debug info",
+				"type" : "bool",
+				"value" : false
+			},
 			"hintalbumspinbeatsensitivity" : 
 			{
 				"condition" : "albumspinshow.value == true",
@@ -974,6 +983,15 @@
 				"type" : "text",
 				"value" : false
 			},
+			"hintdebugshow" : 
+			{
+				"condition" : "",
+				"index" : 140,
+				"order" : 240,
+				"text" : "<small>Shows what Wallpaper Engine sends to the wallpaper: song, cover, playback and a log of events. Take a screenshot of it when reporting a problem.<br>Default value = Off</small>",
+				"type" : "text",
+				"value" : false
+			},
 			"hinttrackcardartitsfontfamily" : 
 			{
 				"condition" : "trackcardshow.value == true",
@@ -1268,6 +1286,15 @@
 				"index" : 110,
 				"order" : 210,
 				"text" : "<small>A grid of triangles in one color. On each beat of the music, a few random triangles light up and fade away.</small>",
+				"type" : "text",
+				"value" : false
+			},
+			"labeltroubleshooting" : 
+			{
+				"condition" : "",
+				"index" : 138,
+				"order" : 238,
+				"text" : "<small>Tools to find out what is wrong when something does not show up.</small>",
 				"type" : "text",
 				"value" : false
 			},
@@ -1632,6 +1659,15 @@
 				"text" : "Texture",
 				"type" : "slider",
 				"value" : 0.2
+			},
+			"troubleshooting" : 
+			{
+				"condition" : "",
+				"index" : 137,
+				"order" : 237,
+				"text" : "🛠️ Troubleshooting",
+				"type" : "group",
+				"value" : ""
 			}
 		},
 		"supportsaudioprocessing" : true

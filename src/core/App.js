@@ -8,8 +8,9 @@ import DateCard from "../components/DateCard.js";
 import AudioBars from "../components/AudioBars.js";
 import Triangles from "../components/Triangles.js";
 import Debug from "../components/Debug.js";
-import { DEBUG, TRIANGLES } from "../config.js";
+import { DEBUG, DEBUG_LOG_LINES, TRIANGLES } from "../config.js";
 import { isAlbumColor, pickColor, withMinLightness } from "../utils/color.js";
+import { loadCover, saveCover } from "../media/coverCache.js";
 import { applyDefaults, applySettings } from "./settings.js";
 
 /**
@@ -18,6 +19,7 @@ import { applyDefaults, applySettings } from "./settings.js";
  */
 export default class App {
     constructor(root) {
+        this.root = root;
         this.background = new Background(root);
         this.cards = new Cards(root);
         this.clockCard = new ClockCard(this.cards.container);
@@ -25,7 +27,7 @@ export default class App {
         this.dateCard = new DateCard(this.cards.container);
         this.audioBars = new AudioBars(this.trackCard.audioBarsSlot);
         this.triangles = new Triangles(this.background.trianglesSlot);
-        this.debug = DEBUG ? new Debug(root) : null;
+        this.debug = null;
 
         this.analyzer = new AudioAnalyzer();
         this.audio = null;
@@ -37,10 +39,20 @@ export default class App {
         this.albumColors = null;
         this.colors = { background: { source: "custom", custom: "" }, triangles: { source: "custom", custom: "" } };
 
+        // Latest media state and an event log, so the debug overlay can show them even when turned on later
+        this.track = null;
+        this.thumbnail = null;
+        this.playback = null;
+        this.thumbnailReceived = false;
+        this.events = [];
+        this.logEvent("wallpaper loaded");
+        document.addEventListener("visibilitychange", () => this.logEvent(`page ${document.visibilityState}`));
+
         this.loop = new RenderLoop();
         this.loop.add(this.frame);
 
         applyDefaults(this);
+        if (DEBUG) this.setDebugVisible(true);
         window.addEventListener("resize", () => this.audioBars.invalidateSize());
     }
 
@@ -115,6 +127,44 @@ export default class App {
         this.triangles.setColor(isAlbumColor(triangles.source) ? withMinLightness(trianglesColor, TRIANGLES.minAlbumLightness) : trianglesColor);
     }
 
+    // Diagnostics
+
+    setDebugVisible(visible) {
+        if (DEBUG) visible = true;
+        if (visible === Boolean(this.debug)) return;
+
+        if (!visible) {
+            this.debug.container.remove();
+            this.debug = null;
+            return;
+        }
+
+        this.debug = new Debug(this.root);
+        if (this.track) this.debug.track(this.track);
+        if (this.thumbnail) this.debug.thumbnail(this.thumbnail);
+        if (this.playback) this.debug.playback(this.playback);
+        this.debug.events(this.events);
+    }
+
+    logEvent(text) {
+        const time = new Date().toLocaleTimeString([], { hour12: false });
+        this.events.push(`${time}  ${text}`);
+        if (this.events.length > DEBUG_LOG_LINES) this.events.shift();
+        this.debug?.events(this.events);
+    }
+
+    applyThumbnail(thumbnail) {
+        this.thumbnail = thumbnail;
+        this.background.setThumbnail(thumbnail.thumbnail).then((result) => this.logEvent(`album spin cover ${result}`));
+        this.background.setTint(thumbnail.primaryColor);
+        this.trackCard.setCover(thumbnail.thumbnail);
+        this.cards.setColors(thumbnail);
+        this.audioBars.setColor(thumbnail.textColor);
+        this.albumColors = thumbnail;
+        this.updateColors();
+        this.debug?.thumbnail(thumbnail);
+    }
+
     // Wallpaper Engine handlers
 
     onAudio = (audioArray) => {
@@ -124,6 +174,7 @@ export default class App {
     };
 
     onPaused = (paused) => {
+        this.logEvent(paused ? "paused" : "resumed");
         if (paused) this.loop.stop();
         else this.loop.start();
     };
@@ -134,29 +185,15 @@ export default class App {
     };
 
     onMediaStatus = (enabled) => {
+        this.logEvent(`media integration ${enabled ? "on" : "off"}`);
         if (!enabled) {
             this.trackCard.close();
             this.background.setMediaActive(false);
         }
     };
 
-    onTrack = (track) => {
-        this.trackCard.setTrack(track);
-        this.debug?.track(track);
-    };
-
-    onThumbnail = (thumbnail) => {
-        this.background.setThumbnail(thumbnail.thumbnail);
-        this.background.setTint(thumbnail.primaryColor);
-        this.trackCard.setCover(thumbnail.thumbnail);
-        this.cards.setColors(thumbnail);
-        this.audioBars.setColor(thumbnail.textColor);
-        this.albumColors = thumbnail;
-        this.updateColors();
-        this.debug?.thumbnail(thumbnail);
-    };
-
-    onPlayback = (state) => {
+    applyPlayback(state) {
+        this.playback = state;
         this.trackCard.setPlaying(state === "playing", performance.now());
 
         this.background.setMediaActive(state !== "stopped");
@@ -167,9 +204,52 @@ export default class App {
             this.audioBars.invalidateSize();
         }
         this.debug?.playback(state);
+    }
+
+    /**
+     * Wallpaper Engine only sends playback changes, so after switching wallpapers and back a song can be playing
+     * without any playback event. Media data before the first playback event means something is playing.
+     */
+    assumePlaying(reason) {
+        if (this.playback) return;
+        this.logEvent(`playback assumed playing (${reason} before any playback event)`);
+        this.applyPlayback("playing");
+    }
+
+    onTrack = (track) => {
+        this.logEvent(`track: ${track.title} / ${track.artist}`);
+        this.assumePlaying("track");
+        this.track = track;
+        this.trackCard.setTrack(track);
+        this.debug?.track(track);
+
+        if (this.thumbnailReceived) {
+            saveCover(track, this.thumbnail);
+            return;
+        }
+        // No cover since the wallpaper loaded: Wallpaper Engine may not resend it, so reuse this track's stored one
+        const cached = loadCover(track);
+        if (cached) {
+            this.logEvent("cover restored from cache");
+            this.applyThumbnail(cached);
+        }
+    };
+
+    onThumbnail = (thumbnail) => {
+        this.logEvent(`cover received (${Math.round((thumbnail.thumbnail?.length ?? 0) / 1024)} KB)`);
+        this.assumePlaying("cover");
+        this.thumbnailReceived = true;
+        this.applyThumbnail(thumbnail);
+        if (this.track) saveCover(this.track, thumbnail);
+    };
+
+    onPlayback = (state) => {
+        this.logEvent(`playback ${state}`);
+        this.applyPlayback(state);
     };
 
     onTimeline = ({ position, duration }) => {
+        this.assumePlaying("timeline");
         this.trackCard.syncTimeline(position, duration, performance.now());
         this.debug?.timeline(position, duration);
     };

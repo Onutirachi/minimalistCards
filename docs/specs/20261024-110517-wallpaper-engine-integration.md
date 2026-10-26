@@ -2,7 +2,7 @@
 
 - **Criada em:** 2026-10-24 11:05:17
 - **Status:** Implemented
-- **Código:** `src/main.js`, `src/core/wallpaperBridge.js`, `src/core/settings.js`, `project.json`
+- **Código:** `src/main.js`, `src/core/wallpaperBridge.js`, `src/core/settings.js`, `src/core/App.js`, `src/core/transitions.js`, `src/media/coverCache.js`, `src/components/Debug.js`, `project.json`
 
 ## Contexto
 
@@ -29,6 +29,11 @@ Na v1 o registro acontecia 1 s depois do `DOMContentLoaded`. Para não perder as
 - **REQ-WE-8** — QUANDO o WE chamar `setPaused(true)`, o sistema DEVE parar o render loop. Com `false`, DEVE retomar.
 - **REQ-WE-9** — QUANDO a integração de mídia for desativada (`MediaStatus.enabled = false`), o card de música DEVE fechar.
 - **REQ-WE-10** — Fora do WE, por exemplo no navegador, a ausência da API NÃO DEVE quebrar a página.
+- **REQ-WE-11** — O usuário DEVE poder ligar, pelo painel, um overlay de diagnóstico com os últimos dados de mídia recebidos (faixa, capa, playback) e um log com horário dos eventos desde o carregamento (eventos de mídia, pausa, visibilidade da página, resultado do carregamento da capa). Ligar depois do carregamento DEVE mostrar o histórico desde o carregamento.
+- **REQ-WE-12** — Uma transição (fade ou crossfade) NÃO DEVE ficar presa esperando uma animação que não avança, por exemplo com a página escondida ou parada. Depois da duração mais uma margem, ela DEVE seguir como se a animação tivesse terminado.
+- **REQ-WE-13** — QUANDO `Image.decode()` rejeitar uma capa, o sistema DEVE tentar usá-la pelo evento `load` antes de desistir.
+- **REQ-WE-15** — QUANDO chegar uma faixa, uma capa ou uma posição da música antes de qualquer evento de playback desde o carregamento, o sistema DEVE tratar a mídia como tocando: abrir o card de música e mostrar a capa no fundo. O primeiro evento de playback real DEVE prevalecer.
+- **REQ-WE-14** — O sistema DEVE guardar a última capa recebida junto com o título e o artista. QUANDO, depois de um carregamento, chegar uma faixa com o mesmo título e artista e nenhuma capa tiver chegado ainda, o sistema DEVE usar a capa guardada (imagem e cores). Uma capa recebida do WE DEVE sempre substituir a guardada.
 
 ## Design
 
@@ -42,6 +47,10 @@ Na v1 o registro acontecia 1 s depois do `DOMContentLoaded`. Para não perder as
   - `applySettings(ui, properties)` aplica o que o WE enviar.
 - Propriedades que só existem na interface do WE (`schemecolor`, `information`) e os grupos são ignorados.
 - Os ajustes internos que não aparecem no `project.json` (`peakHoldFrames`, `peakFallSpeed`) ficam em `config.js`.
+
+- **Problema investigado (REQ-WE-11 a 14):** ao voltar para o wallpaper depois de usar outro, às vezes a capa não aparecia, e trocar de música nem sempre resolvia. O WE só dispara eventos de mídia quando algo muda (não está documentado se reenvia o estado atual ao recarregar), e músicas do mesmo álbum não mudam a capa. As causas possíveis no nosso lado eram: transições esperando `animation.finished` de uma animação parada; `decode()` rejeitando em silêncio; e a capa nunca ser reenviada. As três foram tratadas, e o overlay de diagnóstico permite confirmar no WE qual delas acontece.
+- **Playback presumido (REQ-WE-15):** no WE, ao trocar rapidamente para outro wallpaper e voltar, as cores mudavam com a música (a capa chegava) mas o card de música não abria e a capa do fundo não aparecia. Os dois só reagiam ao evento de playback, que o WE também só manda quando muda. `App.assumePlaying()` aplica `playing` na primeira faixa, capa ou timeline que chegar sem playback conhecido, e registra isso no log de diagnóstico.
+- **Cache da capa (REQ-WE-14):** `localStorage`, chave `minimalistcards.lastCover`, com `{ title, artist, thumbnail }`. É gravado quando chega uma capa e quando chega uma faixa depois de uma capa, então termina certo nas duas ordens de chegada. Falhas de armazenamento são ignoradas.
 
 ### Mudança de comportamento intencional
 
@@ -58,3 +67,8 @@ O tamanho do peak dot agora respeita o slider (1–10). A v1 limitava internamen
 | REQ-WE-7 | `tests/settings.test.js` › "thumbnails with identical colors get readable fallbacks" |
 | REQ-WE-8, 9 | Manual: em `dev/`, teclas `P` e `M` |
 | REQ-WE-10 | Manual: abrir `index.html` servido sem o mock. A página carrega com avisos no console |
+| REQ-WE-11 | Manual no WE: ligar "Show debug info" e trocar de wallpaper e voltar; o log mostra os eventos recebidos |
+| REQ-WE-12 | `tests/transitions.test.js` › "a transition never waits forever on a stalled animation" |
+| REQ-WE-13 | Revisão de `loadImage` em `Background.js` |
+| REQ-WE-14 | `tests/coverCache.test.js` |
+| REQ-WE-15 | Manual em `dev/` com o listener de playback bloqueado: o card abre e a capa do fundo aparece; no WE, trocar rápido de wallpaper e voltar |

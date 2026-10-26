@@ -4,7 +4,7 @@ import { formatDuration } from "../utils/time.js";
 const MAX_LOG_LINES = 50;
 const SWATCHES = ["primaryColor", "secondaryColor", "tertiaryColor", "textColor", "highContrastColor"];
 
-/** Overlay with the raw Wallpaper Engine data. Enabled with `?debug` in the URL. */
+/** Overlay with the raw Wallpaper Engine data. Enabled with `?debug` in the URL or the "Show debug info" setting. */
 export default class Debug {
     constructor(parent) {
         this.container = el("div", "debug", parent);
@@ -21,6 +21,8 @@ export default class Debug {
 
         this.timelineText = el("div", "debug-big", this.panel("Timeline"));
         this.playbackText = el("div", "debug-big", this.panel("Playback"));
+
+        this.eventLog = this.panel("Events since load", "debug-wide debug-log");
 
         this.log = this.panel("User Properties", "debug-wide debug-log");
         this.lines = [];
@@ -52,6 +54,11 @@ export default class Debug {
 
     playback(state) {
         this.playbackText.textContent = state[0].toUpperCase() + state.slice(1);
+    }
+
+    events(lines) {
+        this.eventLog.textContent = lines.join("\n");
+        this.eventLog.scrollTop = this.eventLog.scrollHeight;
     }
 
     userProperties(properties) {

@@ -1,8 +1,10 @@
 // Internal tuning values. User-facing defaults live in core/settings.js (mirroring project.json).
 
 export const DEBUG = typeof location !== "undefined" && new URLSearchParams(location.search).has("debug");
+export const DEBUG_LOG_LINES = 40;
 
 export const FADE_DURATION = 1000; // ms
+export const TRANSITION_TIMEOUT_MARGIN = 250; // ms a transition waits past its duration for a stalled animation
 
 export const FALLBACK_COLORS = { primary: "#111111", text: "#ffffff" };
 
