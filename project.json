@@ -1249,7 +1249,7 @@
 				"condition" : "",
 				"index" : 1,
 				"order" : 101,
-				"text" : "<small>🎨 The background is made of layers: color, Album Spin, Triangles and image. Use their opacity sliders to blend them together, or set one to 0 to remove that effect.</small><br>&nbsp;",
+				"text" : "<small>🎨 The background is made of layers: color, Album Spin, Triangles and image. Use their opacity sliders to blend them together. To remove an effect, turn it off or set its opacity to 0.</small><br>&nbsp;",
 				"type" : "text",
 				"value" : false
 			},
