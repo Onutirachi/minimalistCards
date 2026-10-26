@@ -15,6 +15,57 @@
 				"type" : "group",
 				"value" : ""
 			},
+			"albumspinbeatsensitivity" : 
+			{
+				"condition" : "albumspinshow.value == true",
+				"fraction" : true,
+				"index" : 98,
+				"max" : 1,
+				"min" : 0,
+				"order" : 198,
+				"precision" : 2,
+				"step" : 0.1,
+				"text" : "Beat pulse",
+				"type" : "slider",
+				"value" : 0.2
+			},
+			"albumspinopacity" : 
+			{
+				"condition" : "albumspinshow.value == true",
+				"fraction" : true,
+				"index" : 94,
+				"max" : 1,
+				"min" : 0,
+				"order" : 194,
+				"precision" : 2,
+				"step" : 0.01,
+				"text" : "Opacity",
+				"type" : "slider",
+				"value" : 1
+			},
+			"albumspinrotationspeed" : 
+			{
+				"condition" : "albumspinshow.value == true",
+				"fraction" : true,
+				"index" : 96,
+				"max" : 240,
+				"min" : 0,
+				"order" : 196,
+				"precision" : 2,
+				"step" : 0.1,
+				"text" : "Rotation speed",
+				"type" : "slider",
+				"value" : 120
+			},
+			"albumspinshow" : 
+			{
+				"condition" : "",
+				"index" : 92,
+				"order" : 192,
+				"text" : "Show Album Spin",
+				"type" : "bool",
+				"value" : true
+			},
 			"audiobars" : 
 			{
 				"condition" : "trackcardshow.value == true && trackcardshowbars.value == true",
@@ -142,43 +193,6 @@
 				"type" : "group",
 				"value" : ""
 			},
-			"backgroundalbumopacity" : 
-			{
-				"condition" : "backgroundalbumshow.value == true",
-				"fraction" : true,
-				"index" : 94,
-				"max" : 1,
-				"min" : 0,
-				"order" : 194,
-				"precision" : 2,
-				"step" : 0.01,
-				"text" : "Opacity",
-				"type" : "slider",
-				"value" : 1
-			},
-			"backgroundalbumshow" : 
-			{
-				"condition" : "",
-				"index" : 92,
-				"order" : 192,
-				"text" : "Show Album Spin",
-				"type" : "bool",
-				"value" : true
-			},
-			"backgroundbeatsensitivity" : 
-			{
-				"condition" : "",
-				"fraction" : true,
-				"index" : 88,
-				"max" : 1,
-				"min" : 0,
-				"order" : 188,
-				"precision" : 2,
-				"step" : 0.1,
-				"text" : "Beat pulse",
-				"type" : "slider",
-				"value" : 0.2
-			},
 			"backgroundcolor" : 
 			{
 				"condition" : "backgroundcolorsource.value == 'custom'",
@@ -224,7 +238,7 @@
 				"type" : "combo",
 				"value" : "custom"
 			},
-			"backgroundcustomimage" : 
+			"backgroundimage" : 
 			{
 				"condition" : "",
 				"index" : 84,
@@ -233,7 +247,21 @@
 				"type" : "file",
 				"value" : ""
 			},
-			"backgroundcustomimageopacity" : 
+			"backgroundimagebeatsensitivity" : 
+			{
+				"condition" : "",
+				"fraction" : true,
+				"index" : 88,
+				"max" : 1,
+				"min" : 0,
+				"order" : 188,
+				"precision" : 2,
+				"step" : 0.1,
+				"text" : "Your image beat pulse",
+				"type" : "slider",
+				"value" : 0.2
+			},
+			"backgroundimageopacity" : 
 			{
 				"condition" : "",
 				"fraction" : true,
@@ -246,20 +274,6 @@
 				"text" : "Your image opacity",
 				"type" : "slider",
 				"value" : 1
-			},
-			"backgroundmovementspeed" : 
-			{
-				"condition" : "backgroundalbumshow.value == true",
-				"fraction" : true,
-				"index" : 96,
-				"max" : 240,
-				"min" : 0,
-				"order" : 196,
-				"precision" : 2,
-				"step" : 0.1,
-				"text" : "Rotation speed",
-				"type" : "slider",
-				"value" : 120
 			},
 			"cards" : 
 			{
@@ -538,6 +552,42 @@
 				"type" : "slider",
 				"value" : 600
 			},
+			"hintalbumspinbeatsensitivity" : 
+			{
+				"condition" : "albumspinshow.value == true",
+				"index" : 99,
+				"order" : 199,
+				"text" : "<small>How much the cover grows with the bass. 0 = off.<br>Default value = 0.2</small>",
+				"type" : "text",
+				"value" : false
+			},
+			"hintalbumspinopacity" : 
+			{
+				"condition" : "albumspinshow.value == true",
+				"index" : 95,
+				"order" : 195,
+				"text" : "<small>Lower = more of the background color shows through.<br>Default value = 1</small><hr width=\"260\">",
+				"type" : "text",
+				"value" : false
+			},
+			"hintalbumspinrotationspeed" : 
+			{
+				"condition" : "albumspinshow.value == true",
+				"index" : 97,
+				"order" : 197,
+				"text" : "<small>0 = stopped, higher = faster.<br>Default value = 120</small><hr width=\"260\">",
+				"type" : "text",
+				"value" : false
+			},
+			"hintalbumspinshow" : 
+			{
+				"condition" : "",
+				"index" : 93,
+				"order" : 193,
+				"text" : "<small>Turn off to hide the spinning cover.<br>Default value = On</small><hr width=\"260\">",
+				"type" : "text",
+				"value" : false
+			},
 			"hintaudiobarsborderradius" : 
 			{
 				"condition" : "trackcardshow.value == true && trackcardshowbars.value == true",
@@ -619,33 +669,6 @@
 				"type" : "text",
 				"value" : false
 			},
-			"hintbackgroundalbumopacity" : 
-			{
-				"condition" : "backgroundalbumshow.value == true",
-				"index" : 95,
-				"order" : 195,
-				"text" : "<small>Lower = more of the background color shows through.<br>Default value = 1</small><hr width=\"260\">",
-				"type" : "text",
-				"value" : false
-			},
-			"hintbackgroundalbumshow" : 
-			{
-				"condition" : "",
-				"index" : 93,
-				"order" : 193,
-				"text" : "<small>Turn off to hide the spinning cover.<br>Default value = On</small><hr width=\"260\">",
-				"type" : "text",
-				"value" : false
-			},
-			"hintbackgroundbeatsensitivity" : 
-			{
-				"condition" : "",
-				"index" : 89,
-				"order" : 189,
-				"text" : "<small>How much your image and the Album Spin grow with the bass. 0 = off.<br>Default value = 0.2</small>",
-				"type" : "text",
-				"value" : false
-			},
 			"hintbackgroundcolor" : 
 			{
 				"condition" : "backgroundcolorsource.value == 'custom'",
@@ -664,7 +687,7 @@
 				"type" : "text",
 				"value" : false
 			},
-			"hintbackgroundcustomimage" : 
+			"hintbackgroundimage" : 
 			{
 				"condition" : "",
 				"index" : 85,
@@ -673,21 +696,21 @@
 				"type" : "text",
 				"value" : false
 			},
-			"hintbackgroundcustomimageopacity" : 
+			"hintbackgroundimagebeatsensitivity" : 
+			{
+				"condition" : "",
+				"index" : 89,
+				"order" : 189,
+				"text" : "<small>How much your image grows with the bass. 0 = off.<br>Default value = 0.2</small>",
+				"type" : "text",
+				"value" : false
+			},
+			"hintbackgroundimageopacity" : 
 			{
 				"condition" : "",
 				"index" : 87,
 				"order" : 187,
 				"text" : "<small>Lower = more of the layers below show through.<br>Default value = 1</small><hr width=\"260\">",
-				"type" : "text",
-				"value" : false
-			},
-			"hintbackgroundmovementspeed" : 
-			{
-				"condition" : "backgroundalbumshow.value == true",
-				"index" : 97,
-				"order" : 197,
-				"text" : "<small>0 = stopped, higher = faster.<br>Default value = 120</small>",
 				"type" : "text",
 				"value" : false
 			},
@@ -910,8 +933,8 @@
 			"hinttrianglesbeatsensitivity" : 
 			{
 				"condition" : "trianglesshow.value == true",
-				"index" : 111,
-				"order" : 211,
+				"index" : 113,
+				"order" : 213,
 				"text" : "<small>How many light up on each beat.<br>Default value = 0.25</small><hr width=\"260\">",
 				"type" : "text",
 				"value" : false
@@ -919,8 +942,8 @@
 			"hinttrianglesbeatthreshold" : 
 			{
 				"condition" : "trianglesshow.value == true",
-				"index" : 125,
-				"order" : 225,
+				"index" : 127,
+				"order" : 227,
 				"text" : "<small>Higher = only strong beats light triangles.<br>Default value = 1.3</small>",
 				"type" : "text",
 				"value" : false
@@ -928,8 +951,8 @@
 			"hinttrianglescolor" : 
 			{
 				"condition" : "trianglesshow.value == true && trianglescolorsource.value == 'custom'",
-				"index" : 109,
-				"order" : 209,
+				"index" : 111,
+				"order" : 211,
 				"text" : "<small>Used when the color is “My color”.<br>Default value = blue</small><hr width=\"260\">",
 				"type" : "text",
 				"value" : false
@@ -937,8 +960,8 @@
 			"hinttrianglescolorsource" : 
 			{
 				"condition" : "trianglesshow.value == true",
-				"index" : 107,
-				"order" : 207,
+				"index" : 109,
+				"order" : 209,
 				"text" : "<small>Your own color, or a color taken from the album cover.<br>Default value = Album: main color</small><hr width=\"260\">",
 				"type" : "text",
 				"value" : false
@@ -946,8 +969,8 @@
 			"hinttrianglesfadeinduration" : 
 			{
 				"condition" : "trianglesshow.value == true",
-				"index" : 115,
-				"order" : 215,
+				"index" : 117,
+				"order" : 217,
 				"text" : "<small>How long they take to light up.<br>Default value = 0.1</small><hr width=\"260\">",
 				"type" : "text",
 				"value" : false
@@ -955,8 +978,8 @@
 			"hinttrianglesfadeoutduration" : 
 			{
 				"condition" : "trianglesshow.value == true",
-				"index" : 117,
-				"order" : 217,
+				"index" : 119,
+				"order" : 219,
 				"text" : "<small>How long they take to go dark.<br>Default value = 1.5</small><hr width=\"260\">",
 				"type" : "text",
 				"value" : false
@@ -964,8 +987,8 @@
 			"hinttrianglesglowstrength" : 
 			{
 				"condition" : "trianglesshow.value == true",
-				"index" : 113,
-				"order" : 213,
+				"index" : 115,
+				"order" : 215,
 				"text" : "<small>How bright they get. Above 1 they turn white.<br>Default value = 0.2</small><hr width=\"260\">",
 				"type" : "text",
 				"value" : false
@@ -973,8 +996,8 @@
 			"hinttrianglesopacity" : 
 			{
 				"condition" : "trianglesshow.value == true",
-				"index" : 103,
-				"order" : 203,
+				"index" : 105,
+				"order" : 205,
 				"text" : "<small>Lower = more of the layers below show through.<br>Default value = 0.5</small><hr width=\"260\">",
 				"type" : "text",
 				"value" : false
@@ -982,8 +1005,8 @@
 			"hinttrianglesrangeend" : 
 			{
 				"condition" : "trianglesshow.value == true",
-				"index" : 123,
-				"order" : 223,
+				"index" : 125,
+				"order" : 225,
 				"text" : "<small>64 channels (0–63)<br>63 = highest treble<br>Default value = 9</small><hr width=\"260\">",
 				"type" : "text",
 				"value" : false
@@ -991,8 +1014,8 @@
 			"hinttrianglesrangestart" : 
 			{
 				"condition" : "trianglesshow.value == true",
-				"index" : 121,
-				"order" : 221,
+				"index" : 123,
+				"order" : 223,
 				"text" : "<small>64 channels (0–63)<br>0 = deepest bass<br>Default value = 0</small><hr width=\"260\">",
 				"type" : "text",
 				"value" : false
@@ -1000,8 +1023,8 @@
 			"hinttrianglesrows" : 
 			{
 				"condition" : "trianglesshow.value == true",
-				"index" : 105,
-				"order" : 205,
+				"index" : 107,
+				"order" : 207,
 				"text" : "<small>More rows = smaller triangles.<br>Default value = 6</small><hr width=\"260\">",
 				"type" : "text",
 				"value" : false
@@ -1009,8 +1032,8 @@
 			"hinttrianglesshow" : 
 			{
 				"condition" : "",
-				"index" : 101,
-				"order" : 201,
+				"index" : 103,
+				"order" : 203,
 				"text" : "<small>Turn off to hide the triangles.<br>Default value = On</small><hr width=\"260\">",
 				"type" : "text",
 				"value" : false
@@ -1018,8 +1041,8 @@
 			"hinttrianglesvariation" : 
 			{
 				"condition" : "trianglesshow.value == true",
-				"index" : 119,
-				"order" : 219,
+				"index" : 121,
+				"order" : 221,
 				"text" : "<small>Shade difference between triangles. 0 = all the same.<br>Default value = 0.2</small><hr width=\"260\">",
 				"type" : "text",
 				"value" : false
@@ -1108,8 +1131,8 @@
 			"labeltriangles" : 
 			{
 				"condition" : "",
-				"index" : 99,
-				"order" : 199,
+				"index" : 101,
+				"order" : 201,
 				"text" : "<small>A grid of triangles in one color. On each beat of the music, a few random triangles light up and fade away.</small>",
 				"type" : "text",
 				"value" : false
@@ -1279,8 +1302,8 @@
 			"triangles" : 
 			{
 				"condition" : "",
-				"index" : 98,
-				"order" : 198,
+				"index" : 100,
+				"order" : 200,
 				"text" : "🔺 Triangles",
 				"type" : "group",
 				"value" : ""
@@ -1289,10 +1312,10 @@
 			{
 				"condition" : "trianglesshow.value == true",
 				"fraction" : true,
-				"index" : 110,
+				"index" : 112,
 				"max" : 1,
 				"min" : 0,
-				"order" : 210,
+				"order" : 212,
 				"precision" : 2,
 				"step" : 0.01,
 				"text" : "Triangles per beat",
@@ -1303,10 +1326,10 @@
 			{
 				"condition" : "trianglesshow.value == true",
 				"fraction" : true,
-				"index" : 124,
+				"index" : 126,
 				"max" : 3,
 				"min" : 1,
-				"order" : 224,
+				"order" : 226,
 				"precision" : 2,
 				"step" : 0.05,
 				"text" : "Beat threshold",
@@ -1316,8 +1339,8 @@
 			"trianglescolor" : 
 			{
 				"condition" : "trianglesshow.value == true && trianglescolorsource.value == 'custom'",
-				"index" : 108,
-				"order" : 208,
+				"index" : 110,
+				"order" : 210,
 				"text" : "Pick a color",
 				"type" : "color",
 				"value" : "0.2 0.4 1"
@@ -1325,7 +1348,7 @@
 			"trianglescolorsource" : 
 			{
 				"condition" : "trianglesshow.value == true",
-				"index" : 106,
+				"index" : 108,
 				"options" : 
 				[
 					{
@@ -1353,7 +1376,7 @@
 						"value" : "highcontrast"
 					}
 				],
-				"order" : 206,
+				"order" : 208,
 				"text" : "Color",
 				"type" : "combo",
 				"value" : "primary"
@@ -1362,10 +1385,10 @@
 			{
 				"condition" : "trianglesshow.value == true",
 				"fraction" : true,
-				"index" : 114,
+				"index" : 116,
 				"max" : 1,
 				"min" : 0,
-				"order" : 214,
+				"order" : 216,
 				"precision" : 2,
 				"step" : 0.05,
 				"text" : "Fade in (seconds)",
@@ -1376,10 +1399,10 @@
 			{
 				"condition" : "trianglesshow.value == true",
 				"fraction" : true,
-				"index" : 116,
+				"index" : 118,
 				"max" : 5,
 				"min" : 0.1,
-				"order" : 216,
+				"order" : 218,
 				"precision" : 1,
 				"step" : 0.1,
 				"text" : "Fade out (seconds)",
@@ -1390,10 +1413,10 @@
 			{
 				"condition" : "trianglesshow.value == true",
 				"fraction" : true,
-				"index" : 112,
+				"index" : 114,
 				"max" : 2,
 				"min" : 0,
-				"order" : 212,
+				"order" : 214,
 				"precision" : 2,
 				"step" : 0.05,
 				"text" : "Glow strength",
@@ -1404,10 +1427,10 @@
 			{
 				"condition" : "trianglesshow.value == true",
 				"fraction" : true,
-				"index" : 102,
+				"index" : 104,
 				"max" : 1,
 				"min" : 0,
-				"order" : 202,
+				"order" : 204,
 				"precision" : 2,
 				"step" : 0.01,
 				"text" : "Opacity",
@@ -1418,10 +1441,10 @@
 			{
 				"condition" : "trianglesshow.value == true",
 				"fraction" : false,
-				"index" : 122,
+				"index" : 124,
 				"max" : 63,
 				"min" : 0,
-				"order" : 222,
+				"order" : 224,
 				"step" : 1,
 				"text" : "Reaction range end",
 				"type" : "slider",
@@ -1431,10 +1454,10 @@
 			{
 				"condition" : "trianglesshow.value == true",
 				"fraction" : false,
-				"index" : 120,
+				"index" : 122,
 				"max" : 63,
 				"min" : 0,
-				"order" : 220,
+				"order" : 222,
 				"step" : 1,
 				"text" : "Reaction range start",
 				"type" : "slider",
@@ -1444,10 +1467,10 @@
 			{
 				"condition" : "trianglesshow.value == true",
 				"fraction" : false,
-				"index" : 104,
+				"index" : 106,
 				"max" : 20,
 				"min" : 2,
-				"order" : 204,
+				"order" : 206,
 				"step" : 1,
 				"text" : "Rows",
 				"type" : "slider",
@@ -1456,8 +1479,8 @@
 			"trianglesshow" : 
 			{
 				"condition" : "",
-				"index" : 100,
-				"order" : 200,
+				"index" : 102,
+				"order" : 202,
 				"text" : "Show triangles",
 				"type" : "bool",
 				"value" : true
@@ -1466,10 +1489,10 @@
 			{
 				"condition" : "trianglesshow.value == true",
 				"fraction" : true,
-				"index" : 118,
+				"index" : 120,
 				"max" : 1,
 				"min" : 0,
-				"order" : 218,
+				"order" : 220,
 				"precision" : 2,
 				"step" : 0.01,
 				"text" : "Texture",

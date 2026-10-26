@@ -20,7 +20,7 @@ const TRACK = "trackcardshow.value == true";
 const BARS = `${TRACK} && trackcardshowbars.value == true`;
 const DOTS = `${BARS} && audiobarsshowpeakdots.value == true`;
 const DATE = "datecardshow.value == true";
-const ALBUM = "backgroundalbumshow.value == true";
+const ALBUM = "albumspinshow.value == true";
 const TRI = "trianglesshow.value == true";
 const WEIGHT = "100 = thin, 900 = bold.";
 const ROUND = "0 = square corners, higher = rounder.";
@@ -92,15 +92,16 @@ const PANEL = [
     label("labelbackground", "<small>The background is made of layers, from bottom to top: <b>color → Album Spin → Triangles → your image</b>. This section has the bottom and the top layers; Album Spin and Triangles have their own sections. Use the opacity sliders to mix them.</small>"),
     opt("backgroundcolorsource", "Background color", "Solid color at the very bottom. Your own color, or a color taken from the album cover.", undefined, { options: COLOR_SOURCES }),
     opt("backgroundcolor", "Pick a color", "Used when the background color is “My color”.", "backgroundcolorsource.value == 'custom'"),
-    opt("backgroundcustomimage", "Your image", "An image of your own, on top of all the other layers."),
-    opt("backgroundcustomimageopacity", "Your image opacity", "Lower = more of the layers below show through."),
-    opt("backgroundbeatsensitivity", "Beat pulse", "How much your image and the Album Spin grow with the bass. 0 = off."),
+    opt("backgroundimage", "Your image", "An image of your own, on top of all the other layers."),
+    opt("backgroundimageopacity", "Your image opacity", "Lower = more of the layers below show through."),
+    opt("backgroundimagebeatsensitivity", "Your image beat pulse", "How much your image grows with the bass. 0 = off."),
 
     group("albumspin", "💿 Album Spin"),
     label("labelalbumspin", "<small>The cover of the song playing, blurred and slowly spinning behind the cards. Its color follows each song.</small>"),
-    opt("backgroundalbumshow", "Show Album Spin", "Turn off to hide the spinning cover."),
-    opt("backgroundalbumopacity", "Opacity", "Lower = more of the background color shows through.", ALBUM),
-    opt("backgroundmovementspeed", "Rotation speed", "0 = stopped, higher = faster.", ALBUM),
+    opt("albumspinshow", "Show Album Spin", "Turn off to hide the spinning cover."),
+    opt("albumspinopacity", "Opacity", "Lower = more of the background color shows through.", ALBUM),
+    opt("albumspinrotationspeed", "Rotation speed", "0 = stopped, higher = faster.", ALBUM),
+    opt("albumspinbeatsensitivity", "Beat pulse", "How much the cover grows with the bass. 0 = off.", ALBUM),
 
     group("triangles", "🔺 Triangles"),
     label("labeltriangles", "<small>A grid of triangles in one color. On each beat of the music, a few random triangles light up and fade away.</small>"),

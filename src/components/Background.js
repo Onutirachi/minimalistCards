@@ -32,7 +32,8 @@ export default class Background {
         this.source = null;
         this.loadToken = 0;
         this.customPath = null;
-        this.beatSensitivity = 0.2;
+        this.albumBeatSensitivity = 0.2;
+        this.customImageBeatSensitivity = 0.2;
         this.albumVisible = true;
         this.albumOpacity = 1;
         this.albumActive = true;
@@ -101,13 +102,16 @@ export default class Background {
     }
 
     setBeat(bass) {
-        const scale = 1 + bass * this.beatSensitivity;
-        if (this.albumActive) this.thumbnail.style.scale = scale;
-        this.customImage.style.scale = scale;
+        if (this.albumActive) this.thumbnail.style.scale = 1 + bass * this.albumBeatSensitivity;
+        this.customImage.style.scale = 1 + bass * this.customImageBeatSensitivity;
     }
 
-    setBeatSensitivity(sensitivity) {
-        this.beatSensitivity = sensitivity;
+    setAlbumBeatSensitivity(sensitivity) {
+        this.albumBeatSensitivity = sensitivity;
+    }
+
+    setCustomImageBeatSensitivity(sensitivity) {
+        this.customImageBeatSensitivity = sensitivity;
     }
 
     /** 0 stops the rotation; 1-240 maps to one turn every 240-1 seconds. */
