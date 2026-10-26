@@ -10,6 +10,17 @@ const clamp = (value, min, max) => Math.min(max, Math.max(min, value));
  * position follows it by speeding up or slowing down slightly instead of jumping, and only moves
  * backwards on a real seek (a difference above `snapThreshold`).
  */
+/**
+ * True when two timeline reports `{ position, duration, time }` (time in ms) show the track really advancing.
+ * Used while the playback state is unknown, since a paused track keeps reporting the same position.
+ */
+export function timelineAdvanced(previous, current) {
+    if (!previous || previous.duration !== current.duration) return false;
+    const elapsed = (current.time - previous.time) / 1000;
+    const advanced = current.position - previous.position;
+    return advanced >= Math.max(TIMELINE.playingEvidenceMin, elapsed * TIMELINE.playingEvidenceRate);
+}
+
 export default class TimelineClock {
     constructor() {
         this.duration = 0;

@@ -1,6 +1,6 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import TimelineClock from "../src/media/TimelineClock.js";
+import TimelineClock, { timelineAdvanced } from "../src/media/TimelineClock.js";
 
 const FRAME = 1000 / 60;
 
@@ -95,4 +95,15 @@ test("stays within [0, duration] and handles unknown durations", () => {
     const empty = new TimelineClock();
     empty.sync(5, 0, 0);
     assert.equal(empty.progress, 0);
+});
+
+test("timelineAdvanced confirms playback only when the position really moves", () => {
+    const at = (position, seconds, duration = 200) => ({ position, duration, time: seconds * 1000 });
+
+    assert.equal(timelineAdvanced(at(10, 0), at(15, 5)), true, "playing: 5 s in 5 s");
+    assert.equal(timelineAdvanced(at(10, 0), at(10, 5)), false, "paused: same position");
+    assert.equal(timelineAdvanced(at(10, 0), at(10.4, 5)), false, "paused with reporting jitter");
+    assert.equal(timelineAdvanced(at(10, 0), at(11, 1)), true, "playing, reported every second");
+    assert.equal(timelineAdvanced(at(10, 0), at(15, 5, 180)), false, "another track");
+    assert.equal(timelineAdvanced(null, at(15, 5)), false, "a single report proves nothing");
 });

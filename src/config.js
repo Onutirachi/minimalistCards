@@ -30,6 +30,9 @@ export const TIMELINE = {
     minRate: 0.5,
     maxRate: 1.5,
     maxFrameDelta: 0.25, // seconds
+    // Two timeline events prove playback when the position advanced by at least this share of the elapsed time...
+    playingEvidenceRate: 0.5,
+    playingEvidenceMin: 0.5, // ...and by at least this many seconds, so reporting jitter is not mistaken for playback
 };
 
 export const BACKGROUND = {

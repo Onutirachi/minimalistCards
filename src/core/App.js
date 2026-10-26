@@ -11,6 +11,7 @@ import Debug from "../components/Debug.js";
 import { DEBUG, DEBUG_LOG_LINES, TRIANGLES } from "../config.js";
 import { isAlbumColor, pickColor, withMinLightness } from "../utils/color.js";
 import { loadCover, saveCover } from "../media/coverCache.js";
+import { timelineAdvanced } from "../media/TimelineClock.js";
 import { applyDefaults, applySettings } from "./settings.js";
 
 /**
@@ -43,6 +44,8 @@ export default class App {
         this.track = null;
         this.thumbnail = null;
         this.playback = null;
+        this.playbackAssumed = false;
+        this.lastTimeline = null;
         this.thumbnailReceived = false;
         this.events = [];
         this.logEvent("wallpaper loaded");
@@ -192,9 +195,10 @@ export default class App {
         }
     };
 
-    applyPlayback(state) {
+    /** `advanceTimeline` is false while playback is only assumed, so a paused track's progress bar stays still. */
+    applyPlayback(state, advanceTimeline = state === "playing") {
         this.playback = state;
-        this.trackCard.setPlaying(state === "playing", performance.now());
+        this.trackCard.setPlaying(advanceTimeline, performance.now());
 
         this.background.setMediaActive(state !== "stopped");
         if (state === "stopped") {
@@ -208,12 +212,14 @@ export default class App {
 
     /**
      * Wallpaper Engine only sends playback changes, so after switching wallpapers and back a song can be playing
-     * without any playback event. Media data before the first playback event means something is playing.
+     * (or paused) without any playback event. Media data before the first playback event opens the music card,
+     * but the progress bar only moves once the timeline shows the song advancing (see onTimeline).
      */
     assumePlaying(reason) {
         if (this.playback) return;
-        this.logEvent(`playback assumed playing (${reason} before any playback event)`);
-        this.applyPlayback("playing");
+        this.logEvent(`playback assumed (${reason} before any playback event); progress bar waits for the timeline`);
+        this.playbackAssumed = true;
+        this.applyPlayback("playing", false);
     }
 
     onTrack = (track) => {
@@ -245,12 +251,22 @@ export default class App {
 
     onPlayback = (state) => {
         this.logEvent(`playback ${state}`);
+        this.playbackAssumed = false;
         this.applyPlayback(state);
     };
 
     onTimeline = ({ position, duration }) => {
+        const now = performance.now();
         this.assumePlaying("timeline");
-        this.trackCard.syncTimeline(position, duration, performance.now());
+        this.trackCard.syncTimeline(position, duration, now);
         this.debug?.timeline(position, duration);
+
+        const report = { position, duration, time: now };
+        if (this.playbackAssumed && timelineAdvanced(this.lastTimeline, report)) {
+            this.logEvent("playback confirmed by the timeline; progress bar moves");
+            this.playbackAssumed = false;
+            this.trackCard.setPlaying(true, now);
+        }
+        this.lastTimeline = report;
     };
 }
