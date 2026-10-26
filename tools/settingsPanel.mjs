@@ -22,6 +22,9 @@ const DOTS = `${BARS} && audiobarsshowpeakdots.value == true`;
 const DATE = "datecardshow.value == true";
 const ALBUM = "albumspinshow.value == true";
 const TRI = "trianglesshow.value == true";
+const MY_IMAGE = "backgroundimagesource.value == 'custom'";
+const ALBUM_IMAGE = "backgroundimagesource.value == 'album'";
+const ANY_IMAGE = `${MY_IMAGE} || ${ALBUM_IMAGE}`;
 const WEIGHT = "100 = thin, 900 = bold.";
 const ROUND = "0 = square corners, higher = rounder.";
 
@@ -32,6 +35,26 @@ const COLOR_SOURCES = [
     { label: "Album: third color", value: "tertiary" },
     { label: "Album: text color", value: "text" },
     { label: "Album: high contrast color", value: "highcontrast" },
+];
+
+const IMAGE_SOURCES = [
+    { label: "None", value: "none" },
+    { label: "My image", value: "custom" },
+    { label: "Album cover", value: "album" },
+];
+
+const IMAGE_FITS = [
+    { label: "Stretch", value: "stretch" },
+    { label: "Fill", value: "fill" },
+    { label: "Fit", value: "fit" },
+    { label: "Center", value: "center" },
+    { label: "Tile", value: "tile" },
+];
+
+const COVER_POSITIONS = [
+    { label: "Left", value: "left" },
+    { label: "Right", value: "right" },
+    { label: "Center", value: "center" },
 ];
 
 const COLOR_NAMES = { "0 0 0": "black", "1 1 1": "white", "0.2 0.4 1": "blue" };
@@ -89,12 +112,16 @@ const PANEL = [
     opt("datecardborderradius", "Corner roundness", ROUND, DATE),
 
     group("background", "🖼️ Background"),
-    label("labelbackground", "<small>The background is made of layers, from bottom to top: <b>color → Album Spin → Triangles → your image</b>. This section has the bottom and the top layers; Album Spin and Triangles have their own sections. Use the opacity sliders to mix them.</small>"),
+    label("labelbackground", "<small>The background is made of layers, from bottom to top: <b>color → Album Spin → Triangles → image</b>. This section has the bottom and the top layers; Album Spin and Triangles have their own sections. Use the opacity sliders to mix them.</small>"),
     opt("backgroundcolorsource", "Background color", "Solid color at the very bottom. Your own color, or a color taken from the album cover.", undefined, { options: COLOR_SOURCES }),
     opt("backgroundcolor", "Pick a color", "Used when the background color is “My color”.", "backgroundcolorsource.value == 'custom'"),
-    opt("backgroundimage", "Your image", "An image of your own, on top of all the other layers."),
-    opt("backgroundimageopacity", "Your image opacity", "Lower = more of the layers below show through."),
-    opt("backgroundimagebeatsensitivity", "Your image beat pulse", "How much your image grows with the bass. 0 = off."),
+    opt("backgroundimagesource", "Image", "Top layer: an image of your own, or the cover of the song playing.", undefined, { options: IMAGE_SOURCES }),
+    opt("backgroundimage", "Your image", "The image file to show.", MY_IMAGE),
+    opt("backgroundimagefit", "Image fit", "Stretch = fills the screen, may distort. Fill = fills without distorting, cuts the edges. Fit = shows the whole image. Center = original size. Tile = repeats the image.", MY_IMAGE, { options: IMAGE_FITS }),
+    opt("backgroundimagecoverposition", "Cover position", "Left and Right fade out towards the center, like the cover in the music card. Center fades a little on both sides.", ALBUM_IMAGE, { options: COVER_POSITIONS }),
+    opt("backgroundimagekeepcover", "Keep last cover", "Keeps showing the last cover when no music is playing. Off = the cover fades out.", ALBUM_IMAGE),
+    opt("backgroundimageopacity", "Image opacity", "Lower = more of the layers below show through.", ANY_IMAGE),
+    opt("backgroundimagebeatsensitivity", "Image beat pulse", "How much the image grows with the bass. 0 = off.", ANY_IMAGE),
 
     group("albumspin", "💿 Album Spin"),
     label("labelalbumspin", "<small>The cover of the song playing, blurred and slowly spinning behind the cards. Its color follows each song.</small>"),

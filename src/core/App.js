@@ -134,7 +134,10 @@ export default class App {
     };
 
     onMediaStatus = (enabled) => {
-        if (!enabled) this.trackCard.close();
+        if (!enabled) {
+            this.trackCard.close();
+            this.background.setMediaActive(false);
+        }
     };
 
     onTrack = (track) => {
@@ -156,6 +159,7 @@ export default class App {
     onPlayback = (state) => {
         this.trackCard.setPlaying(state === "playing", performance.now());
 
+        this.background.setMediaActive(state !== "stopped");
         if (state === "stopped") {
             this.trackCard.close();
         } else {

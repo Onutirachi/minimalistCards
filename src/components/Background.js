@@ -4,8 +4,9 @@ import { toCssColor, withAlpha } from "../utils/color.js";
 import { crossFade } from "../core/transitions.js";
 
 /**
- * Background layers, bottom to top: base color, rotating album cover, triangles (a slot filled by App), custom image.
- * The cover, the triangles and the custom image are optional and have their own opacity.
+ * Background layers, bottom to top: base color, rotating album cover, triangles (a slot filled by App), background image.
+ * The cover, the triangles and the background image are optional and have their own opacity.
+ * The background image is the user's file or the current album cover, docked to the left, the right or the center.
  *
  * Rotating, beat-scaled album cover:
  * The blur is baked into a small canvas once per cover, so each frame only transforms a ready texture
@@ -31,9 +32,18 @@ export default class Background {
 
         this.source = null;
         this.loadToken = 0;
-        this.customPath = null;
+        this.coverUrl = null;
+        this.mediaActive = false;
+
+        this.imageSource = "album";
+        this.customPath = "";
+        this.imageFit = "stretch";
+        this.keepLastCover = false;
+        this.coverPosition = "left";
+        this.renderedImage = null;
+        this.imageShown = false;
         this.albumBeatSensitivity = 0.2;
-        this.customImageBeatSensitivity = 0.2;
+        this.customImageBeatSensitivity = 0;
         this.albumVisible = true;
         this.albumOpacity = 1;
         this.albumActive = true;
@@ -59,6 +69,9 @@ export default class Background {
     }
 
     async setThumbnail(url) {
+        this.coverUrl = url;
+        this.updateImage();
+
         const token = ++this.loadToken;
         const image = await loadImage(url).catch(() => null);
         if (!image || token !== this.loadToken) return;
@@ -103,7 +116,7 @@ export default class Background {
 
     setBeat(bass) {
         if (this.albumActive) this.thumbnail.style.scale = 1 + bass * this.albumBeatSensitivity;
-        this.customImage.style.scale = 1 + bass * this.customImageBeatSensitivity;
+        if (this.imageShown) this.customImage.style.scale = 1 + bass * this.customImageBeatSensitivity;
     }
 
     setAlbumBeatSensitivity(sensitivity) {
@@ -119,13 +132,60 @@ export default class Background {
         this.rotation.updatePlaybackRate(speed > 0 ? 1 / (241 - speed) : 0);
     }
 
+    /** "none", "custom" (the user's file) or "album" (the current cover). */
+    setImageSource(source) {
+        this.imageSource = source;
+        this.updateImage();
+    }
+
     setCustomImage(path) {
-        if (path === this.customPath) return;
         this.customPath = path;
+        this.updateImage();
+    }
+
+    /** How the user's file fills the screen: "stretch", "fill", "fit", "center" or "tile". */
+    setImageFit(fit) {
+        this.imageFit = fit;
+        this.updateImage();
+    }
+
+    /** Where the album cover image sits: "left", "right" or "center". */
+    setCoverPosition(position) {
+        this.coverPosition = position;
+        this.updateImage();
+    }
+
+    setKeepLastCover(keep) {
+        this.keepLastCover = keep;
+        this.updateImage();
+    }
+
+    /** False when no media is playing; the album cover image then fades out unless the last cover is kept. */
+    setMediaActive(active) {
+        this.mediaActive = active;
+        this.updateImage();
+    }
+
+    /** Cross-fades to the image and layout the settings describe, only when one of them changed. */
+    updateImage() {
+        const url = this.imageUrl();
+        const layout = this.imageSource === "album" ? `album-${this.coverPosition}` : this.imageFit;
+        const next = url ? `${layout} ${url}` : "";
+        if (next === this.renderedImage) return;
+        this.renderedImage = next;
 
         crossFade(this.customImage, () => {
-            this.customImage.style.backgroundImage = path ? `url("file:///${path.replace(/"/g, '\\"')}")` : "none";
+            this.customImage.dataset.layout = layout;
+            this.customImage.style.backgroundImage = url ? `url("${url.replace(/"/g, '\\"')}")` : "none";
+            this.imageShown = Boolean(url);
+            if (!url) this.customImage.style.scale = 1;
         });
+    }
+
+    imageUrl() {
+        if (this.imageSource === "custom") return this.customPath ? `file:///${this.customPath}` : null;
+        if (this.imageSource === "album" && (this.mediaActive || this.keepLastCover)) return this.coverUrl;
+        return null;
     }
 
     setCustomImageOpacity(opacity) {

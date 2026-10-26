@@ -53,9 +53,9 @@ const TRIANGLE = new Float32Array([0.5, 0, 0, 1, 1, 1]);
 export default class Triangles {
     constructor(parent) {
         this.canvas = el("canvas", "triangles", parent);
-        this.options = { rows: 6, sensitivity: 0.25, beatThreshold: 1.3, rangeStart: 0, rangeEnd: 9, fadeInDuration: 0.1, fadeOutDuration: 1.5, glowStrength: 0.2, variation: 0.2 };
+        this.options = { rows: 6, sensitivity: 0.35, beatThreshold: 1.3, rangeStart: 0, rangeEnd: 9, fadeInDuration: 0.1, fadeOutDuration: 1.5, glowStrength: 0.2, variation: 0.2 };
         this.visible = true;
-        this.opacity = 0.5;
+        this.opacity = 0.33;
 
         this.color = [1, 1, 1];
         this.targetColor = [1, 1, 1];
