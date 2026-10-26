@@ -24,3 +24,4 @@ Uma spec descreve o comportamento **atual**. Se o comportamento mudar, a spec mu
 | [Timeline](specs/20261024-110521-timeline.md) | Interpolação da posição da música |
 | [Triângulos](specs/20261025-172350-triangles.md) | Grade de triângulos reativa ao grave, fonte de cor |
 | [Painel de configurações](specs/20261025-191730-settings-panel.md) | Seções, rótulos e dicas no painel do WE |
+| [Cores](specs/20261026-125745-colors.md) | Cor do usuário e cor do álbum por elemento, comportamento na pausa |

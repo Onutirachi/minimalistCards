@@ -2,7 +2,7 @@ import { test } from "node:test";
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import { SETTINGS, applyDefaults, applySettings } from "../src/core/settings.js";
-import { normalizeThumbnail, normalizeTrack, toPlaybackState } from "../src/core/wallpaperBridge.js";
+import { isEmptyThumbnail, normalizeThumbnail, normalizeTrack, toPlaybackState } from "../src/core/wallpaperBridge.js";
 
 const project = JSON.parse(readFileSync(new URL("../project.json", import.meta.url), "utf8").replace(/^﻿/, ""));
 const properties = project.general.properties;
@@ -65,6 +65,13 @@ test("thumbnails with identical colors get readable fallbacks", () => {
 
     const different = normalizeThumbnail({ primaryColor: "#000000", textColor: "#ffffff" });
     assert.equal(different.primaryColor, "#000000");
+});
+
+test("covers without an image are recognized as empty", () => {
+    assert.equal(isEmptyThumbnail({ thumbnail: "", primaryColor: "", textColor: "" }), true);
+    assert.equal(isEmptyThumbnail({ thumbnail: "data:image/png;base64," }), true);
+    assert.equal(isEmptyThumbnail({}), true);
+    assert.equal(isEmptyThumbnail({ thumbnail: `data:image/png;base64,${"A".repeat(400)}` }), false);
 });
 
 test("tracks without a title are called Untitled", () => {

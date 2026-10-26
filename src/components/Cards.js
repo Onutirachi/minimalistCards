@@ -1,7 +1,6 @@
 import { el } from "../utils/dom.js";
-import { withAlpha } from "../utils/color.js";
 
-/** Positions, scales and colors the column of cards. */
+/** Positions and scales the column of cards. */
 export default class Cards {
     constructor(parent) {
         this.container = el("div", "cards", parent);
@@ -14,12 +13,6 @@ export default class Cards {
 
     setScale(scale) {
         this.container.style.setProperty("--cards-scale", scale);
-    }
-
-    setColors({ primaryColor, textColor }) {
-        this.container.style.setProperty("--card-background", primaryColor);
-        this.container.style.setProperty("--card-text", textColor);
-        this.container.style.setProperty("--card-text-muted", withAlpha(textColor, 0x50 / 255));
     }
 
     show() {

@@ -1,4 +1,4 @@
-import { BACKGROUND } from "../config.js";
+import { BACKGROUND, FADE_DURATION } from "../config.js";
 import { el } from "../utils/dom.js";
 import { toCssColor, withAlpha } from "../utils/color.js";
 import { crossFade } from "../core/transitions.js";
@@ -34,6 +34,11 @@ export default class Background {
         this.loadToken = 0;
         this.coverUrl = null;
         this.mediaActive = false;
+        this.mediaPaused = false;
+        this.hideCoverWhenPaused = false;
+        this.hideAlbumWhenPaused = false;
+        this.keepLastAlbum = false;
+        this.albumHideTimer = 0;
 
         this.imageSource = "album";
         this.customPath = "";
@@ -99,16 +104,51 @@ export default class Background {
         this.updateAlbum();
     }
 
-    /** A hidden cover costs nothing: no rotation, no beat scaling, and its blur waits until it is shown again. */
-    updateAlbum() {
-        this.albumActive = this.albumVisible && this.albumOpacity > 0;
-        this.album.hidden = !this.albumActive;
-        this.album.style.opacity = this.albumOpacity;
+    setHideAlbumWhenPaused(hide) {
+        this.hideAlbumWhenPaused = hide;
+        this.updateAlbum();
+    }
 
-        if (!this.albumActive) {
+    setKeepLastAlbum(keep) {
+        this.keepLastAlbum = keep;
+        this.updateAlbum();
+    }
+
+    /**
+     * A hidden cover costs nothing: no rotation, no beat scaling, and its blur waits until it is shown again.
+     * Hiding it because of the music (paused, or stopped without "Keep last cover") fades it out first
+     * (CSS opacity transition), then stops it.
+     */
+    updateAlbum() {
+        const enabled = this.albumVisible && this.albumOpacity > 0;
+        const pausedOut = this.mediaPaused && this.hideAlbumWhenPaused;
+        const stoppedOut = !this.mediaActive && !this.keepLastAlbum;
+        const hiddenByMedia = enabled && (pausedOut || stoppedOut);
+        this.albumActive = enabled && !hiddenByMedia;
+        clearTimeout(this.albumHideTimer);
+
+        if (!enabled) {
+            this.album.hidden = true;
             this.rotation.pause();
             return;
         }
+
+        if (hiddenByMedia) {
+            this.album.style.opacity = 0;
+            this.albumHideTimer = setTimeout(() => {
+                this.album.hidden = true;
+                this.rotation.pause();
+            }, FADE_DURATION);
+            return;
+        }
+
+        // Coming back from hidden: start at 0 so the opacity transition fades it in
+        if (this.album.hidden) {
+            this.album.style.opacity = 0;
+            this.album.hidden = false;
+            void this.album.offsetWidth;
+        }
+        this.album.style.opacity = this.albumOpacity;
         this.rotation.play();
         if (this.blurPending) this.redraw();
     }
@@ -166,6 +206,18 @@ export default class Background {
     /** False when no media is playing; the album cover image then fades out unless the last cover is kept. */
     setMediaActive(active) {
         this.mediaActive = active;
+        this.updateAlbum();
+        this.updateImage();
+    }
+
+    setMediaPaused(paused) {
+        this.mediaPaused = paused;
+        this.updateAlbum();
+        this.updateImage();
+    }
+
+    setHideCoverWhenPaused(hide) {
+        this.hideCoverWhenPaused = hide;
         this.updateImage();
     }
 
@@ -187,7 +239,8 @@ export default class Background {
 
     imageUrl() {
         if (this.imageSource === "custom") return this.customPath ? `file:///${this.customPath}` : null;
-        if (this.imageSource === "album" && (this.mediaActive || this.keepLastCover)) return this.coverUrl;
+        if (this.imageSource !== "album" || (this.mediaPaused && this.hideCoverWhenPaused)) return null;
+        if (this.mediaActive || this.keepLastCover) return this.coverUrl;
         return null;
     }
 

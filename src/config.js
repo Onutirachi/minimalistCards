@@ -15,6 +15,13 @@ export const AUDIO = {
     bands: { bass: [0, 20], mid: [20, 40], treble: [40, 64] },
 };
 
+export const AUTO_VOLUME = {
+    windowFrames: 90, // the reference peak is the loudest sample of the last 90 audio frames (about 3 s)
+    gainSmoothing: 0.08, // share of the way to a higher gain covered per audio frame (about 1 s); lower gains apply at once
+    maxGain: 100, // quiet music is amplified at most this much, so noise never fills the bars
+    silence: 0.0005, // below this peak nothing is amplified (digital silence arrives as 0)
+};
+
 export const AUDIO_BARS = {
     maxQuantity: 64,
     smoothing: 0.4, // weight of the newest sample

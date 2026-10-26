@@ -6,6 +6,19 @@ const number = (fallback, min, max) => ({ fallback, min, max, parse: (value) => 
 const text = (fallback) => ({ fallback, parse: (value) => toText(value, fallback) });
 const color = (fallback) => ({ fallback, parse: (value) => (parseColor(value) ? value : fallback) });
 
+const DARK_GRAY = "0.06667 0.06667 0.06667"; // #111111
+
+/** The color settings of a card (docs/specs/20261026-125745-colors.md); `keepLast` only where the card stays visible without music. */
+const cardColors = (card, { keepLast = true } = {}) => ({
+    [`${card}color`]: { ...color(DARK_GRAY), apply: (ui, v) => ui.setColor(card, "color", v) },
+    [`${card}coloralbum`]: { ...text("primary"), apply: (ui, v) => ui.setColor(card, "album", v) },
+    [`${card}colorkeep`]: { ...bool(false), apply: (ui, v) => ui.setColor(card, "keep", v) },
+    ...(keepLast && { [`${card}colorkeeplast`]: { ...bool(false), apply: (ui, v) => ui.setColor(card, "keepLast", v) } }),
+    [`${card}textmode`]: { ...text("album"), apply: (ui, v) => ui.setColor(card, "textMode", v) },
+    [`${card}textcolor`]: { ...color("1 1 1"), apply: (ui, v) => ui.setColor(card, "textColor", v) },
+    [`${card}textalbum`]: { ...text("text"), apply: (ui, v) => ui.setColor(card, "textAlbum", v) },
+});
+
 /**
  * Every user property from project.json: default, parser and how it is applied to the UI.
  * Keys must match project.json exactly (including the legacy "artits" typo), otherwise users lose saved settings.
@@ -17,6 +30,7 @@ export const SETTINGS = {
     cardsverticalposition: { ...number(50, 0, 100), apply: (ui, v) => ui.cards.setPosition("y", v) },
 
     clockcardshow: { ...bool(true), apply: (ui, v) => ui.clockCard.setVisible(v) },
+    ...cardColors("clockcard"),
     clockcardshowseconds: { ...bool(true), apply: (ui, v) => ui.clockCard.setShowSeconds(v) },
     clockcardformat12h: { ...bool(false), apply: (ui, v) => ui.clockCard.setFormat12h(v) },
     clockcardborderradius: { ...number(10, 0, 40), apply: (ui, v) => ui.clockCard.setBorderRadius(v) },
@@ -24,6 +38,8 @@ export const SETTINGS = {
     clockcardfontweight: { ...number(600, 100, 900), apply: (ui, v) => ui.clockCard.setFontWeight("time", v) },
 
     trackcardshow: { ...bool(true), apply: (ui, v) => ui.setTrackCardVisible(v) },
+    trackcardhideonpause: { ...bool(false), apply: (ui, v) => ui.setTrackCardHideOnPause(v) },
+    ...cardColors("trackcard", { keepLast: false }),
     trackcardborderradius: { ...number(10, 0, 40), apply: (ui, v) => ui.trackCard.setBorderRadius(v) },
     trackcardtitlefontfamily: { ...text("Unageo"), apply: (ui, v) => ui.trackCard.setFont("title", v) },
     trackcardtitlefontweight: { ...number(600, 100, 900), apply: (ui, v) => ui.trackCard.setFontWeight("title", v) },
@@ -44,15 +60,19 @@ export const SETTINGS = {
     audiobarspeakdotsgap: { ...number(4, 0, 10), apply: (ui, v) => ui.audioBars.configure({ peakDotsGap: v }) },
 
     datecardshow: { ...bool(true), apply: (ui, v) => ui.dateCard.setVisible(v) },
+    ...cardColors("datecard"),
     datecardborderradius: { ...number(10, 0, 40), apply: (ui, v) => ui.dateCard.setBorderRadius(v) },
     datecardweekdayfontfamily: { ...text("Unageo"), apply: (ui, v) => ui.dateCard.setFont("weekday", v) },
     datecardweekdayfontweight: { ...number(600, 100, 900), apply: (ui, v) => ui.dateCard.setFontWeight("weekday", v) },
     datecardfulldatefontfamily: { ...text("Unageo"), apply: (ui, v) => ui.dateCard.setFont("fullDate", v) },
     datecardfulldatefontweight: { ...number(300, 100, 900), apply: (ui, v) => ui.dateCard.setFontWeight("fullDate", v) },
 
-    backgroundcolorsource: { ...text("primary"), apply: (ui, v) => ui.setColorSource("background", v) },
-    backgroundcolor: { ...color("0 0 0"), apply: (ui, v) => ui.setCustomColor("background", v) },
+    backgroundcolor: { ...color("0 0 0"), apply: (ui, v) => ui.setColor("background", "color", v) },
+    backgroundcoloralbum: { ...text("primary"), apply: (ui, v) => ui.setColor("background", "album", v) },
+    backgroundcolorkeep: { ...bool(false), apply: (ui, v) => ui.setColor("background", "keep", v) },
     albumspinshow: { ...bool(true), apply: (ui, v) => ui.background.setAlbumVisible(v) },
+    albumspinkeepcover: { ...bool(false), apply: (ui, v) => ui.background.setKeepLastAlbum(v) },
+    albumspinhideonpause: { ...bool(false), apply: (ui, v) => ui.background.setHideAlbumWhenPaused(v) },
     albumspinopacity: { ...number(1, 0, 1), apply: (ui, v) => ui.background.setAlbumOpacity(v) },
     albumspinbeatsensitivity: { ...number(0.2, 0, 1), apply: (ui, v) => ui.background.setAlbumBeatSensitivity(v) },
     albumspinrotationspeed: { ...number(120, 0, 240), apply: (ui, v) => ui.background.setMovementSpeed(v) },
@@ -60,6 +80,7 @@ export const SETTINGS = {
     backgroundimage: { ...text(""), apply: (ui, v) => ui.background.setCustomImage(v) },
     backgroundimagefit: { ...text("stretch"), apply: (ui, v) => ui.background.setImageFit(v) },
     backgroundimagecoverposition: { ...text("left"), apply: (ui, v) => ui.background.setCoverPosition(v) },
+    backgroundimagehideonpause: { ...bool(false), apply: (ui, v) => ui.background.setHideCoverWhenPaused(v) },
     backgroundimagekeepcover: { ...bool(false), apply: (ui, v) => ui.background.setKeepLastCover(v) },
     backgroundimageopacity: { ...number(0.15, 0, 1), apply: (ui, v) => ui.background.setCustomImageOpacity(v) },
     backgroundimagebeatsensitivity: { ...number(0, 0, 1), apply: (ui, v) => ui.background.setCustomImageBeatSensitivity(v) },
@@ -67,8 +88,9 @@ export const SETTINGS = {
     trianglesshow: { ...bool(true), apply: (ui, v) => ui.triangles.setVisible(v) },
     trianglesopacity: { ...number(0.33, 0, 1), apply: (ui, v) => ui.triangles.setOpacity(v) },
     trianglesrows: { ...number(6, 2, 20), apply: (ui, v) => ui.triangles.configure({ rows: Math.round(v) }) },
-    trianglescolorsource: { ...text("primary"), apply: (ui, v) => ui.setColorSource("triangles", v) },
-    trianglescolor: { ...color("0.2 0.4 1"), apply: (ui, v) => ui.setCustomColor("triangles", v) },
+    trianglescolor: { ...color(DARK_GRAY), apply: (ui, v) => ui.setColor("triangles", "color", v) },
+    trianglescoloralbum: { ...text("primary"), apply: (ui, v) => ui.setColor("triangles", "album", v) },
+    trianglescolorkeep: { ...bool(false), apply: (ui, v) => ui.setColor("triangles", "keep", v) },
     trianglesbeatsensitivity: { ...number(0.35, 0, 1), apply: (ui, v) => ui.triangles.configure({ sensitivity: v }) },
     trianglesrangestart: { ...number(0, 0, 63), apply: (ui, v) => ui.triangles.configure({ rangeStart: Math.round(v) }) },
     trianglesrangeend: { ...number(9, 0, 63), apply: (ui, v) => ui.triangles.configure({ rangeEnd: Math.round(v) }) },
@@ -77,6 +99,9 @@ export const SETTINGS = {
     trianglesfadeoutduration: { ...number(1.5, 0.1, 5), apply: (ui, v) => ui.triangles.configure({ fadeOutDuration: v }) },
     trianglesglowstrength: { ...number(0.2, 0, 2), apply: (ui, v) => ui.triangles.configure({ glowStrength: v }) },
     trianglesvariation: { ...number(0.2, 0, 1), apply: (ui, v) => ui.triangles.configure({ variation: v }) },
+
+    audioautovolume: { ...bool(true), apply: (ui, v) => ui.analyzer.setAutoVolume(v) },
+    playbackmycolorswhenpaused: { ...bool(false), apply: (ui, v) => ui.setMyColorsWhenPaused(v) },
 
     debugshow: { ...bool(false), apply: (ui, v) => ui.setDebugVisible(v) },
 };

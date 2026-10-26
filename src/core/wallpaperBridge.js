@@ -38,6 +38,15 @@ export function normalizeThumbnail(event) {
     };
 }
 
+/**
+ * True for the cover Wallpaper Engine sends when the player closes: no image (or a data URL without data).
+ * A real PNG cover is always far longer than this.
+ */
+export function isEmptyThumbnail(event) {
+    const image = typeof event?.thumbnail === "string" ? event.thumbnail : "";
+    return image.length < 100;
+}
+
 export function normalizeTimeline(event) {
     return { position: Number(event.position) || 0, duration: Number(event.duration) || 0 };
 }

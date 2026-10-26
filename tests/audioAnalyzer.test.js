@@ -1,6 +1,7 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
 import AudioAnalyzer from "../src/audio/AudioAnalyzer.js";
+import { AUTO_VOLUME } from "../src/config.js";
 
 /** Builds a Wallpaper Engine audio array: 64 left samples followed by 64 right samples. */
 function audioArray(left, right = left) {
@@ -43,4 +44,42 @@ test("handles short arrays without NaN", () => {
     const out = new Float32Array(9);
     analyzer.channels(out, 9);
     assert.ok(out.every(Number.isFinite));
+});
+
+test("auto volume is off by default", () => {
+    const analyzer = new AudioAnalyzer();
+    analyzer.update(audioArray(() => 0.1));
+    assert.ok(Math.abs(analyzer.bass - 0.1) < 1e-6);
+});
+
+test("auto volume amplifies quiet music up to the recent peak, within its limits", () => {
+    const analyzer = new AudioAnalyzer();
+    analyzer.setAutoVolume(true);
+
+    analyzer.update(audioArray((i) => (i === 0 ? 0.25 : 0.1)));
+    assert.ok(Math.abs(analyzer.mono[0] - 1) < 1e-6, "the loudest sample reaches 1");
+    assert.ok(Math.abs(analyzer.mono[1] - 0.4) < 1e-6, "the rest keeps its proportion");
+
+    const veryQuiet = new AudioAnalyzer();
+    veryQuiet.setAutoVolume(true);
+    veryQuiet.update(audioArray(() => 0.01));
+    assert.ok(Math.abs(veryQuiet.mono[0] - 0.01 * AUTO_VOLUME.maxGain) < 1e-6, "gain is capped");
+
+    const silent = new AudioAnalyzer();
+    silent.setAutoVolume(true);
+    silent.update(audioArray(() => AUTO_VOLUME.silence / 2));
+    assert.ok(Math.abs(silent.mono[0] - AUTO_VOLUME.silence / 2) < 1e-9, "silence is not amplified");
+
+    const loud = new AudioAnalyzer();
+    loud.setAutoVolume(true);
+    loud.update(audioArray(() => 1.5));
+    assert.ok(Math.abs(loud.mono[0] - 1.5) < 1e-6, "loud music is never turned down");
+});
+
+test("auto volume keeps a recent loud peak, so a quieter moment stays quieter", () => {
+    const analyzer = new AudioAnalyzer();
+    analyzer.setAutoVolume(true);
+    analyzer.update(audioArray(() => 0.5));
+    analyzer.update(audioArray(() => 0.25));
+    assert.ok(analyzer.mono[0] < 0.6, "right after a loud frame, a quieter one is not pushed back to 1");
 });

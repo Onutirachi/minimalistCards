@@ -1,6 +1,6 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { isAlbumColor, parseColor, pickColor, toCssColor, toGlColor, withAlpha, withMinLightness } from "../src/utils/color.js";
+import { albumColor, contrastColor, layerColor, parseColor, textColor, toCssColor, toGlColor, withAlpha, withMinLightness } from "../src/utils/color.js";
 
 test("parseColor reads hex in every length", () => {
     assert.deepEqual(parseColor("#ffffff"), [255, 255, 255]);
@@ -43,25 +43,39 @@ test("toCssColor turns any parsed color into rgb()", () => {
 
 const album = { primaryColor: "#102030", secondaryColor: "#405060", tertiaryColor: "#708090", textColor: "#ffffff", highContrastColor: "#ff0000" };
 
-test("pickColor picks the custom color or the matching album color", () => {
-    assert.equal(pickColor("custom", "0 0 0", album), "0 0 0");
-    assert.equal(pickColor("primary", "0 0 0", album), "#102030");
-    assert.equal(pickColor("secondary", "0 0 0", album), "#405060");
-    assert.equal(pickColor("tertiary", "0 0 0", album), "#708090");
-    assert.equal(pickColor("text", "0 0 0", album), "#ffffff");
-    assert.equal(pickColor("highcontrast", "0 0 0", album), "#ff0000");
-    assert.equal(pickColor("unknown", "0 0 0", album), "0 0 0");
+test("albumColor reads each album color and returns null when missing", () => {
+    assert.equal(albumColor("primary", album), "#102030");
+    assert.equal(albumColor("secondary", album), "#405060");
+    assert.equal(albumColor("tertiary", album), "#708090");
+    assert.equal(albumColor("text", album), "#ffffff");
+    assert.equal(albumColor("highcontrast", album), "#ff0000");
+    assert.equal(albumColor("primary", null), null);
+    assert.equal(albumColor("secondary", { primaryColor: "#102030" }), null);
+    assert.equal(albumColor("unknown", album), null);
 });
 
-test("pickColor falls back when there is no cover or the color is missing", () => {
-    assert.equal(pickColor("primary", "0 0 0", null), "#111111");
-    assert.equal(pickColor("highcontrast", "0 0 0", null), "#ffffff");
-    assert.equal(pickColor("secondary", "0 0 0", { primaryColor: "#102030" }), "#111111");
+test("layerColor uses the album color only while album colors are active and not kept", () => {
+    const layer = { color: "0 0 0", album: "secondary", keep: false };
+    assert.deepEqual(layerColor(layer, album), { color: "#405060", fromAlbum: true });
+    assert.deepEqual(layerColor(layer, null), { color: "0 0 0", fromAlbum: false });
+    assert.deepEqual(layerColor({ ...layer, keep: true }, album), { color: "0 0 0", fromAlbum: false });
+    assert.deepEqual(layerColor(layer, { primaryColor: "#102030" }), { color: "0 0 0", fromAlbum: false });
 });
 
-test("isAlbumColor tells album sources from custom", () => {
-    assert.equal(isAlbumColor("primary"), true);
-    assert.equal(isAlbumColor("custom"), false);
+test("textColor follows its mode and falls back to the best contrast", () => {
+    assert.equal(textColor({ mode: "auto" }, "#ffffff", album), "#000000");
+    assert.equal(textColor({ mode: "auto" }, "#111111", album), "#ffffff");
+    assert.equal(textColor({ mode: "custom", color: "1 0 0" }, "#111111", album), "1 0 0");
+    assert.equal(textColor({ mode: "album", album: "highcontrast" }, "#111111", album), "#ff0000");
+    assert.equal(textColor({ mode: "album", album: "highcontrast" }, "#eeeeee", null), "#000000");
+});
+
+test("contrastColor picks black on light and white on dark backgrounds", () => {
+    assert.equal(contrastColor("#ffffff"), "#000000");
+    assert.equal(contrastColor("#000000"), "#ffffff");
+    assert.equal(contrastColor("#ffcc00"), "#000000");
+    assert.equal(contrastColor("#1d3557"), "#ffffff");
+    assert.equal(contrastColor("0.5 0.5 0.5"), "#000000");
 });
 
 test("withMinLightness raises dark colors and keeps the hue", () => {

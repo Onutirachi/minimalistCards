@@ -9,8 +9,8 @@
 			"albumspin" : 
 			{
 				"condition" : "",
-				"index" : 99,
-				"order" : 199,
+				"index" : 145,
+				"order" : 245,
 				"text" : "💿 Album Spin",
 				"type" : "group",
 				"value" : ""
@@ -19,24 +19,42 @@
 			{
 				"condition" : "albumspinshow.value == true",
 				"fraction" : true,
-				"index" : 107,
+				"index" : 157,
 				"max" : 1,
 				"min" : 0,
-				"order" : 207,
+				"order" : 257,
 				"precision" : 2,
 				"step" : 0.1,
 				"text" : "Beat pulse",
 				"type" : "slider",
 				"value" : 0.2
 			},
+			"albumspinhideonpause" : 
+			{
+				"condition" : "albumspinshow.value == true",
+				"index" : 151,
+				"order" : 251,
+				"text" : "Hide when paused",
+				"type" : "bool",
+				"value" : false
+			},
+			"albumspinkeepcover" : 
+			{
+				"condition" : "albumspinshow.value == true",
+				"index" : 149,
+				"order" : 249,
+				"text" : "Keep last cover",
+				"type" : "bool",
+				"value" : false
+			},
 			"albumspinopacity" : 
 			{
 				"condition" : "albumspinshow.value == true",
 				"fraction" : true,
-				"index" : 103,
+				"index" : 153,
 				"max" : 1,
 				"min" : 0,
-				"order" : 203,
+				"order" : 253,
 				"precision" : 2,
 				"step" : 0.01,
 				"text" : "Opacity",
@@ -47,10 +65,10 @@
 			{
 				"condition" : "albumspinshow.value == true",
 				"fraction" : true,
-				"index" : 105,
+				"index" : 155,
 				"max" : 240,
 				"min" : 0,
-				"order" : 205,
+				"order" : 255,
 				"precision" : 2,
 				"step" : 0.1,
 				"text" : "Rotation speed",
@@ -60,17 +78,26 @@
 			"albumspinshow" : 
 			{
 				"condition" : "",
-				"index" : 101,
-				"order" : 201,
+				"index" : 147,
+				"order" : 247,
 				"text" : "Show Album Spin",
+				"type" : "bool",
+				"value" : true
+			},
+			"audioautovolume" : 
+			{
+				"condition" : "",
+				"index" : 191,
+				"order" : 291,
+				"text" : "Auto volume",
 				"type" : "bool",
 				"value" : true
 			},
 			"audiobars" : 
 			{
 				"condition" : "trackcardshow.value == true && trackcardshowbars.value == true",
-				"index" : 45,
-				"order" : 145,
+				"index" : 73,
+				"order" : 173,
 				"text" : "📊 Audio Bars",
 				"type" : "group",
 				"value" : ""
@@ -79,10 +106,10 @@
 			{
 				"condition" : "trackcardshow.value == true && trackcardshowbars.value == true",
 				"fraction" : true,
-				"index" : 51,
+				"index" : 79,
 				"max" : 100,
 				"min" : 0,
-				"order" : 151,
+				"order" : 179,
 				"precision" : 1,
 				"step" : 1,
 				"text" : "Bar roundness",
@@ -93,10 +120,10 @@
 			{
 				"condition" : "trackcardshow.value == true && trackcardshowbars.value == true",
 				"fraction" : false,
-				"index" : 49,
+				"index" : 77,
 				"max" : 10,
 				"min" : 0,
-				"order" : 149,
+				"order" : 177,
 				"text" : "Space between bars",
 				"type" : "slider",
 				"value" : 4
@@ -105,10 +132,10 @@
 			{
 				"condition" : "trackcardshow.value == true && trackcardshowbars.value == true",
 				"fraction" : false,
-				"index" : 53,
+				"index" : 81,
 				"max" : 100,
 				"min" : 10,
-				"order" : 153,
+				"order" : 181,
 				"text" : "Bar opacity",
 				"type" : "slider",
 				"value" : 100
@@ -117,10 +144,10 @@
 			{
 				"condition" : "trackcardshow.value == true && trackcardshowbars.value == true && audiobarsshowpeakdots.value == true",
 				"fraction" : true,
-				"index" : 61,
+				"index" : 89,
 				"max" : 100,
 				"min" : 0,
-				"order" : 161,
+				"order" : 189,
 				"precision" : 2,
 				"step" : 0.1,
 				"text" : "Dot roundness",
@@ -131,10 +158,10 @@
 			{
 				"condition" : "trackcardshow.value == true && trackcardshowbars.value == true && audiobarsshowpeakdots.value == true",
 				"fraction" : false,
-				"index" : 59,
+				"index" : 87,
 				"max" : 10,
 				"min" : 0,
-				"order" : 159,
+				"order" : 187,
 				"text" : "Space between dot and bar",
 				"type" : "slider",
 				"value" : 4
@@ -143,10 +170,10 @@
 			{
 				"condition" : "trackcardshow.value == true && trackcardshowbars.value == true && audiobarsshowpeakdots.value == true",
 				"fraction" : false,
-				"index" : 63,
+				"index" : 91,
 				"max" : 100,
 				"min" : 10,
-				"order" : 163,
+				"order" : 191,
 				"text" : "Dot opacity",
 				"type" : "slider",
 				"value" : 80
@@ -155,10 +182,10 @@
 			{
 				"condition" : "trackcardshow.value == true && trackcardshowbars.value == true && audiobarsshowpeakdots.value == true",
 				"fraction" : false,
-				"index" : 57,
+				"index" : 85,
 				"max" : 10,
 				"min" : 1,
-				"order" : 157,
+				"order" : 185,
 				"text" : "Dot size",
 				"type" : "slider",
 				"value" : 5
@@ -167,10 +194,10 @@
 			{
 				"condition" : "trackcardshow.value == true && trackcardshowbars.value == true",
 				"fraction" : false,
-				"index" : 47,
+				"index" : 75,
 				"max" : 64,
 				"min" : 9,
-				"order" : 147,
+				"order" : 175,
 				"text" : "Number of bars",
 				"type" : "slider",
 				"value" : 40
@@ -178,71 +205,85 @@
 			"audiobarsshowpeakdots" : 
 			{
 				"condition" : "trackcardshow.value == true && trackcardshowbars.value == true",
-				"index" : 55,
-				"order" : 155,
+				"index" : 83,
+				"order" : 183,
 				"text" : "Show peak dots",
 				"type" : "bool",
 				"value" : true
 			},
+			"audioplayback" : 
+			{
+				"condition" : "",
+				"index" : 189,
+				"order" : 289,
+				"text" : "🔊 Audio & Playback",
+				"type" : "group",
+				"value" : ""
+			},
 			"background" : 
 			{
 				"condition" : "",
-				"index" : 79,
-				"order" : 179,
+				"index" : 121,
+				"order" : 221,
 				"text" : "🖼️ Background",
 				"type" : "group",
 				"value" : ""
 			},
 			"backgroundcolor" : 
 			{
-				"condition" : "backgroundcolorsource.value == 'custom'",
-				"index" : 83,
-				"order" : 183,
-				"text" : "Pick a color",
+				"condition" : "",
+				"index" : 123,
+				"order" : 223,
+				"text" : "Background color",
 				"type" : "color",
 				"value" : "0 0 0"
 			},
-			"backgroundcolorsource" : 
+			"backgroundcoloralbum" : 
 			{
-				"condition" : "",
-				"index" : 81,
+				"condition" : "backgroundcolorkeep.value == false",
+				"index" : 127,
 				"options" : 
 				[
 					{
-						"label" : "My color",
-						"value" : "custom"
-					},
-					{
-						"label" : "Album: main color",
+						"label" : "Main color",
 						"value" : "primary"
 					},
 					{
-						"label" : "Album: second color",
+						"label" : "Second color",
 						"value" : "secondary"
 					},
 					{
-						"label" : "Album: third color",
+						"label" : "Third color",
 						"value" : "tertiary"
 					},
 					{
-						"label" : "Album: text color",
+						"label" : "Text color",
 						"value" : "text"
 					},
 					{
-						"label" : "Album: high contrast color",
+						"label" : "High contrast color",
 						"value" : "highcontrast"
 					}
 				],
-				"order" : 181,
-				"text" : "Background color",
+				"order" : 227,
+				"text" : "Album color",
 				"type" : "combo",
 				"value" : "primary"
+			},
+			"backgroundcolorkeep" : 
+			{
+				"condition" : "",
+				"index" : 125,
+				"order" : 225,
+				"text" : "Keep my color",
+				"type" : "bool",
+				"value" : false
 			},
 			"backgroundimage" : 
 			{
 				"condition" : "backgroundimagesource.value == 'custom'",
-				"index" : 87,
-				"order" : 187,
+				"index" : 131,
+				"order" : 231,
 				"text" : "Your image",
 				"type" : "file",
 				"value" : ""
@@ -251,10 +292,10 @@
 			{
 				"condition" : "backgroundimagesource.value == 'custom' || backgroundimagesource.value == 'album'",
 				"fraction" : true,
-				"index" : 97,
+				"index" : 143,
 				"max" : 1,
 				"min" : 0,
-				"order" : 197,
+				"order" : 243,
 				"precision" : 2,
 				"step" : 0.1,
 				"text" : "Image beat pulse",
@@ -264,7 +305,7 @@
 			"backgroundimagecoverposition" : 
 			{
 				"condition" : "backgroundimagesource.value == 'album'",
-				"index" : 91,
+				"index" : 135,
 				"options" : 
 				[
 					{
@@ -280,7 +321,7 @@
 						"value" : "center"
 					}
 				],
-				"order" : 191,
+				"order" : 235,
 				"text" : "Cover position",
 				"type" : "combo",
 				"value" : "left"
@@ -288,7 +329,7 @@
 			"backgroundimagefit" : 
 			{
 				"condition" : "backgroundimagesource.value == 'custom'",
-				"index" : 89,
+				"index" : 133,
 				"options" : 
 				[
 					{
@@ -312,16 +353,25 @@
 						"value" : "tile"
 					}
 				],
-				"order" : 189,
+				"order" : 233,
 				"text" : "Image fit",
 				"type" : "combo",
 				"value" : "stretch"
 			},
+			"backgroundimagehideonpause" : 
+			{
+				"condition" : "backgroundimagesource.value == 'album'",
+				"index" : 139,
+				"order" : 239,
+				"text" : "Hide cover when paused",
+				"type" : "bool",
+				"value" : false
+			},
 			"backgroundimagekeepcover" : 
 			{
 				"condition" : "backgroundimagesource.value == 'album'",
-				"index" : 93,
-				"order" : 193,
+				"index" : 137,
+				"order" : 237,
 				"text" : "Keep last cover",
 				"type" : "bool",
 				"value" : false
@@ -330,10 +380,10 @@
 			{
 				"condition" : "backgroundimagesource.value == 'custom' || backgroundimagesource.value == 'album'",
 				"fraction" : true,
-				"index" : 95,
+				"index" : 141,
 				"max" : 1,
 				"min" : 0,
-				"order" : 195,
+				"order" : 241,
 				"precision" : 3,
 				"step" : 0.01,
 				"text" : "Image opacity",
@@ -343,7 +393,7 @@
 			"backgroundimagesource" : 
 			{
 				"condition" : "",
-				"index" : 85,
+				"index" : 129,
 				"options" : 
 				[
 					{
@@ -359,7 +409,7 @@
 						"value" : "album"
 					}
 				],
-				"order" : 185,
+				"order" : 229,
 				"text" : "Image",
 				"type" : "combo",
 				"value" : "album"
@@ -428,20 +478,79 @@
 			{
 				"condition" : "clockcardshow.value == true",
 				"fraction" : true,
-				"index" : 23,
+				"index" : 37,
 				"max" : 40,
 				"min" : 0,
-				"order" : 123,
+				"order" : 137,
 				"precision" : 2,
 				"step" : 0.1,
 				"text" : "Corner roundness",
 				"type" : "slider",
 				"value" : 10
 			},
-			"clockcardfontfamily" : 
+			"clockcardcolor" : 
+			{
+				"condition" : "clockcardshow.value == true",
+				"index" : 17,
+				"order" : 117,
+				"text" : "Card color",
+				"type" : "color",
+				"value" : "0.06667 0.06667 0.06667"
+			},
+			"clockcardcoloralbum" : 
+			{
+				"condition" : "clockcardshow.value == true && clockcardcolorkeep.value == false",
+				"index" : 21,
+				"options" : 
+				[
+					{
+						"label" : "Main color",
+						"value" : "primary"
+					},
+					{
+						"label" : "Second color",
+						"value" : "secondary"
+					},
+					{
+						"label" : "Third color",
+						"value" : "tertiary"
+					},
+					{
+						"label" : "Text color",
+						"value" : "text"
+					},
+					{
+						"label" : "High contrast color",
+						"value" : "highcontrast"
+					}
+				],
+				"order" : 121,
+				"text" : "Album color",
+				"type" : "combo",
+				"value" : "primary"
+			},
+			"clockcardcolorkeep" : 
 			{
 				"condition" : "clockcardshow.value == true",
 				"index" : 19,
+				"order" : 119,
+				"text" : "Keep my color",
+				"type" : "bool",
+				"value" : false
+			},
+			"clockcardcolorkeeplast" : 
+			{
+				"condition" : "clockcardshow.value == true && clockcardcolorkeep.value == false",
+				"index" : 23,
+				"order" : 123,
+				"text" : "Keep last color",
+				"type" : "bool",
+				"value" : false
+			},
+			"clockcardfontfamily" : 
+			{
+				"condition" : "clockcardshow.value == true",
+				"index" : 33,
 				"options" : 
 				[
 					{
@@ -469,7 +578,7 @@
 						"value" : "Tokyo"
 					}
 				],
-				"order" : 119,
+				"order" : 133,
 				"text" : "Font",
 				"type" : "combo",
 				"value" : "Unageo"
@@ -478,10 +587,10 @@
 			{
 				"condition" : "clockcardshow.value == true",
 				"fraction" : false,
-				"index" : 21,
+				"index" : 35,
 				"max" : 900,
 				"min" : 100,
-				"order" : 121,
+				"order" : 135,
 				"text" : "Font weight",
 				"type" : "slider",
 				"value" : 600
@@ -489,8 +598,8 @@
 			"clockcardformat12h" : 
 			{
 				"condition" : "clockcardshow.value == true",
-				"index" : 17,
-				"order" : 117,
+				"index" : 31,
+				"order" : 131,
 				"text" : "12-hour format",
 				"type" : "bool",
 				"value" : false
@@ -513,11 +622,76 @@
 				"type" : "bool",
 				"value" : true
 			},
+			"clockcardtextalbum" : 
+			{
+				"condition" : "clockcardshow.value == true && clockcardtextmode.value == 'album'",
+				"index" : 29,
+				"options" : 
+				[
+					{
+						"label" : "Main color",
+						"value" : "primary"
+					},
+					{
+						"label" : "Second color",
+						"value" : "secondary"
+					},
+					{
+						"label" : "Third color",
+						"value" : "tertiary"
+					},
+					{
+						"label" : "Text color",
+						"value" : "text"
+					},
+					{
+						"label" : "High contrast color",
+						"value" : "highcontrast"
+					}
+				],
+				"order" : 129,
+				"text" : "Text album color",
+				"type" : "combo",
+				"value" : "text"
+			},
+			"clockcardtextcolor" : 
+			{
+				"condition" : "clockcardshow.value == true && clockcardtextmode.value == 'custom'",
+				"index" : 27,
+				"order" : 127,
+				"text" : "Pick a text color",
+				"type" : "color",
+				"value" : "1 1 1"
+			},
+			"clockcardtextmode" : 
+			{
+				"condition" : "clockcardshow.value == true",
+				"index" : 25,
+				"options" : 
+				[
+					{
+						"label" : "Automatic",
+						"value" : "auto"
+					},
+					{
+						"label" : "My color",
+						"value" : "custom"
+					},
+					{
+						"label" : "Album color",
+						"value" : "album"
+					}
+				],
+				"order" : 125,
+				"text" : "Text color",
+				"type" : "combo",
+				"value" : "album"
+			},
 			"datecard" : 
 			{
 				"condition" : "",
-				"index" : 65,
-				"order" : 165,
+				"index" : 93,
+				"order" : 193,
 				"text" : "📅 Date",
 				"type" : "group",
 				"value" : ""
@@ -526,20 +700,79 @@
 			{
 				"condition" : "datecardshow.value == true",
 				"fraction" : true,
-				"index" : 77,
+				"index" : 119,
 				"max" : 40,
 				"min" : 0,
-				"order" : 177,
+				"order" : 219,
 				"precision" : 2,
 				"step" : 0.1,
 				"text" : "Corner roundness",
 				"type" : "slider",
 				"value" : 10
 			},
+			"datecardcolor" : 
+			{
+				"condition" : "datecardshow.value == true",
+				"index" : 97,
+				"order" : 197,
+				"text" : "Card color",
+				"type" : "color",
+				"value" : "0.06667 0.06667 0.06667"
+			},
+			"datecardcoloralbum" : 
+			{
+				"condition" : "datecardshow.value == true && datecardcolorkeep.value == false",
+				"index" : 101,
+				"options" : 
+				[
+					{
+						"label" : "Main color",
+						"value" : "primary"
+					},
+					{
+						"label" : "Second color",
+						"value" : "secondary"
+					},
+					{
+						"label" : "Third color",
+						"value" : "tertiary"
+					},
+					{
+						"label" : "Text color",
+						"value" : "text"
+					},
+					{
+						"label" : "High contrast color",
+						"value" : "highcontrast"
+					}
+				],
+				"order" : 201,
+				"text" : "Album color",
+				"type" : "combo",
+				"value" : "primary"
+			},
+			"datecardcolorkeep" : 
+			{
+				"condition" : "datecardshow.value == true",
+				"index" : 99,
+				"order" : 199,
+				"text" : "Keep my color",
+				"type" : "bool",
+				"value" : false
+			},
+			"datecardcolorkeeplast" : 
+			{
+				"condition" : "datecardshow.value == true && datecardcolorkeep.value == false",
+				"index" : 103,
+				"order" : 203,
+				"text" : "Keep last color",
+				"type" : "bool",
+				"value" : false
+			},
 			"datecardfulldatefontfamily" : 
 			{
 				"condition" : "datecardshow.value == true",
-				"index" : 73,
+				"index" : 115,
 				"options" : 
 				[
 					{
@@ -567,7 +800,7 @@
 						"value" : "Tokyo"
 					}
 				],
-				"order" : 173,
+				"order" : 215,
 				"text" : "Date font",
 				"type" : "combo",
 				"value" : "Unageo"
@@ -576,10 +809,10 @@
 			{
 				"condition" : "datecardshow.value == true",
 				"fraction" : false,
-				"index" : 75,
+				"index" : 117,
 				"max" : 900,
 				"min" : 100,
-				"order" : 175,
+				"order" : 217,
 				"text" : "Date font weight",
 				"type" : "slider",
 				"value" : 300
@@ -587,16 +820,81 @@
 			"datecardshow" : 
 			{
 				"condition" : "",
-				"index" : 67,
-				"order" : 167,
+				"index" : 95,
+				"order" : 195,
 				"text" : "Show date",
 				"type" : "bool",
 				"value" : true
 			},
+			"datecardtextalbum" : 
+			{
+				"condition" : "datecardshow.value == true && datecardtextmode.value == 'album'",
+				"index" : 109,
+				"options" : 
+				[
+					{
+						"label" : "Main color",
+						"value" : "primary"
+					},
+					{
+						"label" : "Second color",
+						"value" : "secondary"
+					},
+					{
+						"label" : "Third color",
+						"value" : "tertiary"
+					},
+					{
+						"label" : "Text color",
+						"value" : "text"
+					},
+					{
+						"label" : "High contrast color",
+						"value" : "highcontrast"
+					}
+				],
+				"order" : 209,
+				"text" : "Text album color",
+				"type" : "combo",
+				"value" : "text"
+			},
+			"datecardtextcolor" : 
+			{
+				"condition" : "datecardshow.value == true && datecardtextmode.value == 'custom'",
+				"index" : 107,
+				"order" : 207,
+				"text" : "Pick a text color",
+				"type" : "color",
+				"value" : "1 1 1"
+			},
+			"datecardtextmode" : 
+			{
+				"condition" : "datecardshow.value == true",
+				"index" : 105,
+				"options" : 
+				[
+					{
+						"label" : "Automatic",
+						"value" : "auto"
+					},
+					{
+						"label" : "My color",
+						"value" : "custom"
+					},
+					{
+						"label" : "Album color",
+						"value" : "album"
+					}
+				],
+				"order" : 205,
+				"text" : "Text color",
+				"type" : "combo",
+				"value" : "album"
+			},
 			"datecardweekdayfontfamily" : 
 			{
 				"condition" : "datecardshow.value == true",
-				"index" : 69,
+				"index" : 111,
 				"options" : 
 				[
 					{
@@ -624,7 +922,7 @@
 						"value" : "Tokyo"
 					}
 				],
-				"order" : 169,
+				"order" : 211,
 				"text" : "Weekday font",
 				"type" : "combo",
 				"value" : "Unageo"
@@ -633,10 +931,10 @@
 			{
 				"condition" : "datecardshow.value == true",
 				"fraction" : false,
-				"index" : 71,
+				"index" : 113,
 				"max" : 900,
 				"min" : 100,
-				"order" : 171,
+				"order" : 213,
 				"text" : "Weekday font weight",
 				"type" : "slider",
 				"value" : 600
@@ -644,8 +942,8 @@
 			"debugshow" : 
 			{
 				"condition" : "",
-				"index" : 139,
-				"order" : 239,
+				"index" : 197,
+				"order" : 297,
 				"text" : "Show debug info",
 				"type" : "bool",
 				"value" : false
@@ -653,17 +951,35 @@
 			"hintalbumspinbeatsensitivity" : 
 			{
 				"condition" : "albumspinshow.value == true",
-				"index" : 108,
-				"order" : 208,
+				"index" : 158,
+				"order" : 258,
 				"text" : "<small>How much the cover grows with the bass. 0 = off.<br>Default value = 0.2</small>",
+				"type" : "text",
+				"value" : false
+			},
+			"hintalbumspinhideonpause" : 
+			{
+				"condition" : "albumspinshow.value == true",
+				"index" : 152,
+				"order" : 252,
+				"text" : "<small>Removes the spinning cover while the music is paused, even with “Keep last cover”.<br>Default value = Off</small><hr width=\"260\">",
+				"type" : "text",
+				"value" : false
+			},
+			"hintalbumspinkeepcover" : 
+			{
+				"condition" : "albumspinshow.value == true",
+				"index" : 150,
+				"order" : 250,
+				"text" : "<small>Keeps spinning the last cover when no music is playing. Off = the cover fades out.<br>Default value = Off</small><hr width=\"260\">",
 				"type" : "text",
 				"value" : false
 			},
 			"hintalbumspinopacity" : 
 			{
 				"condition" : "albumspinshow.value == true",
-				"index" : 104,
-				"order" : 204,
+				"index" : 154,
+				"order" : 254,
 				"text" : "<small>Lower = more of the background color shows through.<br>Default value = 1</small><hr width=\"260\">",
 				"type" : "text",
 				"value" : false
@@ -671,8 +987,8 @@
 			"hintalbumspinrotationspeed" : 
 			{
 				"condition" : "albumspinshow.value == true",
-				"index" : 106,
-				"order" : 206,
+				"index" : 156,
+				"order" : 256,
 				"text" : "<small>0 = stopped, higher = faster.<br>Default value = 120</small><hr width=\"260\">",
 				"type" : "text",
 				"value" : false
@@ -680,17 +996,26 @@
 			"hintalbumspinshow" : 
 			{
 				"condition" : "",
-				"index" : 102,
-				"order" : 202,
+				"index" : 148,
+				"order" : 248,
 				"text" : "<small>Turn off to hide the spinning cover.<br>Default value = On</small><hr width=\"260\">",
+				"type" : "text",
+				"value" : false
+			},
+			"hintaudioautovolume" : 
+			{
+				"condition" : "",
+				"index" : 192,
+				"order" : 292,
+				"text" : "<small>Bars and effects react as if the music were at full volume, even when it is quiet. Quiet parts of a song can then look as strong as loud ones.<br>Default value = On</small><hr width=\"260\">",
 				"type" : "text",
 				"value" : false
 			},
 			"hintaudiobarsborderradius" : 
 			{
 				"condition" : "trackcardshow.value == true && trackcardshowbars.value == true",
-				"index" : 52,
-				"order" : 152,
+				"index" : 80,
+				"order" : 180,
 				"text" : "<small>0 = square corners, higher = rounder.<br>Default value = 60</small><hr width=\"260\">",
 				"type" : "text",
 				"value" : false
@@ -698,8 +1023,8 @@
 			"hintaudiobarsgap" : 
 			{
 				"condition" : "trackcardshow.value == true && trackcardshowbars.value == true",
-				"index" : 50,
-				"order" : 150,
+				"index" : 78,
+				"order" : 178,
 				"text" : "<small>0 = bars touch each other.<br>Default value = 4</small><hr width=\"260\">",
 				"type" : "text",
 				"value" : false
@@ -707,8 +1032,8 @@
 			"hintaudiobarsopacity" : 
 			{
 				"condition" : "trackcardshow.value == true && trackcardshowbars.value == true",
-				"index" : 54,
-				"order" : 154,
+				"index" : 82,
+				"order" : 182,
 				"text" : "<small>Lower = more see-through.<br>Default value = 100</small><hr width=\"260\">",
 				"type" : "text",
 				"value" : false
@@ -716,8 +1041,8 @@
 			"hintaudiobarspeakdotsborderradius" : 
 			{
 				"condition" : "trackcardshow.value == true && trackcardshowbars.value == true && audiobarsshowpeakdots.value == true",
-				"index" : 62,
-				"order" : 162,
+				"index" : 90,
+				"order" : 190,
 				"text" : "<small>0 = square corners, higher = rounder.<br>Default value = 80</small><hr width=\"260\">",
 				"type" : "text",
 				"value" : false
@@ -725,8 +1050,8 @@
 			"hintaudiobarspeakdotsgap" : 
 			{
 				"condition" : "trackcardshow.value == true && trackcardshowbars.value == true && audiobarsshowpeakdots.value == true",
-				"index" : 60,
-				"order" : 160,
+				"index" : 88,
+				"order" : 188,
 				"text" : "<small>Distance between the dot and the top of its bar.<br>Default value = 4</small><hr width=\"260\">",
 				"type" : "text",
 				"value" : false
@@ -734,8 +1059,8 @@
 			"hintaudiobarspeakdotsopacity" : 
 			{
 				"condition" : "trackcardshow.value == true && trackcardshowbars.value == true && audiobarsshowpeakdots.value == true",
-				"index" : 64,
-				"order" : 164,
+				"index" : 92,
+				"order" : 192,
 				"text" : "<small>Lower = more see-through.<br>Default value = 80</small>",
 				"type" : "text",
 				"value" : false
@@ -743,8 +1068,8 @@
 			"hintaudiobarspeakdotssize" : 
 			{
 				"condition" : "trackcardshow.value == true && trackcardshowbars.value == true && audiobarsshowpeakdots.value == true",
-				"index" : 58,
-				"order" : 158,
+				"index" : 86,
+				"order" : 186,
 				"text" : "<small>Height of each dot.<br>Default value = 5</small><hr width=\"260\">",
 				"type" : "text",
 				"value" : false
@@ -752,8 +1077,8 @@
 			"hintaudiobarsquantity" : 
 			{
 				"condition" : "trackcardshow.value == true && trackcardshowbars.value == true",
-				"index" : 48,
-				"order" : 148,
+				"index" : 76,
+				"order" : 176,
 				"text" : "<small>More bars = thinner bars.<br>Default value = 40</small><hr width=\"260\">",
 				"type" : "text",
 				"value" : false
@@ -761,35 +1086,44 @@
 			"hintaudiobarsshowpeakdots" : 
 			{
 				"condition" : "trackcardshow.value == true && trackcardshowbars.value == true",
-				"index" : 56,
-				"order" : 156,
+				"index" : 84,
+				"order" : 184,
 				"text" : "<small>Small dots that mark the highest point of each bar and fall slowly.<br>Default value = On</small><hr width=\"260\">",
 				"type" : "text",
 				"value" : false
 			},
 			"hintbackgroundcolor" : 
 			{
-				"condition" : "backgroundcolorsource.value == 'custom'",
-				"index" : 84,
-				"order" : 184,
-				"text" : "<small>Used when the background color is “My color”.<br>Default value = black</small><hr width=\"260\">",
+				"condition" : "",
+				"index" : 124,
+				"order" : 224,
+				"text" : "<small>Your color for the solid color at the very bottom. While music plays, the album color replaces it, unless “Keep my color” is on.<br>Default value = black</small><hr width=\"260\">",
 				"type" : "text",
 				"value" : false
 			},
-			"hintbackgroundcolorsource" : 
+			"hintbackgroundcoloralbum" : 
+			{
+				"condition" : "backgroundcolorkeep.value == false",
+				"index" : 128,
+				"order" : 228,
+				"text" : "<small>Which color of the album cover replaces your color while music plays.<br>Default value = Main color</small><hr width=\"260\">",
+				"type" : "text",
+				"value" : false
+			},
+			"hintbackgroundcolorkeep" : 
 			{
 				"condition" : "",
-				"index" : 82,
-				"order" : 182,
-				"text" : "<small>Solid color at the very bottom. Your own color, or a color taken from the album cover.<br>Default value = Album: main color</small><hr width=\"260\">",
+				"index" : 126,
+				"order" : 226,
+				"text" : "<small>The album never changes the solid color at the very bottom.<br>Default value = Off</small><hr width=\"260\">",
 				"type" : "text",
 				"value" : false
 			},
 			"hintbackgroundimage" : 
 			{
 				"condition" : "backgroundimagesource.value == 'custom'",
-				"index" : 88,
-				"order" : 188,
+				"index" : 132,
+				"order" : 232,
 				"text" : "<small>The image file to show.<br>Default value = none</small><hr width=\"260\">",
 				"type" : "text",
 				"value" : false
@@ -797,8 +1131,8 @@
 			"hintbackgroundimagebeatsensitivity" : 
 			{
 				"condition" : "backgroundimagesource.value == 'custom' || backgroundimagesource.value == 'album'",
-				"index" : 98,
-				"order" : 198,
+				"index" : 144,
+				"order" : 244,
 				"text" : "<small>How much the image grows with the bass. 0 = off.<br>Default value = 0</small>",
 				"type" : "text",
 				"value" : false
@@ -806,8 +1140,8 @@
 			"hintbackgroundimagecoverposition" : 
 			{
 				"condition" : "backgroundimagesource.value == 'album'",
-				"index" : 92,
-				"order" : 192,
+				"index" : 136,
+				"order" : 236,
 				"text" : "<small>Left and Right fade out towards the center, like the cover in the music card. Center fades a little on both sides.<br>Default value = Left</small><hr width=\"260\">",
 				"type" : "text",
 				"value" : false
@@ -815,17 +1149,26 @@
 			"hintbackgroundimagefit" : 
 			{
 				"condition" : "backgroundimagesource.value == 'custom'",
-				"index" : 90,
-				"order" : 190,
+				"index" : 134,
+				"order" : 234,
 				"text" : "<small>Stretch = fills the screen, may distort. Fill = fills without distorting, cuts the edges. Fit = shows the whole image. Center = original size. Tile = repeats the image.<br>Default value = Stretch</small><hr width=\"260\">",
+				"type" : "text",
+				"value" : false
+			},
+			"hintbackgroundimagehideonpause" : 
+			{
+				"condition" : "backgroundimagesource.value == 'album'",
+				"index" : 140,
+				"order" : 240,
+				"text" : "<small>Removes the cover while the music is paused, even with “Keep last cover”.<br>Default value = Off</small><hr width=\"260\">",
 				"type" : "text",
 				"value" : false
 			},
 			"hintbackgroundimagekeepcover" : 
 			{
 				"condition" : "backgroundimagesource.value == 'album'",
-				"index" : 94,
-				"order" : 194,
+				"index" : 138,
+				"order" : 238,
 				"text" : "<small>Keeps showing the last cover when no music is playing. Off = the cover fades out.<br>Default value = Off</small><hr width=\"260\">",
 				"type" : "text",
 				"value" : false
@@ -833,8 +1176,8 @@
 			"hintbackgroundimageopacity" : 
 			{
 				"condition" : "backgroundimagesource.value == 'custom' || backgroundimagesource.value == 'album'",
-				"index" : 96,
-				"order" : 196,
+				"index" : 142,
+				"order" : 242,
 				"text" : "<small>Lower = more of the layers below show through.<br>Default value = 0.15</small><hr width=\"260\">",
 				"type" : "text",
 				"value" : false
@@ -842,8 +1185,8 @@
 			"hintbackgroundimagesource" : 
 			{
 				"condition" : "",
-				"index" : 86,
-				"order" : 186,
+				"index" : 130,
+				"order" : 230,
 				"text" : "<small>Top layer: an image of your own, or the cover of the song playing.<br>Default value = Album cover</small><hr width=\"260\">",
 				"type" : "text",
 				"value" : false
@@ -878,17 +1221,53 @@
 			"hintclockcardborderradius" : 
 			{
 				"condition" : "clockcardshow.value == true",
+				"index" : 38,
+				"order" : 138,
+				"text" : "<small>0 = square corners, higher = rounder.<br>Default value = 10</small>",
+				"type" : "text",
+				"value" : false
+			},
+			"hintclockcardcolor" : 
+			{
+				"condition" : "clockcardshow.value == true",
+				"index" : 18,
+				"order" : 118,
+				"text" : "<small>Your color for this card. While music plays, the album color replaces it, unless “Keep my color” is on.<br>Default value = dark gray (#111111)</small><hr width=\"260\">",
+				"type" : "text",
+				"value" : false
+			},
+			"hintclockcardcoloralbum" : 
+			{
+				"condition" : "clockcardshow.value == true && clockcardcolorkeep.value == false",
+				"index" : 22,
+				"order" : 122,
+				"text" : "<small>Which color of the album cover replaces your color while music plays.<br>Default value = Main color</small><hr width=\"260\">",
+				"type" : "text",
+				"value" : false
+			},
+			"hintclockcardcolorkeep" : 
+			{
+				"condition" : "clockcardshow.value == true",
+				"index" : 20,
+				"order" : 120,
+				"text" : "<small>The album never changes this card.<br>Default value = Off</small><hr width=\"260\">",
+				"type" : "text",
+				"value" : false
+			},
+			"hintclockcardcolorkeeplast" : 
+			{
+				"condition" : "clockcardshow.value == true && clockcardcolorkeep.value == false",
 				"index" : 24,
 				"order" : 124,
-				"text" : "<small>0 = square corners, higher = rounder.<br>Default value = 10</small>",
+				"text" : "<small>After the music stops, keeps the last album colors instead of going back to yours.<br>Default value = Off</small><hr width=\"260\">",
 				"type" : "text",
 				"value" : false
 			},
 			"hintclockcardfontfamily" : 
 			{
 				"condition" : "clockcardshow.value == true",
-				"index" : 20,
-				"order" : 120,
+				"index" : 34,
+				"order" : 134,
 				"text" : "<small>Font of the time.<br>Default value = Unageo</small><hr width=\"260\">",
 				"type" : "text",
 				"value" : false
@@ -896,8 +1275,8 @@
 			"hintclockcardfontweight" : 
 			{
 				"condition" : "clockcardshow.value == true",
-				"index" : 22,
-				"order" : 122,
+				"index" : 36,
+				"order" : 136,
 				"text" : "<small>100 = thin, 900 = bold.<br>Default value = 600</small><hr width=\"260\">",
 				"type" : "text",
 				"value" : false
@@ -905,8 +1284,8 @@
 			"hintclockcardformat12h" : 
 			{
 				"condition" : "clockcardshow.value == true",
-				"index" : 18,
-				"order" : 118,
+				"index" : 32,
+				"order" : 132,
 				"text" : "<small>Shows AM / PM instead of 0–23 h.<br>Default value = Off</small><hr width=\"260\">",
 				"type" : "text",
 				"value" : false
@@ -929,20 +1308,83 @@
 				"type" : "text",
 				"value" : false
 			},
+			"hintclockcardtextalbum" : 
+			{
+				"condition" : "clockcardshow.value == true && clockcardtextmode.value == 'album'",
+				"index" : 30,
+				"order" : 130,
+				"text" : "<small>Which color of the album cover the text uses while music plays.<br>Default value = Text color</small><hr width=\"260\">",
+				"type" : "text",
+				"value" : false
+			},
+			"hintclockcardtextcolor" : 
+			{
+				"condition" : "clockcardshow.value == true && clockcardtextmode.value == 'custom'",
+				"index" : 28,
+				"order" : 128,
+				"text" : "<small>Used when the text color is “My color”.<br>Default value = white</small><hr width=\"260\">",
+				"type" : "text",
+				"value" : false
+			},
+			"hintclockcardtextmode" : 
+			{
+				"condition" : "clockcardshow.value == true",
+				"index" : 26,
+				"order" : 126,
+				"text" : "<small>Automatic = black or white, whichever reads best. My color = your own color. Album color = a color of the album cover (automatic without music).<br>Default value = Album color</small><hr width=\"260\">",
+				"type" : "text",
+				"value" : false
+			},
 			"hintdatecardborderradius" : 
 			{
 				"condition" : "datecardshow.value == true",
-				"index" : 78,
-				"order" : 178,
+				"index" : 120,
+				"order" : 220,
 				"text" : "<small>0 = square corners, higher = rounder.<br>Default value = 10</small>",
+				"type" : "text",
+				"value" : false
+			},
+			"hintdatecardcolor" : 
+			{
+				"condition" : "datecardshow.value == true",
+				"index" : 98,
+				"order" : 198,
+				"text" : "<small>Your color for this card. While music plays, the album color replaces it, unless “Keep my color” is on.<br>Default value = dark gray (#111111)</small><hr width=\"260\">",
+				"type" : "text",
+				"value" : false
+			},
+			"hintdatecardcoloralbum" : 
+			{
+				"condition" : "datecardshow.value == true && datecardcolorkeep.value == false",
+				"index" : 102,
+				"order" : 202,
+				"text" : "<small>Which color of the album cover replaces your color while music plays.<br>Default value = Main color</small><hr width=\"260\">",
+				"type" : "text",
+				"value" : false
+			},
+			"hintdatecardcolorkeep" : 
+			{
+				"condition" : "datecardshow.value == true",
+				"index" : 100,
+				"order" : 200,
+				"text" : "<small>The album never changes this card.<br>Default value = Off</small><hr width=\"260\">",
+				"type" : "text",
+				"value" : false
+			},
+			"hintdatecardcolorkeeplast" : 
+			{
+				"condition" : "datecardshow.value == true && datecardcolorkeep.value == false",
+				"index" : 104,
+				"order" : 204,
+				"text" : "<small>After the music stops, keeps the last album colors instead of going back to yours.<br>Default value = Off</small><hr width=\"260\">",
 				"type" : "text",
 				"value" : false
 			},
 			"hintdatecardfulldatefontfamily" : 
 			{
 				"condition" : "datecardshow.value == true",
-				"index" : 74,
-				"order" : 174,
+				"index" : 116,
+				"order" : 216,
 				"text" : "<small>Font of the day, month and year.<br>Default value = Unageo</small><hr width=\"260\">",
 				"type" : "text",
 				"value" : false
@@ -950,8 +1392,8 @@
 			"hintdatecardfulldatefontweight" : 
 			{
 				"condition" : "datecardshow.value == true",
-				"index" : 76,
-				"order" : 176,
+				"index" : 118,
+				"order" : 218,
 				"text" : "<small>100 = thin, 900 = bold.<br>Default value = 300</small><hr width=\"260\">",
 				"type" : "text",
 				"value" : false
@@ -959,17 +1401,44 @@
 			"hintdatecardshow" : 
 			{
 				"condition" : "",
-				"index" : 68,
-				"order" : 168,
+				"index" : 96,
+				"order" : 196,
 				"text" : "<small>Turn off to hide the date card.<br>Default value = On</small><hr width=\"260\">",
+				"type" : "text",
+				"value" : false
+			},
+			"hintdatecardtextalbum" : 
+			{
+				"condition" : "datecardshow.value == true && datecardtextmode.value == 'album'",
+				"index" : 110,
+				"order" : 210,
+				"text" : "<small>Which color of the album cover the text uses while music plays.<br>Default value = Text color</small><hr width=\"260\">",
+				"type" : "text",
+				"value" : false
+			},
+			"hintdatecardtextcolor" : 
+			{
+				"condition" : "datecardshow.value == true && datecardtextmode.value == 'custom'",
+				"index" : 108,
+				"order" : 208,
+				"text" : "<small>Used when the text color is “My color”.<br>Default value = white</small><hr width=\"260\">",
+				"type" : "text",
+				"value" : false
+			},
+			"hintdatecardtextmode" : 
+			{
+				"condition" : "datecardshow.value == true",
+				"index" : 106,
+				"order" : 206,
+				"text" : "<small>Automatic = black or white, whichever reads best. My color = your own color. Album color = a color of the album cover (automatic without music).<br>Default value = Album color</small><hr width=\"260\">",
 				"type" : "text",
 				"value" : false
 			},
 			"hintdatecardweekdayfontfamily" : 
 			{
 				"condition" : "datecardshow.value == true",
-				"index" : 70,
-				"order" : 170,
+				"index" : 112,
+				"order" : 212,
 				"text" : "<small>Font of the day of the week.<br>Default value = Unageo</small><hr width=\"260\">",
 				"type" : "text",
 				"value" : false
@@ -977,8 +1446,8 @@
 			"hintdatecardweekdayfontweight" : 
 			{
 				"condition" : "datecardshow.value == true",
-				"index" : 72,
-				"order" : 172,
+				"index" : 114,
+				"order" : 214,
 				"text" : "<small>100 = thin, 900 = bold.<br>Default value = 600</small><hr width=\"260\">",
 				"type" : "text",
 				"value" : false
@@ -986,17 +1455,26 @@
 			"hintdebugshow" : 
 			{
 				"condition" : "",
-				"index" : 140,
-				"order" : 240,
+				"index" : 198,
+				"order" : 298,
 				"text" : "<small>Shows what Wallpaper Engine sends to the wallpaper: song, cover, playback and a log of events. Take a screenshot of it when reporting a problem.<br>Default value = Off</small>",
+				"type" : "text",
+				"value" : false
+			},
+			"hintplaybackmycolorswhenpaused" : 
+			{
+				"condition" : "",
+				"index" : 194,
+				"order" : 294,
+				"text" : "<small>While the music is paused, every card and the background go back to your own colors.<br>Default value = Off</small>",
 				"type" : "text",
 				"value" : false
 			},
 			"hinttrackcardartitsfontfamily" : 
 			{
 				"condition" : "trackcardshow.value == true",
-				"index" : 40,
-				"order" : 140,
+				"index" : 68,
+				"order" : 168,
 				"text" : "<small>Font of the artist name.<br>Default value = Unageo</small><hr width=\"260\">",
 				"type" : "text",
 				"value" : false
@@ -1004,8 +1482,8 @@
 			"hinttrackcardartitsfontweight" : 
 			{
 				"condition" : "trackcardshow.value == true",
-				"index" : 42,
-				"order" : 142,
+				"index" : 70,
+				"order" : 170,
 				"text" : "<small>100 = thin, 900 = bold.<br>Default value = 300</small><hr width=\"260\">",
 				"type" : "text",
 				"value" : false
@@ -1013,17 +1491,53 @@
 			"hinttrackcardborderradius" : 
 			{
 				"condition" : "trackcardshow.value == true",
+				"index" : 72,
+				"order" : 172,
+				"text" : "<small>0 = square corners, higher = rounder.<br>Default value = 10</small>",
+				"type" : "text",
+				"value" : false
+			},
+			"hinttrackcardcolor" : 
+			{
+				"condition" : "trackcardshow.value == true",
+				"index" : 46,
+				"order" : 146,
+				"text" : "<small>Your color for this card. While music plays, the album color replaces it, unless “Keep my color” is on.<br>Default value = dark gray (#111111)</small><hr width=\"260\">",
+				"type" : "text",
+				"value" : false
+			},
+			"hinttrackcardcoloralbum" : 
+			{
+				"condition" : "trackcardshow.value == true && trackcardcolorkeep.value == false",
+				"index" : 50,
+				"order" : 150,
+				"text" : "<small>Which color of the album cover replaces your color while music plays.<br>Default value = Main color</small><hr width=\"260\">",
+				"type" : "text",
+				"value" : false
+			},
+			"hinttrackcardcolorkeep" : 
+			{
+				"condition" : "trackcardshow.value == true",
+				"index" : 48,
+				"order" : 148,
+				"text" : "<small>The album never changes this card.<br>Default value = Off</small><hr width=\"260\">",
+				"type" : "text",
+				"value" : false
+			},
+			"hinttrackcardhideonpause" : 
+			{
+				"condition" : "trackcardshow.value == true",
 				"index" : 44,
 				"order" : 144,
-				"text" : "<small>0 = square corners, higher = rounder.<br>Default value = 10</small>",
+				"text" : "<small>Closes this card while the music is paused.<br>Default value = Off</small><hr width=\"260\">",
 				"type" : "text",
 				"value" : false
 			},
 			"hinttrackcardshow" : 
 			{
 				"condition" : "",
-				"index" : 28,
-				"order" : 128,
+				"index" : 42,
+				"order" : 142,
 				"text" : "<small>Turn off to hide the music card.<br>Default value = On</small><hr width=\"260\">",
 				"type" : "text",
 				"value" : false
@@ -1031,8 +1545,8 @@
 			"hinttrackcardshowbars" : 
 			{
 				"condition" : "trackcardshow.value == true",
-				"index" : 32,
-				"order" : 132,
+				"index" : 60,
+				"order" : 160,
 				"text" : "<small>Bars that dance with the music.<br>Default value = On</small><hr width=\"260\">",
 				"type" : "text",
 				"value" : false
@@ -1040,8 +1554,8 @@
 			"hinttrackcardshowbeats" : 
 			{
 				"condition" : "trackcardshow.value == true",
-				"index" : 34,
-				"order" : 134,
+				"index" : 62,
+				"order" : 162,
 				"text" : "<small>Three blocks that pulse with the bass, mids and treble.<br>Default value = On</small><hr width=\"260\">",
 				"type" : "text",
 				"value" : false
@@ -1049,17 +1563,44 @@
 			"hinttrackcardshowtimeline" : 
 			{
 				"condition" : "trackcardshow.value == true",
-				"index" : 30,
-				"order" : 130,
+				"index" : 58,
+				"order" : 158,
 				"text" : "<small>Elapsed and total time of the song.<br>Default value = On</small><hr width=\"260\">",
+				"type" : "text",
+				"value" : false
+			},
+			"hinttrackcardtextalbum" : 
+			{
+				"condition" : "trackcardshow.value == true && trackcardtextmode.value == 'album'",
+				"index" : 56,
+				"order" : 156,
+				"text" : "<small>Which color of the album cover the text uses while music plays.<br>Default value = Text color</small><hr width=\"260\">",
+				"type" : "text",
+				"value" : false
+			},
+			"hinttrackcardtextcolor" : 
+			{
+				"condition" : "trackcardshow.value == true && trackcardtextmode.value == 'custom'",
+				"index" : 54,
+				"order" : 154,
+				"text" : "<small>Used when the text color is “My color”.<br>Default value = white</small><hr width=\"260\">",
+				"type" : "text",
+				"value" : false
+			},
+			"hinttrackcardtextmode" : 
+			{
+				"condition" : "trackcardshow.value == true",
+				"index" : 52,
+				"order" : 152,
+				"text" : "<small>Automatic = black or white, whichever reads best. My color = your own color. Album color = a color of the album cover (automatic without music).<br>Default value = Album color</small><hr width=\"260\">",
 				"type" : "text",
 				"value" : false
 			},
 			"hinttrackcardtitlefontfamily" : 
 			{
 				"condition" : "trackcardshow.value == true",
-				"index" : 36,
-				"order" : 136,
+				"index" : 64,
+				"order" : 164,
 				"text" : "<small>Font of the song name.<br>Default value = Unageo</small><hr width=\"260\">",
 				"type" : "text",
 				"value" : false
@@ -1067,8 +1608,8 @@
 			"hinttrackcardtitlefontweight" : 
 			{
 				"condition" : "trackcardshow.value == true",
-				"index" : 38,
-				"order" : 138,
+				"index" : 66,
+				"order" : 166,
 				"text" : "<small>100 = thin, 900 = bold.<br>Default value = 600</small><hr width=\"260\">",
 				"type" : "text",
 				"value" : false
@@ -1076,8 +1617,8 @@
 			"hinttrianglesbeatsensitivity" : 
 			{
 				"condition" : "trianglesshow.value == true",
-				"index" : 122,
-				"order" : 222,
+				"index" : 174,
+				"order" : 274,
 				"text" : "<small>How many light up on each beat.<br>Default value = 0.35</small><hr width=\"260\">",
 				"type" : "text",
 				"value" : false
@@ -1085,35 +1626,44 @@
 			"hinttrianglesbeatthreshold" : 
 			{
 				"condition" : "trianglesshow.value == true",
-				"index" : 136,
-				"order" : 236,
+				"index" : 188,
+				"order" : 288,
 				"text" : "<small>Higher = only strong beats light triangles.<br>Default value = 1.3</small>",
 				"type" : "text",
 				"value" : false
 			},
 			"hinttrianglescolor" : 
 			{
-				"condition" : "trianglesshow.value == true && trianglescolorsource.value == 'custom'",
-				"index" : 120,
-				"order" : 220,
-				"text" : "<small>Used when the color is “My color”.<br>Default value = blue</small><hr width=\"260\">",
+				"condition" : "trianglesshow.value == true",
+				"index" : 168,
+				"order" : 268,
+				"text" : "<small>Your color for the triangles. While music plays, the album color replaces it, unless “Keep my color” is on.<br>Default value = dark gray (#111111)</small><hr width=\"260\">",
 				"type" : "text",
 				"value" : false
 			},
-			"hinttrianglescolorsource" : 
+			"hinttrianglescoloralbum" : 
+			{
+				"condition" : "trianglesshow.value == true && trianglescolorkeep.value == false",
+				"index" : 172,
+				"order" : 272,
+				"text" : "<small>Which color of the album cover replaces your color while music plays.<br>Default value = Main color</small><hr width=\"260\">",
+				"type" : "text",
+				"value" : false
+			},
+			"hinttrianglescolorkeep" : 
 			{
 				"condition" : "trianglesshow.value == true",
-				"index" : 118,
-				"order" : 218,
-				"text" : "<small>Your own color, or a color taken from the album cover.<br>Default value = Album: main color</small><hr width=\"260\">",
+				"index" : 170,
+				"order" : 270,
+				"text" : "<small>The album never changes the triangles.<br>Default value = Off</small><hr width=\"260\">",
 				"type" : "text",
 				"value" : false
 			},
 			"hinttrianglesfadeinduration" : 
 			{
 				"condition" : "trianglesshow.value == true",
-				"index" : 126,
-				"order" : 226,
+				"index" : 178,
+				"order" : 278,
 				"text" : "<small>How long they take to light up.<br>Default value = 0.1</small><hr width=\"260\">",
 				"type" : "text",
 				"value" : false
@@ -1121,8 +1671,8 @@
 			"hinttrianglesfadeoutduration" : 
 			{
 				"condition" : "trianglesshow.value == true",
-				"index" : 128,
-				"order" : 228,
+				"index" : 180,
+				"order" : 280,
 				"text" : "<small>How long they take to go dark.<br>Default value = 1.5</small><hr width=\"260\">",
 				"type" : "text",
 				"value" : false
@@ -1130,8 +1680,8 @@
 			"hinttrianglesglowstrength" : 
 			{
 				"condition" : "trianglesshow.value == true",
-				"index" : 124,
-				"order" : 224,
+				"index" : 176,
+				"order" : 276,
 				"text" : "<small>How bright they get. Above 1 they turn white.<br>Default value = 0.2</small><hr width=\"260\">",
 				"type" : "text",
 				"value" : false
@@ -1139,8 +1689,8 @@
 			"hinttrianglesopacity" : 
 			{
 				"condition" : "trianglesshow.value == true",
-				"index" : 114,
-				"order" : 214,
+				"index" : 164,
+				"order" : 264,
 				"text" : "<small>Lower = more of the layers below show through.<br>Default value = 0.33</small><hr width=\"260\">",
 				"type" : "text",
 				"value" : false
@@ -1148,8 +1698,8 @@
 			"hinttrianglesrangeend" : 
 			{
 				"condition" : "trianglesshow.value == true",
-				"index" : 134,
-				"order" : 234,
+				"index" : 186,
+				"order" : 286,
 				"text" : "<small>64 channels (0–63)<br>63 = highest treble<br>Default value = 9</small><hr width=\"260\">",
 				"type" : "text",
 				"value" : false
@@ -1157,8 +1707,8 @@
 			"hinttrianglesrangestart" : 
 			{
 				"condition" : "trianglesshow.value == true",
-				"index" : 132,
-				"order" : 232,
+				"index" : 184,
+				"order" : 284,
 				"text" : "<small>64 channels (0–63)<br>0 = deepest bass<br>Default value = 0</small><hr width=\"260\">",
 				"type" : "text",
 				"value" : false
@@ -1166,8 +1716,8 @@
 			"hinttrianglesrows" : 
 			{
 				"condition" : "trianglesshow.value == true",
-				"index" : 116,
-				"order" : 216,
+				"index" : 166,
+				"order" : 266,
 				"text" : "<small>More rows = smaller triangles.<br>Default value = 6</small><hr width=\"260\">",
 				"type" : "text",
 				"value" : false
@@ -1175,8 +1725,8 @@
 			"hinttrianglesshow" : 
 			{
 				"condition" : "",
-				"index" : 112,
-				"order" : 212,
+				"index" : 162,
+				"order" : 262,
 				"text" : "<small>Turn off to hide the triangles.<br>Default value = On</small><hr width=\"260\">",
 				"type" : "text",
 				"value" : false
@@ -1184,8 +1734,8 @@
 			"hinttrianglesvariation" : 
 			{
 				"condition" : "trianglesshow.value == true",
-				"index" : 130,
-				"order" : 230,
+				"index" : 182,
+				"order" : 282,
 				"text" : "<small>Shade difference between triangles. 0 = all the same.<br>Default value = 0.2</small><hr width=\"260\">",
 				"type" : "text",
 				"value" : false
@@ -1202,8 +1752,8 @@
 			"labelalbumspin" : 
 			{
 				"condition" : "",
-				"index" : 100,
-				"order" : 200,
+				"index" : 146,
+				"order" : 246,
 				"text" : "<small>The cover of the song playing, blurred and slowly spinning behind the cards. Its color follows each song.</small>",
 				"type" : "text",
 				"value" : false
@@ -1211,17 +1761,26 @@
 			"labelaudiobars" : 
 			{
 				"condition" : "trackcardshow.value == true && trackcardshowbars.value == true",
-				"index" : 46,
-				"order" : 146,
+				"index" : 74,
+				"order" : 174,
 				"text" : "<small>The bars inside the now playing card.</small>",
+				"type" : "text",
+				"value" : false
+			},
+			"labelaudioplayback" : 
+			{
+				"condition" : "",
+				"index" : 190,
+				"order" : 290,
+				"text" : "<small>How the wallpaper reacts to the music for every section.</small>",
 				"type" : "text",
 				"value" : false
 			},
 			"labelbackground" : 
 			{
 				"condition" : "",
-				"index" : 80,
-				"order" : 180,
+				"index" : 122,
+				"order" : 222,
 				"text" : "<small>The background is made of layers, from bottom to top: <b>color → Album Spin → Triangles → image</b>. This section has the bottom and the top layers; Album Spin and Triangles have their own sections. Use the opacity sliders to mix them.</small>",
 				"type" : "text",
 				"value" : false
@@ -1247,8 +1806,8 @@
 			"labeldate" : 
 			{
 				"condition" : "",
-				"index" : 66,
-				"order" : 166,
+				"index" : 94,
+				"order" : 194,
 				"text" : "<small>The card with the weekday and the date, in your system language.</small>",
 				"type" : "text",
 				"value" : false
@@ -1274,8 +1833,8 @@
 			"labeltrack" : 
 			{
 				"condition" : "",
-				"index" : 26,
-				"order" : 126,
+				"index" : 40,
+				"order" : 140,
 				"text" : "<small>The song playing on your PC, with cover, title and artist. Hides itself when nothing is playing.</small>",
 				"type" : "text",
 				"value" : false
@@ -1283,8 +1842,8 @@
 			"labeltriangles" : 
 			{
 				"condition" : "",
-				"index" : 110,
-				"order" : 210,
+				"index" : 160,
+				"order" : 260,
 				"text" : "<small>A grid of triangles in one color. On each beat of the music, a few random triangles light up and fade away.</small>",
 				"type" : "text",
 				"value" : false
@@ -1292,10 +1851,19 @@
 			"labeltroubleshooting" : 
 			{
 				"condition" : "",
-				"index" : 138,
-				"order" : 238,
+				"index" : 196,
+				"order" : 296,
 				"text" : "<small>Tools to find out what is wrong when something does not show up.</small>",
 				"type" : "text",
+				"value" : false
+			},
+			"playbackmycolorswhenpaused" : 
+			{
+				"condition" : "",
+				"index" : 193,
+				"order" : 293,
+				"text" : "My colors when paused",
+				"type" : "bool",
 				"value" : false
 			},
 			"schemecolor" : 
@@ -1308,8 +1876,8 @@
 			"trackcard" : 
 			{
 				"condition" : "",
-				"index" : 25,
-				"order" : 125,
+				"index" : 39,
+				"order" : 139,
 				"text" : "🎵 Now Playing",
 				"type" : "group",
 				"value" : ""
@@ -1317,7 +1885,7 @@
 			"trackcardartitsfontfamily" : 
 			{
 				"condition" : "trackcardshow.value == true",
-				"index" : 39,
+				"index" : 67,
 				"options" : 
 				[
 					{
@@ -1345,7 +1913,7 @@
 						"value" : "Tokyo"
 					}
 				],
-				"order" : 139,
+				"order" : 167,
 				"text" : "Artist font",
 				"type" : "combo",
 				"value" : "Unageo"
@@ -1354,10 +1922,10 @@
 			{
 				"condition" : "trackcardshow.value == true",
 				"fraction" : false,
-				"index" : 41,
+				"index" : 69,
 				"max" : 900,
 				"min" : 100,
-				"order" : 141,
+				"order" : 169,
 				"text" : "Artist font weight",
 				"type" : "slider",
 				"value" : 300
@@ -1366,21 +1934,80 @@
 			{
 				"condition" : "trackcardshow.value == true",
 				"fraction" : true,
-				"index" : 43,
+				"index" : 71,
 				"max" : 40,
 				"min" : 0,
-				"order" : 143,
+				"order" : 171,
 				"precision" : 2,
 				"step" : 0.1,
 				"text" : "Corner roundness",
 				"type" : "slider",
 				"value" : 10
 			},
+			"trackcardcolor" : 
+			{
+				"condition" : "trackcardshow.value == true",
+				"index" : 45,
+				"order" : 145,
+				"text" : "Card color",
+				"type" : "color",
+				"value" : "0.06667 0.06667 0.06667"
+			},
+			"trackcardcoloralbum" : 
+			{
+				"condition" : "trackcardshow.value == true && trackcardcolorkeep.value == false",
+				"index" : 49,
+				"options" : 
+				[
+					{
+						"label" : "Main color",
+						"value" : "primary"
+					},
+					{
+						"label" : "Second color",
+						"value" : "secondary"
+					},
+					{
+						"label" : "Third color",
+						"value" : "tertiary"
+					},
+					{
+						"label" : "Text color",
+						"value" : "text"
+					},
+					{
+						"label" : "High contrast color",
+						"value" : "highcontrast"
+					}
+				],
+				"order" : 149,
+				"text" : "Album color",
+				"type" : "combo",
+				"value" : "primary"
+			},
+			"trackcardcolorkeep" : 
+			{
+				"condition" : "trackcardshow.value == true",
+				"index" : 47,
+				"order" : 147,
+				"text" : "Keep my color",
+				"type" : "bool",
+				"value" : false
+			},
+			"trackcardhideonpause" : 
+			{
+				"condition" : "trackcardshow.value == true",
+				"index" : 43,
+				"order" : 143,
+				"text" : "Hide when paused",
+				"type" : "bool",
+				"value" : false
+			},
 			"trackcardshow" : 
 			{
 				"condition" : "",
-				"index" : 27,
-				"order" : 127,
+				"index" : 41,
+				"order" : 141,
 				"text" : "Show now playing",
 				"type" : "bool",
 				"value" : true
@@ -1388,8 +2015,8 @@
 			"trackcardshowbars" : 
 			{
 				"condition" : "trackcardshow.value == true",
-				"index" : 31,
-				"order" : 131,
+				"index" : 59,
+				"order" : 159,
 				"text" : "Show audio bars",
 				"type" : "bool",
 				"value" : true
@@ -1397,8 +2024,8 @@
 			"trackcardshowbeats" : 
 			{
 				"condition" : "trackcardshow.value == true",
-				"index" : 33,
-				"order" : 133,
+				"index" : 61,
+				"order" : 161,
 				"text" : "Show beat blocks",
 				"type" : "bool",
 				"value" : true
@@ -1406,16 +2033,81 @@
 			"trackcardshowtimeline" : 
 			{
 				"condition" : "trackcardshow.value == true",
-				"index" : 29,
-				"order" : 129,
+				"index" : 57,
+				"order" : 157,
 				"text" : "Show progress bar",
 				"type" : "bool",
 				"value" : true
 			},
+			"trackcardtextalbum" : 
+			{
+				"condition" : "trackcardshow.value == true && trackcardtextmode.value == 'album'",
+				"index" : 55,
+				"options" : 
+				[
+					{
+						"label" : "Main color",
+						"value" : "primary"
+					},
+					{
+						"label" : "Second color",
+						"value" : "secondary"
+					},
+					{
+						"label" : "Third color",
+						"value" : "tertiary"
+					},
+					{
+						"label" : "Text color",
+						"value" : "text"
+					},
+					{
+						"label" : "High contrast color",
+						"value" : "highcontrast"
+					}
+				],
+				"order" : 155,
+				"text" : "Text album color",
+				"type" : "combo",
+				"value" : "text"
+			},
+			"trackcardtextcolor" : 
+			{
+				"condition" : "trackcardshow.value == true && trackcardtextmode.value == 'custom'",
+				"index" : 53,
+				"order" : 153,
+				"text" : "Pick a text color",
+				"type" : "color",
+				"value" : "1 1 1"
+			},
+			"trackcardtextmode" : 
+			{
+				"condition" : "trackcardshow.value == true",
+				"index" : 51,
+				"options" : 
+				[
+					{
+						"label" : "Automatic",
+						"value" : "auto"
+					},
+					{
+						"label" : "My color",
+						"value" : "custom"
+					},
+					{
+						"label" : "Album color",
+						"value" : "album"
+					}
+				],
+				"order" : 151,
+				"text" : "Text color",
+				"type" : "combo",
+				"value" : "album"
+			},
 			"trackcardtitlefontfamily" : 
 			{
 				"condition" : "trackcardshow.value == true",
-				"index" : 35,
+				"index" : 63,
 				"options" : 
 				[
 					{
@@ -1443,7 +2135,7 @@
 						"value" : "Tokyo"
 					}
 				],
-				"order" : 135,
+				"order" : 163,
 				"text" : "Song title font",
 				"type" : "combo",
 				"value" : "Unageo"
@@ -1452,10 +2144,10 @@
 			{
 				"condition" : "trackcardshow.value == true",
 				"fraction" : false,
-				"index" : 37,
+				"index" : 65,
 				"max" : 900,
 				"min" : 100,
-				"order" : 137,
+				"order" : 165,
 				"text" : "Song title font weight",
 				"type" : "slider",
 				"value" : 600
@@ -1463,8 +2155,8 @@
 			"triangles" : 
 			{
 				"condition" : "",
-				"index" : 109,
-				"order" : 209,
+				"index" : 159,
+				"order" : 259,
 				"text" : "🔺 Triangles",
 				"type" : "group",
 				"value" : ""
@@ -1473,10 +2165,10 @@
 			{
 				"condition" : "trianglesshow.value == true",
 				"fraction" : true,
-				"index" : 121,
+				"index" : 173,
 				"max" : 1,
 				"min" : 0,
-				"order" : 221,
+				"order" : 273,
 				"precision" : 2,
 				"step" : 0.01,
 				"text" : "Triangles per beat",
@@ -1487,10 +2179,10 @@
 			{
 				"condition" : "trianglesshow.value == true",
 				"fraction" : true,
-				"index" : 135,
+				"index" : 187,
 				"max" : 3,
 				"min" : 1,
-				"order" : 235,
+				"order" : 287,
 				"precision" : 2,
 				"step" : 0.05,
 				"text" : "Beat threshold",
@@ -1499,57 +2191,62 @@
 			},
 			"trianglescolor" : 
 			{
-				"condition" : "trianglesshow.value == true && trianglescolorsource.value == 'custom'",
-				"index" : 119,
-				"order" : 219,
-				"text" : "Pick a color",
-				"type" : "color",
-				"value" : "0.2 0.4 1"
-			},
-			"trianglescolorsource" : 
-			{
 				"condition" : "trianglesshow.value == true",
-				"index" : 117,
+				"index" : 167,
+				"order" : 267,
+				"text" : "Color",
+				"type" : "color",
+				"value" : "0.06667 0.06667 0.06667"
+			},
+			"trianglescoloralbum" : 
+			{
+				"condition" : "trianglesshow.value == true && trianglescolorkeep.value == false",
+				"index" : 171,
 				"options" : 
 				[
 					{
-						"label" : "My color",
-						"value" : "custom"
-					},
-					{
-						"label" : "Album: main color",
+						"label" : "Main color",
 						"value" : "primary"
 					},
 					{
-						"label" : "Album: second color",
+						"label" : "Second color",
 						"value" : "secondary"
 					},
 					{
-						"label" : "Album: third color",
+						"label" : "Third color",
 						"value" : "tertiary"
 					},
 					{
-						"label" : "Album: text color",
+						"label" : "Text color",
 						"value" : "text"
 					},
 					{
-						"label" : "Album: high contrast color",
+						"label" : "High contrast color",
 						"value" : "highcontrast"
 					}
 				],
-				"order" : 217,
-				"text" : "Color",
+				"order" : 271,
+				"text" : "Album color",
 				"type" : "combo",
 				"value" : "primary"
+			},
+			"trianglescolorkeep" : 
+			{
+				"condition" : "trianglesshow.value == true",
+				"index" : 169,
+				"order" : 269,
+				"text" : "Keep my color",
+				"type" : "bool",
+				"value" : false
 			},
 			"trianglesfadeinduration" : 
 			{
 				"condition" : "trianglesshow.value == true",
 				"fraction" : true,
-				"index" : 125,
+				"index" : 177,
 				"max" : 1,
 				"min" : 0,
-				"order" : 225,
+				"order" : 277,
 				"precision" : 2,
 				"step" : 0.05,
 				"text" : "Fade in (seconds)",
@@ -1560,10 +2257,10 @@
 			{
 				"condition" : "trianglesshow.value == true",
 				"fraction" : true,
-				"index" : 127,
+				"index" : 179,
 				"max" : 5,
 				"min" : 0.1,
-				"order" : 227,
+				"order" : 279,
 				"precision" : 1,
 				"step" : 0.1,
 				"text" : "Fade out (seconds)",
@@ -1574,10 +2271,10 @@
 			{
 				"condition" : "trianglesshow.value == true",
 				"fraction" : true,
-				"index" : 123,
+				"index" : 175,
 				"max" : 2,
 				"min" : 0,
-				"order" : 223,
+				"order" : 275,
 				"precision" : 2,
 				"step" : 0.05,
 				"text" : "Glow strength",
@@ -1588,10 +2285,10 @@
 			{
 				"condition" : "trianglesshow.value == true",
 				"fraction" : true,
-				"index" : 113,
+				"index" : 163,
 				"max" : 1,
 				"min" : 0,
-				"order" : 213,
+				"order" : 263,
 				"precision" : 2,
 				"step" : 0.01,
 				"text" : "Opacity",
@@ -1602,10 +2299,10 @@
 			{
 				"condition" : "trianglesshow.value == true",
 				"fraction" : false,
-				"index" : 133,
+				"index" : 185,
 				"max" : 63,
 				"min" : 0,
-				"order" : 233,
+				"order" : 285,
 				"step" : 1,
 				"text" : "Reaction range end",
 				"type" : "slider",
@@ -1615,10 +2312,10 @@
 			{
 				"condition" : "trianglesshow.value == true",
 				"fraction" : false,
-				"index" : 131,
+				"index" : 183,
 				"max" : 63,
 				"min" : 0,
-				"order" : 231,
+				"order" : 283,
 				"step" : 1,
 				"text" : "Reaction range start",
 				"type" : "slider",
@@ -1628,10 +2325,10 @@
 			{
 				"condition" : "trianglesshow.value == true",
 				"fraction" : false,
-				"index" : 115,
+				"index" : 165,
 				"max" : 20,
 				"min" : 2,
-				"order" : 215,
+				"order" : 265,
 				"step" : 1,
 				"text" : "Rows",
 				"type" : "slider",
@@ -1640,8 +2337,8 @@
 			"trianglesshow" : 
 			{
 				"condition" : "",
-				"index" : 111,
-				"order" : 211,
+				"index" : 161,
+				"order" : 261,
 				"text" : "Show triangles",
 				"type" : "bool",
 				"value" : true
@@ -1650,10 +2347,10 @@
 			{
 				"condition" : "trianglesshow.value == true",
 				"fraction" : true,
-				"index" : 129,
+				"index" : 181,
 				"max" : 1,
 				"min" : 0,
-				"order" : 229,
+				"order" : 281,
 				"precision" : 2,
 				"step" : 0.01,
 				"text" : "Texture",
@@ -1663,8 +2360,8 @@
 			"troubleshooting" : 
 			{
 				"condition" : "",
-				"index" : 137,
-				"order" : 237,
+				"index" : 195,
+				"order" : 295,
 				"text" : "🛠️ Troubleshooting",
 				"type" : "group",
 				"value" : ""

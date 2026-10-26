@@ -28,14 +28,38 @@ const ANY_IMAGE = `${MY_IMAGE} || ${ALBUM_IMAGE}`;
 const WEIGHT = "100 = thin, 900 = bold.";
 const ROUND = "0 = square corners, higher = rounder.";
 
-const COLOR_SOURCES = [
-    { label: "My color", value: "custom" },
-    { label: "Album: main color", value: "primary" },
-    { label: "Album: second color", value: "secondary" },
-    { label: "Album: third color", value: "tertiary" },
-    { label: "Album: text color", value: "text" },
-    { label: "Album: high contrast color", value: "highcontrast" },
+const ALBUM_COLORS = [
+    { label: "Main color", value: "primary" },
+    { label: "Second color", value: "secondary" },
+    { label: "Third color", value: "tertiary" },
+    { label: "Text color", value: "text" },
+    { label: "High contrast color", value: "highcontrast" },
 ];
+
+const TEXT_MODES = [
+    { label: "Automatic", value: "auto" },
+    { label: "My color", value: "custom" },
+    { label: "Album color", value: "album" },
+];
+
+/** Color, "Keep my color" and album color of an element (docs/specs/20261026-125745-colors.md). */
+const colorOptions = (key, label, what, condition) => {
+    const and = (extra) => (condition ? `${condition} && ${extra}` : extra);
+    return [
+        opt(`${key}color`, label, `Your color for ${what}. While music plays, the album color replaces it, unless “Keep my color” is on.`, condition),
+        opt(`${key}colorkeep`, "Keep my color", `The album never changes ${what}.`, condition),
+        opt(`${key}coloralbum`, "Album color", "Which color of the album cover replaces your color while music plays.", and(`${key}colorkeep.value == false`), { options: ALBUM_COLORS }),
+    ].flat();
+};
+
+/** A card's colors: background (as above) and text. */
+const cardColorOptions = (card, condition, { keepLast = true } = {}) => [
+    colorOptions(card, "Card color", "this card", condition),
+    keepLast ? opt(`${card}colorkeeplast`, "Keep last color", "After the music stops, keeps the last album colors instead of going back to yours.", `${condition} && ${card}colorkeep.value == false`) : [],
+    opt(`${card}textmode`, "Text color", "Automatic = black or white, whichever reads best. My color = your own color. Album color = a color of the album cover (automatic without music).", condition, { options: TEXT_MODES }),
+    opt(`${card}textcolor`, "Pick a text color", "Used when the text color is “My color”.", `${condition} && ${card}textmode.value == 'custom'`),
+    opt(`${card}textalbum`, "Text album color", "Which color of the album cover the text uses while music plays.", `${condition} && ${card}textmode.value == 'album'`, { options: ALBUM_COLORS }),
+].flat();
 
 const IMAGE_SOURCES = [
     { label: "None", value: "none" },
@@ -57,7 +81,7 @@ const COVER_POSITIONS = [
     { label: "Center", value: "center" },
 ];
 
-const COLOR_NAMES = { "0 0 0": "black", "1 1 1": "white", "0.2 0.4 1": "blue" };
+const COLOR_NAMES = { "0 0 0": "black", "1 1 1": "white", "0.06667 0.06667 0.06667": "dark gray (#111111)" };
 
 const PANEL = [
     label("labelintro", "<h2>Minimalist Cards</h2><small>Clock, date and music cards over a background that moves with your music.</small><br>&nbsp;"),
@@ -74,6 +98,7 @@ const PANEL = [
     label("labelclock", "<small>The card with the current time.</small>"),
     opt("clockcardshow", "Show clock", "Turn off to hide the clock card."),
     opt("clockcardshowseconds", "Show seconds", "Adds the seconds to the time.", CLOCK),
+    cardColorOptions("clockcard", CLOCK),
     opt("clockcardformat12h", "12-hour format", "Shows AM / PM instead of 0–23 h.", CLOCK),
     opt("clockcardfontfamily", "Font", "Font of the time.", CLOCK),
     opt("clockcardfontweight", "Font weight", WEIGHT, CLOCK),
@@ -82,6 +107,8 @@ const PANEL = [
     group("trackcard", "🎵 Now Playing"),
     label("labeltrack", "<small>The song playing on your PC, with cover, title and artist. Hides itself when nothing is playing.</small>"),
     opt("trackcardshow", "Show now playing", "Turn off to hide the music card."),
+    opt("trackcardhideonpause", "Hide when paused", "Closes this card while the music is paused.", TRACK),
+    cardColorOptions("trackcard", TRACK, { keepLast: false }),
     opt("trackcardshowtimeline", "Show progress bar", "Elapsed and total time of the song.", TRACK),
     opt("trackcardshowbars", "Show audio bars", "Bars that dance with the music.", TRACK),
     opt("trackcardshowbeats", "Show beat blocks", "Three blocks that pulse with the bass, mids and treble.", TRACK),
@@ -106,6 +133,7 @@ const PANEL = [
     group("datecard", "📅 Date"),
     label("labeldate", "<small>The card with the weekday and the date, in your system language.</small>"),
     opt("datecardshow", "Show date", "Turn off to hide the date card."),
+    cardColorOptions("datecard", DATE),
     opt("datecardweekdayfontfamily", "Weekday font", "Font of the day of the week.", DATE),
     opt("datecardweekdayfontweight", "Weekday font weight", WEIGHT, DATE),
     opt("datecardfulldatefontfamily", "Date font", "Font of the day, month and year.", DATE),
@@ -114,19 +142,21 @@ const PANEL = [
 
     group("background", "🖼️ Background"),
     label("labelbackground", "<small>The background is made of layers, from bottom to top: <b>color → Album Spin → Triangles → image</b>. This section has the bottom and the top layers; Album Spin and Triangles have their own sections. Use the opacity sliders to mix them.</small>"),
-    opt("backgroundcolorsource", "Background color", "Solid color at the very bottom. Your own color, or a color taken from the album cover.", undefined, { options: COLOR_SOURCES }),
-    opt("backgroundcolor", "Pick a color", "Used when the background color is “My color”.", "backgroundcolorsource.value == 'custom'"),
+    colorOptions("background", "Background color", "the solid color at the very bottom"),
     opt("backgroundimagesource", "Image", "Top layer: an image of your own, or the cover of the song playing.", undefined, { options: IMAGE_SOURCES }),
     opt("backgroundimage", "Your image", "The image file to show.", MY_IMAGE),
     opt("backgroundimagefit", "Image fit", "Stretch = fills the screen, may distort. Fill = fills without distorting, cuts the edges. Fit = shows the whole image. Center = original size. Tile = repeats the image.", MY_IMAGE, { options: IMAGE_FITS }),
     opt("backgroundimagecoverposition", "Cover position", "Left and Right fade out towards the center, like the cover in the music card. Center fades a little on both sides.", ALBUM_IMAGE, { options: COVER_POSITIONS }),
     opt("backgroundimagekeepcover", "Keep last cover", "Keeps showing the last cover when no music is playing. Off = the cover fades out.", ALBUM_IMAGE),
+    opt("backgroundimagehideonpause", "Hide cover when paused", "Removes the cover while the music is paused, even with “Keep last cover”.", ALBUM_IMAGE),
     opt("backgroundimageopacity", "Image opacity", "Lower = more of the layers below show through.", ANY_IMAGE),
     opt("backgroundimagebeatsensitivity", "Image beat pulse", "How much the image grows with the bass. 0 = off.", ANY_IMAGE),
 
     group("albumspin", "💿 Album Spin"),
     label("labelalbumspin", "<small>The cover of the song playing, blurred and slowly spinning behind the cards. Its color follows each song.</small>"),
     opt("albumspinshow", "Show Album Spin", "Turn off to hide the spinning cover."),
+    opt("albumspinkeepcover", "Keep last cover", "Keeps spinning the last cover when no music is playing. Off = the cover fades out.", ALBUM),
+    opt("albumspinhideonpause", "Hide when paused", "Removes the spinning cover while the music is paused, even with “Keep last cover”.", ALBUM),
     opt("albumspinopacity", "Opacity", "Lower = more of the background color shows through.", ALBUM),
     opt("albumspinrotationspeed", "Rotation speed", "0 = stopped, higher = faster.", ALBUM),
     opt("albumspinbeatsensitivity", "Beat pulse", "How much the cover grows with the bass. 0 = off.", ALBUM),
@@ -136,8 +166,7 @@ const PANEL = [
     opt("trianglesshow", "Show triangles", "Turn off to hide the triangles."),
     opt("trianglesopacity", "Opacity", "Lower = more of the layers below show through.", TRI),
     opt("trianglesrows", "Rows", "More rows = smaller triangles.", TRI),
-    opt("trianglescolorsource", "Color", "Your own color, or a color taken from the album cover.", TRI, { options: COLOR_SOURCES }),
-    opt("trianglescolor", "Pick a color", "Used when the color is “My color”.", `${TRI} && trianglescolorsource.value == 'custom'`),
+    colorOptions("triangles", "Color", "the triangles", TRI),
     opt("trianglesbeatsensitivity", "Triangles per beat", "How many light up on each beat.", TRI),
     opt("trianglesglowstrength", "Glow strength", "How bright they get. Above 1 they turn white.", TRI),
     opt("trianglesfadeinduration", "Fade in (seconds)", "How long they take to light up.", TRI),
@@ -146,6 +175,11 @@ const PANEL = [
     opt("trianglesrangestart", "Reaction range start", "64 channels (0–63)<br>0 = deepest bass", TRI),
     opt("trianglesrangeend", "Reaction range end", "64 channels (0–63)<br>63 = highest treble", TRI),
     opt("trianglesbeatthreshold", "Beat threshold", "Higher = only strong beats light triangles.", TRI),
+
+    group("audioplayback", "🔊 Audio & Playback"),
+    label("labelaudioplayback", "<small>How the wallpaper reacts to the music for every section.</small>"),
+    opt("audioautovolume", "Auto volume", "Bars and effects react as if the music were at full volume, even when it is quiet. Quiet parts of a song can then look as strong as loud ones."),
+    opt("playbackmycolorswhenpaused", "My colors when paused", "While the music is paused, every card and the background go back to your own colors."),
 
     group("troubleshooting", "🛠️ Troubleshooting"),
     label("labeltroubleshooting", "<small>Tools to find out what is wrong when something does not show up.</small>"),

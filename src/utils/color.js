@@ -1,5 +1,3 @@
-import { FALLBACK_COLORS } from "../config.js";
-
 /**
  * Parses "#rgb", "#rrggbb", "#rrggbbaa", "rgb()/rgba()" or Wallpaper Engine's "r g b" (0-1 floats)
  * into [r, g, b] (0-255), or null.
@@ -47,26 +45,50 @@ export function toGlColor(color, fallback = [1, 1, 1]) {
     return rgb ? rgb.map((channel) => channel / 255) : fallback;
 }
 
-// Color sources a user can pick for a background layer; anything else means the custom color
-const ALBUM_COLORS = {
-    primary: ["primaryColor", FALLBACK_COLORS.primary],
-    secondary: ["secondaryColor", FALLBACK_COLORS.primary],
-    tertiary: ["tertiaryColor", FALLBACK_COLORS.primary],
-    text: ["textColor", FALLBACK_COLORS.text],
-    highcontrast: ["highContrastColor", FALLBACK_COLORS.text],
+// The album colors a user can pick, by setting value
+const ALBUM_COLOR_KEYS = {
+    primary: "primaryColor",
+    secondary: "secondaryColor",
+    tertiary: "tertiaryColor",
+    text: "textColor",
+    highcontrast: "highContrastColor",
 };
 
-/** Resolves a color source ("custom" or an album color name) against the current cover's colors (may be null). */
-export function pickColor(source, customColor, album) {
-    const entry = ALBUM_COLORS[source];
-    if (!entry) return customColor;
-
-    const [key, fallback] = entry;
-    return parseColor(album?.[key]) ? album[key] : fallback;
+/** The requested color of the current cover (a thumbnail event), or null when there is none. */
+export function albumColor(source, album) {
+    const color = album?.[ALBUM_COLOR_KEYS[source]];
+    return parseColor(color) ? color : null;
 }
 
-export function isAlbumColor(source) {
-    return source in ALBUM_COLORS;
+/**
+ * The color of a colored element (a card, the base color, the triangles): the user's `color`, replaced by the
+ * `album` color while album colors are active (`albumColors` is null otherwise), unless `keep` is on.
+ */
+export function layerColor({ color, album, keep }, albumColors) {
+    const fromAlbum = keep ? null : albumColor(album, albumColors);
+    return fromAlbum ? { color: fromAlbum, fromAlbum: true } : { color, fromAlbum: false };
+}
+
+/** A card's text color: "auto" (best contrast with `background`), "custom" (`color`) or "album" (falls back to auto). */
+export function textColor({ mode, color, album }, background, albumColors) {
+    if (mode === "custom" && parseColor(color)) return color;
+    if (mode === "album") {
+        const fromAlbum = albumColor(album, albumColors);
+        if (fromAlbum) return fromAlbum;
+    }
+    return contrastColor(background);
+}
+
+/** Black or white, whichever has the higher WCAG contrast with `background`. */
+export function contrastColor(background) {
+    const rgb = parseColor(background) ?? [0, 0, 0];
+    const [r, g, b] = rgb.map((channel) => {
+        const c = channel / 255;
+        return c <= 0.03928 ? c / 12.92 : ((c + 0.055) / 1.055) ** 2.4;
+    });
+    const luminance = 0.2126 * r + 0.7152 * g + 0.0722 * b;
+    // Contrast with black is (L + 0.05) / 0.05, with white 1.05 / (L + 0.05); they are equal at L ≈ 0.179
+    return luminance > 0.179 ? "#000000" : "#ffffff";
 }
 
 /** Raises the HSL lightness (0-1) of `color` to at least `min`, keeping hue and saturation. */

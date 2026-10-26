@@ -9,10 +9,11 @@ import AudioBars from "../components/AudioBars.js";
 import Triangles from "../components/Triangles.js";
 import Debug from "../components/Debug.js";
 import { DEBUG, DEBUG_LOG_LINES, TRIANGLES } from "../config.js";
-import { isAlbumColor, pickColor, withMinLightness } from "../utils/color.js";
+import { layerColor, textColor, withMinLightness } from "../utils/color.js";
 import { loadCover, saveCover } from "../media/coverCache.js";
 import { timelineAdvanced } from "../media/TimelineClock.js";
 import { applyDefaults, applySettings } from "./settings.js";
+import { isEmptyThumbnail } from "./wallpaperBridge.js";
 
 /**
  * Owns the components and the single render loop.
@@ -36,9 +37,16 @@ export default class App {
         this.renderedAudioVersion = 0;
         this.lastSecond = -1;
 
-        // Each colored background layer uses its custom color or one of the current cover's colors
-        this.albumColors = null;
-        this.colors = { background: { source: "custom", custom: "" }, triangles: { source: "custom", custom: "" } };
+        // Every colored element: the user's color, the album color that replaces it while music plays, and whether
+        // to keep the user's color anyway. Cards also choose their text color. Values come from the settings.
+        const layer = () => ({ color: "", album: "primary", keep: false, keepLast: false });
+        const card = () => ({ ...layer(), textMode: "album", textColor: "", textAlbum: "text" });
+        // The music card is closed whenever the music stops, so it always keeps its last colors while it fades out
+        this.colors = { clockcard: card(), trackcard: { ...card(), keepLast: true }, datecard: card(), background: layer(), triangles: layer() };
+        this.cardsByKey = { clockcard: this.clockCard, trackcard: this.trackCard, datecard: this.dateCard };
+        this.mediaEnabled = true;
+        this.myColorsWhenPaused = false;
+        this.trackCardHideOnPause = false;
 
         // Latest media state and an event log, so the debug overlay can show them even when turned on later
         this.track = null;
@@ -109,25 +117,72 @@ export default class App {
         this.audioBars.invalidateSize();
     }
 
-    // Background colors
+    // Colors
 
-    setColorSource(layer, source) {
-        this.colors[layer].source = source;
+    /** `element` is a key of `this.colors`; `field` one of its settings (color, album, keep, textMode…). */
+    setColor(element, field, value) {
+        this.colors[element][field] = value;
         this.updateColors();
     }
 
-    setCustomColor(layer, color) {
-        this.colors[layer].custom = color;
+    setMyColorsWhenPaused(enabled) {
+        this.myColorsWhenPaused = enabled;
         this.updateColors();
+    }
+
+    /** The current cover's colors while music plays or is paused, otherwise null: everything uses the user's colors. */
+    activeAlbumColors() {
+        if (!this.thumbnail || !this.mediaEnabled) return null;
+        if (this.playback === "playing") return this.thumbnail;
+        if (this.playback === "paused" && !this.myColorsWhenPaused) return this.thumbnail;
+        return null;
+    }
+
+    /** The album colors an element uses: the active ones, or with "Keep last color" the last cover's after the music stops. */
+    elementAlbumColors(settings, active) {
+        if (active || !settings.keepLast) return active;
+        const pausedToMyColors = this.playback === "paused" && this.myColorsWhenPaused;
+        return pausedToMyColors ? null : this.thumbnail;
     }
 
     updateColors() {
-        const { background, triangles } = this.colors;
-        this.background.setBaseColor(pickColor(background.source, background.custom, this.albumColors));
+        const active = this.activeAlbumColors();
 
-        // Album colors are often too dark to visibly light up; a custom color is used as chosen
-        const trianglesColor = pickColor(triangles.source, triangles.custom, this.albumColors);
-        this.triangles.setColor(isAlbumColor(triangles.source) ? withMinLightness(trianglesColor, TRIANGLES.minAlbumLightness) : trianglesColor);
+        for (const [key, card] of Object.entries(this.cardsByKey)) {
+            const settings = this.colors[key];
+            const album = this.elementAlbumColors(settings, active);
+            const background = layerColor(settings, album).color;
+            const text = textColor({ mode: settings.textMode, color: settings.textColor, album: settings.textAlbum }, background, album);
+            card.setColors(background, text);
+            if (card === this.trackCard) this.audioBars.setColor(text);
+        }
+
+        this.background.setBaseColor(layerColor(this.colors.background, active).color);
+
+        // Album colors are often too dark to visibly light up; the user's color is used as chosen
+        const triangles = layerColor(this.colors.triangles, active);
+        this.triangles.setColor(triangles.fromAlbum ? withMinLightness(triangles.color, TRIANGLES.minAlbumLightness) : triangles.color);
+    }
+
+    // Music card
+
+    setTrackCardHideOnPause(hide) {
+        this.trackCardHideOnPause = hide;
+        this.updateTrackCard();
+    }
+
+    /** Open while music plays or is paused (unless hidden when paused); closed when stopped or before any media. */
+    updateTrackCard() {
+        const state = this.playback;
+        if (!state) return;
+
+        const open = state === "playing" || (state === "paused" && !this.trackCardHideOnPause);
+        if (open) {
+            this.trackCard.open();
+            this.audioBars.invalidateSize();
+        } else {
+            this.trackCard.close();
+        }
     }
 
     // Diagnostics
@@ -161,9 +216,6 @@ export default class App {
         this.background.setThumbnail(thumbnail.thumbnail).then((result) => this.logEvent(`album spin cover ${result}`));
         this.background.setTint(thumbnail.primaryColor);
         this.trackCard.setCover(thumbnail.thumbnail);
-        this.cards.setColors(thumbnail);
-        this.audioBars.setColor(thumbnail.textColor);
-        this.albumColors = thumbnail;
         this.updateColors();
         this.debug?.thumbnail(thumbnail);
     }
@@ -189,10 +241,12 @@ export default class App {
 
     onMediaStatus = (enabled) => {
         this.logEvent(`media integration ${enabled ? "on" : "off"}`);
+        this.mediaEnabled = enabled;
         if (!enabled) {
             this.trackCard.close();
             this.background.setMediaActive(false);
         }
+        this.updateColors();
     };
 
     /** `advanceTimeline` is false while playback is only assumed, so a paused track's progress bar stays still. */
@@ -201,12 +255,9 @@ export default class App {
         this.trackCard.setPlaying(advanceTimeline, performance.now());
 
         this.background.setMediaActive(state !== "stopped");
-        if (state === "stopped") {
-            this.trackCard.close();
-        } else {
-            this.trackCard.open();
-            this.audioBars.invalidateSize();
-        }
+        this.background.setMediaPaused(state === "paused");
+        this.updateTrackCard();
+        this.updateColors();
         this.debug?.playback(state);
     }
 
@@ -242,7 +293,13 @@ export default class App {
     };
 
     onThumbnail = (thumbnail) => {
-        this.logEvent(`cover received (${Math.round((thumbnail.thumbnail?.length ?? 0) / 1024)} KB)`);
+        // Closing the player sends a cover without image and with blank colors; the last real cover must stay
+        // for "Keep last color", "Keep last cover" and the cover cache
+        if (isEmptyThumbnail(thumbnail)) {
+            this.logEvent("empty cover ignored (player closed?)");
+            return;
+        }
+        this.logEvent(`cover received (${Math.round(thumbnail.thumbnail.length / 1024)} KB)`);
         this.assumePlaying("cover");
         this.thumbnailReceived = true;
         this.applyThumbnail(thumbnail);

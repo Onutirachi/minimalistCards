@@ -1,6 +1,7 @@
 import { el } from "../utils/dom.js";
+import { toCssColor, withAlpha } from "../utils/color.js";
 
-/** Shared look and settings of the clock, track and date cards. Colors come from CSS variables set on `.cards`. */
+/** Shared look and settings of the clock, track and date cards. Each card sets its own color variables. */
 export default class Card {
     constructor(parent, className) {
         this.container = el("div", `card ${className}`, parent);
@@ -11,6 +12,13 @@ export default class Card {
     setVisible(visible) {
         this.visible = visible;
         this.container.hidden = !visible;
+    }
+
+    setColors(background, text) {
+        const style = this.container.style;
+        style.setProperty("--card-background", toCssColor(background));
+        style.setProperty("--card-text", toCssColor(text));
+        style.setProperty("--card-text-muted", withAlpha(text, 0x50 / 255));
     }
 
     setBorderRadius(radius) {

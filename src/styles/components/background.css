@@ -7,10 +7,12 @@
     transition: background-color var(--color-transition);
 }
 
+/* The rotating album cover (Album Spin); Background.updateAlbum fades it through opacity */
 .background-image {
     position: relative;
     width: 100%;
     height: 100%;
+    transition: opacity var(--color-transition);
 }
 
 .background-rotator,
