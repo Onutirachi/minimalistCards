@@ -1,0 +1,66 @@
+{
+    "trackSeconds": 2,
+    "language": "en-US",
+    "timezone": "America/New_York",
+    "clock": "10:30",
+    "settings": {
+        "clockcardshowseconds": false,
+        "cardssize": 1.15,
+        "albumspinbeatsensitivity": 0,
+        "albumspinrotationspeed": 0
+    },
+    "tracks": [
+        {
+            "title": "Florescence",
+            "artist": "Narvent",
+            "cover": "Florescence - Narvent.webp",
+            "duration": 200,
+            "colors": {
+                "primaryColor": "#3226b4",
+                "secondaryColor": "#a2449a",
+                "tertiaryColor": "#de38a2",
+                "textColor": "#de38a2",
+                "highContrastColor": "#ffffff"
+            }
+        },
+        {
+            "title": "Resonance",
+            "artist": "Home",
+            "cover": "Resonance - Home.webp",
+            "duration": 227,
+            "colors": {
+                "primaryColor": "#cbc9ca",
+                "secondaryColor": "#5b4c52",
+                "tertiaryColor": "#9c9b55",
+                "textColor": "#5b4c52",
+                "highContrastColor": "#000000"
+            }
+        },
+        {
+            "title": "Wow.",
+            "artist": "Post Malone",
+            "cover": "Wow. - Post Malone.webp",
+            "duration": 178,
+            "colors": {
+                "primaryColor": "#1d5458",
+                "secondaryColor": "#3b3a34",
+                "tertiaryColor": "#5a6380",
+                "textColor": "#ffffff",
+                "highContrastColor": "#ffffff"
+            }
+        },
+        {
+            "title": "Something About Us (instrumental)",
+            "artist": "Kaminsky",
+            "cover": "Something About Us (instrumental) - Kaminsky.webp",
+            "duration": 252,
+            "colors": {
+                "primaryColor": "#0d3157",
+                "secondaryColor": "#0a2143",
+                "tertiaryColor": "#e8e6e4",
+                "textColor": "#e8e6e4",
+                "highContrastColor": "#ffffff"
+            }
+        }
+    ]
+}

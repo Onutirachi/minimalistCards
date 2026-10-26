@@ -6,6 +6,11 @@
     "scripts": {
         "test": "node --test",
         "panel": "node tools/settingsPanel.mjs",
+        "preview": "node tools/preview/record.mjs",
         "dev": "python -m http.server 8080"
+    },
+    "devDependencies": {
+        "gifenc": "^1.0.3",
+        "pngjs": "^7.0.0"
     }
 }

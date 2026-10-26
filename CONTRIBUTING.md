@@ -51,4 +51,16 @@ O `!` (ou o rodapé `BREAKING CHANGE:`) marca mudanças que exigem que o usuári
 
 ## Publicar no Workshop
 
+### Preview e prints
+
+`npm run preview` grava o wallpaper tocando as músicas de [`tools/preview/tracks.json`](tools/preview/tracks.json) e gera um `preview.gif` quadrado de 256×256 em loop, com o maior frame rate que cabe no limite de 1 MB do Wallpaper Engine. Os arquivos saem em `tools/preview/output/`.
+
+- `npm run preview -- --screenshots`: um PNG 1920×1080 por música, para a página do Workshop.
+- `npm run preview -- --wide`: um GIF 16:9 de 720 px.
+- `npm run preview -- --stills`: também salva o primeiro e o último quadro (a emenda do loop) e o meio de cada música, para conferir.
+
+As capas ficam em `tools/preview/covers/`, fora do Git. O `tracks.json` define a ordem, títulos, artistas, cores (as do overlay "Show debug info" do WE), duração de cada música no GIF, hora, idioma e ajustes do wallpaper. Precisa do Chrome instalado (ou `CHROME_PATH`).
+
+### Publicação
+
 O `project.json` contém `"workshopid": "3596377391"`. Publicar esta pasta pelo editor do Wallpaper Engine (**Share → Share Wallpaper on Workshop**) **atualiza** o item existente. Nunca remova esse campo.
