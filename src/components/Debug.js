@@ -9,27 +9,30 @@ export default class Debug {
     constructor(parent) {
         this.container = el("div", "debug", parent);
 
-        const track = this.panel("Properties", "debug-track");
+        // The event log gets its own column on the left; its lines are long and carry the instance id of each monitor
+        this.eventLog = this.panel(this.container, "Events (time, monitor id, event)", "debug-events debug-log");
+
+        const grid = el("div", "debug-grid", this.container);
+
+        const track = this.panel(grid, "Properties", "debug-track");
         this.title = el("div", "", track);
         this.artist = el("div", "", track);
 
-        this.pulse = el("div", "debug-pulse", this.panel("Audio"));
+        this.pulse = el("div", "debug-pulse", this.panel(grid, "Audio"));
 
-        const thumbnail = this.panel("Thumbnail", "debug-wide debug-thumbnail");
+        const thumbnail = this.panel(grid, "Thumbnail", "debug-wide debug-thumbnail");
         this.thumbnailImage = el("img", "debug-thumbnail-image", thumbnail);
         this.swatches = SWATCHES.map((key) => [key, el("div", "debug-swatch", thumbnail)]);
 
-        this.timelineText = el("div", "debug-big", this.panel("Timeline"));
-        this.playbackText = el("div", "debug-big", this.panel("Playback"));
+        this.timelineText = el("div", "debug-big", this.panel(grid, "Timeline"));
+        this.playbackText = el("div", "debug-big", this.panel(grid, "Playback"));
 
-        this.eventLog = this.panel("Events since load", "debug-wide debug-log");
-
-        this.log = this.panel("User Properties", "debug-wide debug-log");
+        this.log = this.panel(grid, "User Properties", "debug-wide debug-tall debug-log");
         this.lines = [];
     }
 
-    panel(title, className = "") {
-        const panel = el("div", `debug-panel ${className}`, this.container);
+    panel(parent, title, className = "") {
+        const panel = el("div", `debug-panel ${className}`, parent);
         el("div", "debug-title", panel).textContent = title;
         return el("div", "debug-content", panel);
     }

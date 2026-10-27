@@ -8,6 +8,7 @@ import DateCard from "../components/DateCard.js";
 import AudioBars from "../components/AudioBars.js";
 import Triangles from "../components/Triangles.js";
 import Debug from "../components/Debug.js";
+import EventLog from "./EventLog.js";
 import { DEBUG, DEBUG_LOG_LINES, TRIANGLES } from "../config.js";
 import { layerColor, textColor, withMinLightness } from "../utils/color.js";
 import { loadCover, saveCover } from "../media/coverCache.js";
@@ -55,9 +56,10 @@ export default class App {
         this.playbackAssumed = false;
         this.lastTimeline = null;
         this.thumbnailReceived = false;
-        this.events = [];
-        this.logEvent("wallpaper loaded");
+        this.events = new EventLog(DEBUG_LOG_LINES);
+        this.logEvent(`wallpaper loaded (${windowSize()} at ${window.screenX},${window.screenY})`);
         document.addEventListener("visibilitychange", () => this.logEvent(`page ${document.visibilityState}`));
+        window.addEventListener("resize", () => this.logEvent(`resize ${windowSize()}`));
 
         this.loop = new RenderLoop();
         this.loop.add(this.frame);
@@ -201,14 +203,12 @@ export default class App {
         if (this.track) this.debug.track(this.track);
         if (this.thumbnail) this.debug.thumbnail(this.thumbnail);
         if (this.playback) this.debug.playback(this.playback);
-        this.debug.events(this.events);
+        this.debug.events(this.events.lines());
     }
 
     logEvent(text) {
-        const time = new Date().toLocaleTimeString([], { hour12: false });
-        this.events.push(`${time}  ${text}`);
-        if (this.events.length > DEBUG_LOG_LINES) this.events.shift();
-        this.debug?.events(this.events);
+        this.events.add(text);
+        this.debug?.events(this.events.lines());
     }
 
     applyThumbnail(thumbnail) {
@@ -326,4 +326,8 @@ export default class App {
         }
         this.lastTimeline = report;
     };
+}
+
+function windowSize() {
+    return `${window.innerWidth}x${window.innerHeight} @${window.devicePixelRatio}`;
 }
