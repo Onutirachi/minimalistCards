@@ -1,6 +1,6 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import TimelineClock, { timelineAdvanced } from "../src/media/TimelineClock.js";
+import TimelineClock, { timelineAdvanced } from "../wallpaper/src/media/TimelineClock.js";
 
 const FRAME = 1000 / 60;
 

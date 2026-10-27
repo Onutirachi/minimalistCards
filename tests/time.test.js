@@ -1,7 +1,7 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { formatClock, formatDuration } from "../src/utils/time.js";
-import { detectLocale, formatFullDate, formatWeekday } from "../src/utils/locale.js";
+import { formatClock, formatDuration } from "../wallpaper/src/utils/time.js";
+import { detectLocale, formatFullDate, formatWeekday } from "../wallpaper/src/utils/locale.js";
 
 test("formatDuration renders mm:ss and handles bad input", () => {
     assert.equal(formatDuration(0), "00:00");

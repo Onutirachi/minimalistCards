@@ -1,6 +1,6 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { albumColor, contrastColor, layerColor, parseColor, textColor, toCssColor, toGlColor, withAlpha, withMinLightness } from "../src/utils/color.js";
+import { albumColor, contrastColor, layerColor, parseColor, textColor, toCssColor, toGlColor, withAlpha, withMinLightness } from "../wallpaper/src/utils/color.js";
 
 test("parseColor reads hex in every length", () => {
     assert.deepEqual(parseColor("#ffffff"), [255, 255, 255]);

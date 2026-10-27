@@ -1,7 +1,7 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import AudioAnalyzer from "../src/audio/AudioAnalyzer.js";
-import { AUTO_VOLUME } from "../src/config.js";
+import AudioAnalyzer from "../wallpaper/src/audio/AudioAnalyzer.js";
+import { AUTO_VOLUME } from "../wallpaper/src/config.js";
 
 /** Builds a Wallpaper Engine audio array: 64 left samples followed by 64 right samples. */
 function audioArray(left, right = left) {

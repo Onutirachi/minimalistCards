@@ -2,7 +2,7 @@
 
 - **Criada em:** 2026-10-24 11:05:17
 - **Status:** Implemented
-- **Código:** `src/core/RenderLoop.js`, `src/core/App.js` (`frame`, `onAudio`), `src/audio/AudioAnalyzer.js`
+- **Código:** `wallpaper/src/core/RenderLoop.js`, `wallpaper/src/core/App.js` (`frame`, `onAudio`), `wallpaper/src/audio/AudioAnalyzer.js`
 
 ## Contexto
 

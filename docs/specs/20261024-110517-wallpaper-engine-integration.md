@@ -2,7 +2,7 @@
 
 - **Criada em:** 2026-10-24 11:05:17
 - **Status:** Implemented
-- **Código:** `src/main.js`, `src/core/wallpaperBridge.js`, `src/core/settings.js`, `src/core/App.js`, `src/core/transitions.js`, `src/media/coverCache.js`, `src/core/EventLog.js`, `src/components/Debug.js`, `project.json`
+- **Código:** `wallpaper/src/main.js`, `wallpaper/src/core/wallpaperBridge.js`, `wallpaper/src/core/settings.js`, `wallpaper/src/core/App.js`, `wallpaper/src/core/transitions.js`, `wallpaper/src/media/coverCache.js`, `wallpaper/src/core/EventLog.js`, `wallpaper/src/components/Debug.js`, `wallpaper/project.json`
 
 ## Contexto
 

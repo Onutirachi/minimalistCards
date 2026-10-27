@@ -1,6 +1,6 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { loadCover, saveCover } from "../src/media/coverCache.js";
+import { loadCover, saveCover } from "../wallpaper/src/media/coverCache.js";
 
 function memoryStorage() {
     const items = new Map();

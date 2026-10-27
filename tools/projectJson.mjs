@@ -2,7 +2,7 @@
 // so generated changes produce the same diff the WE editor would.
 import { readFileSync, writeFileSync } from "node:fs";
 
-export const PROJECT_JSON = new URL("../project.json", import.meta.url);
+export const PROJECT_JSON = new URL("../wallpaper/project.json", import.meta.url);
 
 const NEWLINE = "\r\n";
 

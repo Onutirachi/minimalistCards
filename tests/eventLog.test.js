@@ -1,6 +1,6 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import EventLog from "../src/core/EventLog.js";
+import EventLog from "../wallpaper/src/core/EventLog.js";
 
 function memoryStorage() {
     const items = new Map();

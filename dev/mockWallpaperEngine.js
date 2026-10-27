@@ -100,7 +100,7 @@
 
     window.addEventListener("load", async () => {
         try {
-            const project = await (await fetch("../project.json")).json();
+            const project = await (await fetch("../wallpaper/project.json")).json();
             window.wallpaperPropertyListener?.applyUserProperties(project.general.properties);
         } catch (error) {
             console.warn("mock: could not load project.json", error);

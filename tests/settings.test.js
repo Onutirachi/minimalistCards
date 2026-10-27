@@ -1,10 +1,10 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
-import { SETTINGS, applyDefaults, applySettings } from "../src/core/settings.js";
-import { isEmptyThumbnail, normalizeThumbnail, normalizeTrack, toPlaybackState } from "../src/core/wallpaperBridge.js";
+import { SETTINGS, applyDefaults, applySettings } from "../wallpaper/src/core/settings.js";
+import { isEmptyThumbnail, normalizeThumbnail, normalizeTrack, toPlaybackState } from "../wallpaper/src/core/wallpaperBridge.js";
 
-const project = JSON.parse(readFileSync(new URL("../project.json", import.meta.url), "utf8").replace(/^﻿/, ""));
+const project = JSON.parse(readFileSync(new URL("../wallpaper/project.json", import.meta.url), "utf8").replace(/^﻿/, ""));
 const properties = project.general.properties;
 
 // Properties that only exist for the Wallpaper Engine UI; "group" and "text" properties are labels

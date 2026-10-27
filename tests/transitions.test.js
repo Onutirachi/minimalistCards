@@ -1,7 +1,7 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { TRANSITION_TIMEOUT_MARGIN } from "../src/config.js";
-import { crossFade, fade } from "../src/core/transitions.js";
+import { TRANSITION_TIMEOUT_MARGIN } from "../wallpaper/src/config.js";
+import { crossFade, fade } from "../wallpaper/src/core/transitions.js";
 
 // An element whose animations never advance, like on a hidden or paused page
 function stalledElement() {

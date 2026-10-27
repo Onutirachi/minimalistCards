@@ -1,6 +1,6 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { toBool, toNumber, toText } from "../src/utils/parse.js";
+import { toBool, toNumber, toText } from "../wallpaper/src/utils/parse.js";
 
 test("toBool accepts booleans and their string forms", () => {
     assert.equal(toBool(true), true);
