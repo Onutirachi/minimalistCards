@@ -58,6 +58,7 @@ export const TRIANGLES = {
     beatCooldown: 6, // audio frames between beats
     colorSpeed: 3, // color transition rate per second (exponential)
     minAlbumLightness: 0.45, // album colors are often too dark to light up
+    maxColumns: 1000, // a 32:9 screen at 20 rows needs about 125; more means the window size is degenerate
 };
 
 export const MARQUEE = {

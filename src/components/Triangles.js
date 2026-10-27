@@ -185,17 +185,23 @@ export default class Triangles {
         const width = Math.round(window.innerWidth * ratio);
         const height = Math.round(window.innerHeight * ratio);
 
+        const rows = this.options.rows;
+        const rowHeight = height / rows;
+        const step = rowHeight / Math.sqrt(3);
+
+        // A row only fully covers the space between its first and last apexes, so it overflows by more than a step on each side
+        const columns = Math.ceil(width / step) + 2;
+
+        // When Windows turns the monitors off, the window can shrink to a few pixels (or none) in height, which would
+        // build millions of triangles and stall the GPU. The layout waits until the screen has a sane size again.
+        if (!(width > 0 && rowHeight >= 1 && columns <= TRIANGLES.maxColumns)) return;
+
         this.canvas.width = width;
         this.canvas.height = height;
         gl.viewport(0, 0, width, height);
 
-        const rows = this.options.rows;
-        this.height = height / rows;
+        this.height = rowHeight;
         this.side = (2 * this.height) / Math.sqrt(3);
-        const step = this.side / 2;
-
-        // A row only fully covers the space between its first and last apexes, so it overflows by more than a step on each side
-        const columns = Math.ceil(width / step) + 2;
         const left = ((columns + 1) * step - width) / 2;
 
         this.count = rows * columns;
