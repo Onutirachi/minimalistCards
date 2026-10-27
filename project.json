@@ -1,6 +1,6 @@
 {
 	"contentrating" : "Everyone",
-	"description" : "[h1]Minimalist Cards[/h1]\r\n\r\n[b]Clock[/b]\r\n[list]\r\n[*]12H or 24H format  \r\n[*]Optional seconds display  \r\n[/list]\r\n\r\n[b]Localized Date[/b]\r\n[list]\r\n[*]Automatically formats weekday and date based on your system language  \r\n[/list]\r\n\r\n[b]Track Info[/b]\r\n[list]\r\n[*]Dynamically updates song details and background color from the album cover  \r\n[*]Animated frequency bars and peak dots\r\n[*]Beat-reactive to bass, mid, and treble frequencies  \r\n[*]Timeline showing current playback position and total track length  \r\n[/list]\r\n\r\n[url=https://github.com/Onutirachi/minimalistCards/tree/main]GitHub[/url]",
+	"description" : "[h1]Minimalist Cards[/h1]\n\nClean clock, date and now-playing cards over a background that moves with your music. Everything can be turned on, off and recolored, and every option in the settings has a short explanation.\n\n[h2]🕒 Clock & 📅 Date[/h2]\n[list]\n[*]12H or 24H format, with optional seconds\n[*]Weekday and date in your system language\n[*]Your own fonts, weights, colors and corner roundness for each card\n[/list]\n\n[h2]🎵 Now Playing[/h2]\n[list]\n[*]Album cover, song title and artist from your music player\n[*]Long titles scroll smoothly\n[*]Audio bars with peak dots, and three blocks that pulse with the bass, mids and treble\n[*]Progress bar with elapsed and total time\n[*]Hides itself when no music is playing, and optionally when it is paused\n[/list]\n\n[h2]🖼️ Background[/h2]\nA stack of layers you can mix with their opacity sliders:\n[list]\n[*][b]Color[/b]: your own color, or one taken from the album cover\n[*][b]Album Spin[/b]: the blurred cover of the song, slowly spinning and pulsing with the bass\n[*][b]Triangles[/b]: a grid where random triangles light up on each beat, with adjustable rows, color, glow, fade and which sounds they react to\n[*][b]Image[/b]: your own image (stretch, fill, fit, center or tile) or the album cover on the left, right or center\n[/list]\n\n[h2]🎨 Colors[/h2]\n[list]\n[*]Each card, the background and the triangles have your own color, replaced by the album color you choose while music plays\n[*]\"Keep my color\" to never let the album change it, \"Keep last color\" to keep it after the music stops\n[*]Text color: automatic (always readable), your own color, or an album color\n[*]Optionally go back to your colors while the music is paused\n[/list]\n\n[h2]🔊 Audio[/h2]\n[list]\n[*][b]Auto volume[/b]: bars and effects react as if the music were at full volume, even when it is quiet\n[/list]\n\n[h2]⚡ Lightweight[/h2]\n[list]\n[*]Bars and triangles are drawn on the GPU in a single pass, the blur is computed once per cover, and anything you turn off costs nothing\n[/list]\n\n[h2]💡 Tips[/h2]\n[list]\n[*]The music info comes from Wallpaper Engine's media integration: make sure it is enabled in Wallpaper Engine's settings and that your player supports it\n[*]If something looks wrong after an update, press [b]Reset[/b] in the wallpaper settings\n[*]Something not showing up? Turn on [b]Troubleshooting → Show debug info[/b] and include a screenshot of it when reporting\n[/list]\n\n[url=https://github.com/Onutirachi/minimalistCards/tree/main]GitHub[/url]",
 	"file" : "index.html",
 	"general" : 
 	{
@@ -2374,8 +2374,8 @@
 	"ratingviolence" : "none",
 	"tags" : [ "Music" ],
 	"title" : "Minimalist Cards",
-	"type" : "Web",
-	"version" : 15,
+	"type" : "web",
+	"version" : 16,
 	"visibility" : "public",
 	"workshopid" : "3596377391",
 	"workshopurl" : "steam://url/CommunityFilePage/3596377391"
