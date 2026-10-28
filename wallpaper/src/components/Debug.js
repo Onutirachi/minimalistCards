@@ -9,8 +9,8 @@ export default class Debug {
     constructor(parent) {
         this.container = el("div", "debug", parent);
 
-        // The event log gets its own column on the left; its lines are long and carry the instance id of each monitor
-        this.eventLog = this.panel(this.container, "Events (time, monitor id, event)", "debug-events debug-log");
+        // The event log gets its own column on the left, since its lines are long
+        this.eventLog = this.panel(this.container, "Events", "debug-events debug-log");
 
         const grid = el("div", "debug-grid", this.container);
 
