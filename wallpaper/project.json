@@ -2374,8 +2374,8 @@
 	"ratingviolence" : "none",
 	"tags" : [ "Music" ],
 	"title" : "Minimalist Cards",
-	"type" : "web",
-	"version" : 16,
+	"type" : "Web",
+	"version" : 17,
 	"visibility" : "public",
 	"workshopid" : "3596377391",
 	"workshopurl" : "steam://url/CommunityFilePage/3596377391"
